@@ -219,44 +219,6 @@ set-jump: post_election
 
 @post_election
 on-arrival: {!
-Q.braun_votes = 0;
-Q.hindenburg_votes = 0;
-Q.hitler_votes = 0;
-Q.thalmann_votes = 0;
-
-// initial phase:
-Q.hitler_votes += Q.nsdap_normalized;
-Q.hindenburg_votes += Q.other_normalized;
-Q.hindenburg_votes += Q.dnvp_normalized;
-
-if (Q.braun_campaign) {
-    Q.braun_votes += Q.spd_normalized;
-    Q.braun_votes += Q.ddp_normalized;
-    if (Q.z_support_braun && Q.z_support_braun == 1) {
-        Q.braun_votes += Q.z_normalized;
-    } else {
-        Q.hindenburg_votes += Q.z_normalized;
-    }
-    if (Q.kpd_support_braun) {
-        Q.braun_votes += Q.kpd_normalized;
-        if (Q.sapd_formed && Q.sapd_votes) {
-            Q.braun_votes += Q.sapd_normalized;
-        }
-    } else {
-        Q.thalmann_votes += Q.kpd_normalized;
-        if (Q.sapd_formed && Q.sapd_votes) {
-            Q.thalmann_votes += Q.sapd_normalized;
-        }
-    }
-    if (Q.dvp_support_braun) {
-        Q.braun_votes += Q.dvp_normalized;
-    } else {
-        Q.hindenburg_votes += Q.dvp_normalized;
-    }
-} else if (Q.spd_support_thalmann) {
-    Q.thalmann_votes += Q.kpd_normalized;
-    Q.thalmann_votes += Q.spd_normalized;
-    Q.hindenburg_voQ.braun_votes = 0;
 Q.hindenburg_votes = 0;
 Q.hitler_votes = 0;
 Q.thalmann_votes = 0;
