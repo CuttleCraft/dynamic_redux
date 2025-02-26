@@ -1,0 +1,71 @@
+title: The Issue of Thuringia
+#subtitle: The Nazis rule Thuringia, and are taking full advantage
+new-page: true
+is-card: true
+view-if: ((((nsdap_votes*(1 + (sa_force/100)))+(unemployed/1.5)) >= 50) or thuringia_seen) and (president == "Braun" or president == "Schumacher" or president == "Juchacz") and dvp_relation < 50 and (not presidential_powers and not victory_republic)
+tags: govt_affairs
+card-image: img/reichsexekution.jpg
+max-visits: 1
+on-arrival: thuringia_seen = 1
+
+= The Issue of Thuringia
+
+Though we have thus far kept the <span style="color: #7A3C00;">Nazis</span> away from national power, Thuringia has not been so lucky. It has, for some time now, been under the Nazi Party's rule in a coalition with other reactionary parties in the state, even including the <span style="color: #C0A054;">**DVP**</span>. Through this coalition, the <span style="color: #7A3C00;">Nazi</span> state government has been packing the state police with Nazis, turning a blind eye to rampant stormtrooper violence, and generally consolidating power into their hands. 
+
+There is a strong argument to make that the <span style="color: #7A3C00;">Nazi</span> excesses of this government are unconstitutional, and since the victory of a <span style="color: #c00000;">socialist</span> in the presidential elections they have only grown greater, as they try and further solidify their grip on the state. If we do not act to remove them from power, they may succeed and mold the state into their image or perhaps even use it as a staging ground for a coup. But if we do, it may prompt a civil war.
+
+- @reichsexekute_thuringia: President [+ president +] will order a Reichsexekution of Thuringia.
+- @do_nothing: We cannot risk rocking the boat by moving against Thuringia.
+- @easy_discard
+
+@reichsexekute_thuringia
+go-to: nazi_resist if sa_force+sh_force >= (rb_force*(1-dissent))+((army_force+(army_force*reichswehr_loyalty))/2); nazi_concede if sa_force+sh_force < (rb_force*(1-dissent))+((army_force+(army_force*reichswehr_loyalty))/2)
+
+@nazi_resist
+
+The order is signed, and the Reichsexekution begins. Reliable forces of the army and police enter Thuringia, moving swiftly to secure key government infrastructure, but quickly find themselves obstructed by the <span style="color: #7A3C00;">SA</span>, which has been rapidly mobilized to resist the ongoing Reichsexekution. If we proceed with the Reichsexekution, there is a risk that it could escalate into a civil war. But if we call it off, we will be humiliated potentially beyond repair, and the <span style="color: #7A3C00;">Nazi</span> propaganda machine bolstered beyond compare. 
+
+- @force_execution: Force the Reichsexekution!
+- @call_it_off: We can't afford to risk a civil war. Call it off.
+
+@force_execution
+on-arrival: reichsexekution_strength = interior_police_strength*interior_police_loyalty*interior_police_militancy; reichsexekution_strength += reichswehr_strength*reichswehr_militancy*reichswehr_loyalty; reichsexekution_strength += (rb_strength*rb_militancy*(1-dissent))/2; nazi_strength = sa_strength*sa_militancy; nazi_strength += (sh_strength*sh_militancy)/2
+go-to: dislodge if reichsexekution_strength > nazi_strength; dislodge_fail if nazi_strength > reichsexekution_strength
+
+@dislodge
+on-arrival: sa_strength *= 0.95; sa_militancy -= 0.02; rb_strength *= 0.99
+go-to: successful_reichsexekution
+
+Our forces move against the fascist holdouts, seizing control over key positions across the state as bloodied firefights and clashes die down and the ineffectual <span style="color: #7A3C00;">Nazi</span> resistance collapses in the face of the full force of the state. Fritz Sauckel is captured and detained, and control over the state placed under temporary federal authority through the Reichskommissar.
+
+# todo: choose who to pick as reichskommissar?
+
+@successful_reichsexekution
+on-arrival: coup_progress += 1 if reichswehr_loyalty < 0.1; coup_progress += 1 if largest_party == "NSDAP"; coup_progress += 2; coup_progress += 1 if sa_force+sh_force >= 50; coup_progress -= 1 if nazi_decline; coup_progress -= 1 if nazi_peak; sa_militancy -= 0.03; sa_strength -= 50; workers_nsdap -= 5; unemployed_nsdap -= 5; new_middle_nsdap -= 4; old_middle_nsdap -= 3; rural_nsdap -= 3; pro_republic -= 2
+
+@dislodge_fail
+on-arrival: nazi_rebel = 1
+
+Our forces move against the fascist holdouts as bloodied firefights and clashes break out across the state. The Harzburg Front mobilizes its forces against the government to defend Thuringia as the Nazis hold out stubbornly against our Reichsexekution.
+
+- @civil_war: It is a civil war.
+
+@call_it_off
+on-arrival: coup_progress += 4; capital_strike_progress += 2; pro_republic -= 8; sa_strength += 200; sa_strength += 0.1; workers_nsdap += 6; unemployed_nsdap += 6; new_middle_nsdap += 6; old_middle_nsdap += 6; rural_nsdap += 6; workers_spd -= 3
+
+Overwhelmed by the reactionary show of strength, we retreat and call the Reichsexekution off. The Nazis declare a victory, bolstering their forces significantly and continuing to consolidate their hold over Thuringia while rallying against us and our incompetency. 
+
+@nazi_concede
+go-to: successful_reichsexekution
+
+The order is signed, and the Reichsexekution begins. Reliable forces of the army and police enter Thuringia, moving swiftly to secure key government infrastructure. The Nazis are caught off guard, and before they have time to react government forces have secured control over Thuringia and placed it under direct federal authority. The Nazis cry Marxist consolidation of power, but at least we have stopped them from turning Thuringia into their backwards bulwark.
+
+@do_nothing
+on-arrival: sa_strength += 100; sa_militancy += 0.05; coup_progress += 1; reichswehr_loyalty -= 0.02; pro_republic -= 5; workers_nsdap += 3; unemployed_nsdap += 4; rural_nsdap += 4; old_middle_nsdap += 4; new_middle_nsdap += 3;
+
+We simply do not have the present ability to forcefully remove the Nazis from power in such a manner. We have no choice but to leave them be.
+
+# reichsexekute thuringia: nazis will either resist or dont resist. if they resist, you can call it off or risk civil war by forcing it. 
+#if thuringia is reichsexekuted, coup progress increases by 2 but nazis are weakened. 
+#if you dont reichsexekute thuringia, nazi populairty increase and coup progress increase and SA becomes stronger
+
