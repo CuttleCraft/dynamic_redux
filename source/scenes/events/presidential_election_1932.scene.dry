@@ -664,7 +664,7 @@ on-arrival: president = "Seldte"; chancellor = "Hitler" if presidential_powers !
 
 Franz Seldte of the Stalhelm has somehow won the Presidency. [? if presidential_powers != 1 : His first act is to depose the current Chancellor and appoint Adolf Hitler. ?][? if presidential_powers : Luckily, the limits on his powers prevent him from doing anything too radical. ?]
 
-- @hitler_victory: What do we do now?
+- @hitler_takes_power: What do we do now?
 
 @duesterburg_wins
 on-arrival: president = "Hindenburg"; pro_republic -= 10
