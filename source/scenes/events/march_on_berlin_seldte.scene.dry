@@ -1,0 +1,189 @@
+title: March on Berlin
+subtitle: Right-wing militants are taking action...
+view-if: ((((spd_in_government = 1 and coup_progress >= 10) or (coup_progress >= 15)) and year >= 1929 and (year >= 1930 or month >= 6) and ((sa_banned=0 or sh_banned=0) or (sa_force + sh_force + army_force*(1-reichswehr_loyalty) >= 50))) or (year >= 1933 and month >= 2 and chancellor != "Papen" and chancellor != "Schleicher" and coup_progress >= 6 and president == "Braun" and nsdap_votes + dnvp_votes + (sa_force+sh_force)/4 >= 50)) and march_on_berlin_timer = 0 and (nsdap_votes + sa_force < dnvp_votes + other_votes + dvp_votes + sh_force)
+new-page: true
+max-visits: 4
+on-arrival: march_on_berlin_seen += 1; sa_strength += 40; sh_strength += 120; strife += 1; march_on_berlin_timer += 8
+go-to: ask_resign if spd_in_government and (president != "Braun" and president != "Schumacher" and president != "Juchacz" and president != "Thälmann" and president != "Münzenberg" and president != "Adenauer" and (president != "Gessler" or reichswehr_loyalty < 0.2)); govt_menu if president = "Braun" or president = "Schumacher" or president = "Juchacz"; non_govt_menu if spd_in_government = 0 and (president != "Braun" and president != "Schumacher" and president != "Juchacz" and president != "Adenauer" and president != "Thälmann" and president != "Münzenberg" and (president != "Gessler" or reichswehr_loyalty < 0.2)); presidential_support if (president == "Gessler" and reichswehr_loyalty >= 0.2) or president == "Adenauer" or president == "Thälmann" or president == "Münzenberg"
+tags: event
+
+= March on Berlin
+
+The <span style="color: #7A3C00;">far</span> <span style="color: #3E88B3;">right</span> is mobilizing. Paramilitary forces of the <span style="color: #3E88B3;">**Stahlhelm**</span> and <span style="color: #7A3C00;">**SA**</span>, organized under the Harzburg Front, have marched on Berlin, threatening to violently overthrow the government.
+
+They demand either immediate elections under the "supervision" of the nationalist paramilitaries, or else the immediate resignation of the government and appointment of a Harzburg Front cabinet headed by Franz Seldte of the Stalhelm. It is obvious that they are threatening a civil war if their demands are not met.
+
+@non_govt_menu
+
+It appears that President [+ president +] is looking favorably upon the <span style="color: #7A3C00;">fascist</span> proposals. Chancellor [+ chancellor +] has announced plans to resign.
+
+- @fight
+- @accept
+
+@accept
+title: There is nothing we can do.
+go-to: accept_seldte
+
+@accept_seldte
+on-arrival: chancellor = "Seldte"; chancellor_party = "DNVP"; labor_minister_party = "I"; interior_minister_party = "DNVP"; finance_minister_party = "I"; justice_minister_party = "DNVP"; economic_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "DNVP"; reichswehr_minister_party = "I"; spd_in_government = 0; harzburg_r += dnf_r if dnf_r; harzburg_r += dnvp_r if dnvp_ideology != "Moderate"; harzburg_r += other_r if dnvp_ideology != "Moderate" and dvp_relation < 35; harzburg_r += 3 if z_relation < 60; harzburg_r += dvp_r if dvp_relation + pro_republic < 85 and dvp_ideology != "Left"; harzburg_r += z_minus_bvp_r if z_relation + pro_republic < 60 and z_party_leader != "Joos"; coup_progress *= 0.6
+go-to: harzburg_collapse if harzburg_r < 50; harzburg_survive if harzburg_r >= 50
+
+After the resignation of the chancellor, <span style="color: #3E88B3;">**Stahlhelm**</span> leader Franz Seldte has been appointed chancellor, heading a highly reactionary Harzburg Front cabinet with army general Kurt von Schleicher being made Reichswehr Minister. Despite this development, the Nazis refuse to back or enter the government, straining the Harzburg Front's unity.
+
+@harzburg_collapse
+go-to: new_elections_2
+
+With only [+ harzburg_r +]% behind the coup-instated government, a motion of no confidence soon brings the minority Harzburg Cabinet down. Though the coup has not yet lead to an outright destruction of democracy, the <span style="color: #3E88B3;">**Stahlhelm**</span> spends this time harshly persecuting the political left, while continued minority rule by decree from the reactionaries threatens to undo much of our reforms.
+
+# todo: seldte reichsexekutes prussia? martial law?
+
+@harzburg_survive
+
+Somehow, the Harzburg Cabinet has cobbled together a majority in the Reichstag of [+ harzburg_r +]%, surviving a motion of no confidence. Immediately, harsh persecution of the political left is initiated by the <span style="color: #3E88B3;">**Stahlhelm**</span> while the state turns a blind eye, and our progressive reforms in government are undone.
+
+@ask_resign
+
+President [+ president +] has asked our government to resign.
+
+- @fight
+- @fight_constitution
+- @resign
+
+# TODO: if Hindenburg is president, he will always ask the govt to resign. If the SPD refuses, this causes a constitutional crisis. If there is a constitutional crisis, then if judicial reform >= 4, then the courts intervene against Hindenburg and preserves the government.
+
+# if Reichsbanner + Prussian Police >= SA + Stahlhelm, then the fascists retreat.
+
+@govt_menu
+
+- @fight
+- @new_elections
+
+@fight
+title: Deploy the Reichsbanner and call a general strike to resist the <span style="color: #7A3C00;">fascists</span>!
+on-arrival: defense_strength = rb_strength*rb_militancy*(1-dissent/2); defense_strength += prussian_police_strength*prussian_police_militancy*prussian_police_loyalty if spd_prussia; enemy_strength = sa_strength*sa_militancy + sh_strength*sh_militancy; defense_strength += workers_spd_normalized*(2 - dissent)*(2 - unemployed/100); defense_strength += reichswehr_strength*reichswehr_loyalty*reichswehr_militancy if president=="Braun" and spd_in_government
+go-to: fight_2_win if defense_strength >= enemy_strength and march_on_berlin_seen <= 1; fight_2_win_2 if defense_strength >= enemy_strength and march_on_berlin_seen > 1; fight_2_pre_civil_war if defense_strength < enemy_strength
+
+The Reichsbanner number at [+ rb_strength +] thousand; many are in Berlin to counter the <span style="color: #7A3C00;">fascist</span> demonstration.
+
+[? if spd_prussia: The Prussian police has been deployed against the <span style="color: #7A3C00;">fascists</span>. ?] [? if spd_in_government and president == "Braun" : The portions of the Reichswehr that are loyal are also deployed. ?]
+
+
+@fight_2_win
+on-arrival: coup_progress = 0; sa_strength *= 0.8; sh_strength *= 0.6; rb_strength *= 0.9; workers_nsdap -= 8*(1-dissent); unemployed_nsdap -= 6*(1-dissent); new_middle_nsdap -= 4*(1-dissent); workers_spd += 8*(1-dissent); unemployed_spd += 6*(1-dissent); pro_republic += 15
+achievement: drei_pfeile
+
+Our forces confront the <span style="color: #7A3C00;">fascists</span>, and somehow, the <span style="color: #7A3C00;">fascists</span> retreat! They were overwhelmed by our display of strength, and have chosen to slink away. The attempted coup is over, at least for now.
+
+The show of force has reinvigorated support for the republic and for the <span style="color: #c00000;">**SPD**</span>, and has weakened the <span style="color: #7A3C00;">fascists</span>.
+
+@fight_2_win_2
+on-arrival: coup_progress = 0; pro_republic += 5; workers_nsdap -= 2*(1-dissent); unemployed_nsdap -= 2*(1-dissent); new_middle_nsdap -= 2*(1-dissent); rb_strength *= 0.9; sa_strength *= 0.9; sh_strength *= 0.9
+
+# if march on Berlin has already been seen
+
+Our forces confront the <span style="color: #7A3C00;">fascists</span>, and somehow, the <span style="color: #7A3C00;">fascists</span> retreat! They were overwhelmed by our display of strength, and have chosen to slink away. The attempted coup is over, at least for now.
+
+The show of force has reinvigorated support for the republic and for the <span style="color: #c00000;">**SPD**</span>, and has weakened the <span style="color: #7A3C00;">fascists</span>.
+
+@fight_2_pre_civil_war
+on-arrival: nazi_rebel = 1 if spd_in_government = 1; spd_rebel = 1 if spd_in_government = 0
+
+Our forces confront the <span style="color: #7A3C00;">fascists</span> on the streets of Berlin, and armed fighting erupts. Neither side is dislodged from their positions.
+
+- @civil_war: It is a civil war.
+
+
+@fight_constitution
+title: This is unconstitutional! We will keep our positions in government, and ask the courts to keep us in power.
+choose-if: judicial_reform >= 3
+unavailable-subtitle: The judiciary would never agree with us.
+
+The courts agree that President [+ president +] is wrong to dismiss us, and that we should remain in the government. The President might respect the court's decision for now, but the <span style="color: #7A3C00;">fascists</span> in the streets do not. They are still demanding snap elections or the resignation of the government, and will remain in the streets until we either meet their demands, or they are forced out.
+
+- @new_elections
+- @fight
+
+
+@new_elections
+title: Call for new snap elections.
+subtitle: We will not resign at gunpoint, and we will attempt to maintain the integrity of the elections.
+go-to: new_elections_braun if president == "Braun" or president == "Schumacher" or president == "Juchacz" or president == "Adenauer" or president == "Gessler" or president == "Thälmann" or president == "Münzenberg"; new_elections_hindenburg if (president != "Braun" and president != "Schumacher" and president != "Juchacz" and president != "Adenaeur" and president != "Thälmann" and president != "Münzenberg" and president != "Gessler") and (z_relation >= 40 or president == "Eckener"); new_elections_hindenburg_reject if (president != "Braun" and president != "Schumacher" and president != "Juchacz" and president != "Adenaeur" and president != "Eckener" and president != "Gessler" and president != "Thälmann" and president != "Münzenberg") and z_relation < 40
+
+
+@new_elections_braun
+go-to: new_elections_braun_2 if nsdap_normalized + dnvp_normalized >= 0.5; new_elections_braun_reject if nsdap_normalized + dnvp_normalized < 0.5
+
+
+@new_elections_braun_reject
+
+The <span style="color: #7A3C00;">fascists</span> reject our offer of free and fair elections. They are demanding that President [+ president +] dismisses the current government and appoints Seldte chancellor.
+
+- @braun_appoints_seldte
+- @fight
+
+@new_elections_braun_2
+go-to: new_elections_2
+
+The fascists seem to believe that they would win an election if one were to be held now, so they agree to our holding an election for next month.
+
+
+@new_elections_hindenburg
+go-to: new_elections_2
+
+With the mediation of various establishment figures, new elections are called for next month, without the use of <span style="color: #7A3C00;">fascist</span> "electoral monitors".
+
+
+@new_elections_2
+on-arrival: next_election_time = time + 1 if next_election_time > time+1; next_election_month = month + 1 if next_election_time >= time+1; next_election_year = year if next_election_time >= time+1; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
+
+
+@new_elections_hindenburg_reject
+
+Influenced by his inner circle and by the <span style="color: #7A3C00;">fascists</span> in the streets, President [+ president +] rejects our offer of new free and fair elections, and again demands that we resign. There is no arguing.
+
+- @resign
+- @fight
+
+
+
+@resign
+title: Resign our positions in the government.
+choose-if: president != "Braun"
+unavailable-subtitle: President Braun cannot resign.
+on-arrival: chancellor = "Papen"; chancellor_party = "I"; spd_in_government = 0;
+go-to: accept
+
+We have resigned our positions in the government.
+
+
+
+@braun_appoints_seldte
+title: We cannot do anything but appoint Seldte chancellor.
+view-if: president == "Braun" or president == "Schumacher" or president == "Juchacz"
+choose-if: dnvp_votes + sh_force >= 50 or largest_party == "DNVP"
+unavailable-subtitle: There is no way President [+ president +] could do such a blatantly undemocratic act.
+on-arrival: chancellor = "Seldte"; chancellor_party = "DNVP"; spd_in_government = 0; reichswehr_loyalty -= 0.05; sh_militancy += 0.05; sh_strength += 25; workers_spd -= 6
+go-to: enabling_act
+
+Threatened with a civil war, and unwilling to fight anymore, President [+ president +] dismisses the current government and appoints Seldte of the <span style="color: #3E88B3;">**Stahlhelm**</span> as chancellor.
+
+# TODO: needs to actually carry weight if braun is president
+
+@enabling_act
+
+Chancellor Seldte's first action is to put forward many decrees for [+ president +] to sign and force through via Article 48 of the Weimar Constitution. One of the most major ones, if signed, would suspend Articles 114, 115, 117, 118, 123, 124 and 153 of the German constitution, effectively turning Germany into a police state at the whims of the Harzburg Front and paving the way for rampant suppression of the political left. It is clear that he is threatening a civil war if his demands are not met.
+
+- @sign: We have no choice but to sign this decree.
+- @civil_war: Sack Seldte! This is unacceptable!
+
+@presidential_support
+
+Luckily, President [+ president +] is on [? if spd_in_government : our ?][? if not spd_in_government : [+ chancellor +]'s ?] side in this crisis. He has recognized the coup for what it is, and is prepared to stand by the government if we resist.
+
+- @fight
+- @new_elections
+
+@sign
+on-arrival: seldte_enabled = 1
+
+Faced with the threat of civil war, we have caved to Seldte's demands.

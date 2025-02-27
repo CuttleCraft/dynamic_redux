@@ -1107,10 +1107,73 @@ The Bourgeois Coalition is formed, with Brüning as its chancellor. We will have
 title: There is no clear governing majority.
 view-if: (weimar_coalition < 50 or weimar_coalition_failed == 1 or ddp_relation < 30 or z_relation < 30 or lvp_relation < 30) and (grand_coalition < 50 or grand_coalition_failed == 1) or (grand_coalition >= 50 and (dvp_ideology == "Right" and black_thursday_seen == 1)) and president == "Hindenburg" and far_right_coalition < 50 and (right_coalition < 50) or (right_coalition >= 50 and dnvp_ideology == "Radical") and center_right_coalition < 50 or (center_right_coalition >= 50 and dnvp_ideology == "Radical")
 on-arrival: no_majority_elections += 1
-go-to: no_majority_bruning if chancellor = "Brüning" or chancellor = "Wirth"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
+go-to: no_majority_bruning if chancellor = "Brüning" or chancellor = "Wirth"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"; no_majority_seldte if chancellor == "Seldte"
 
 
 # either new elections, or Hindenburg appoints either Brüning, Papen, Schleicher, or Hitler.
+
+@no_majority_seldte
+go-to: martial_law if army_force+sh_force >= 50 and dnvp+sh_force < 50 and reichswehr_loyalty < 0.3 and strife >= 4 and not presidential_powers and (president == "Hindenburg" or (president == "Gessler" and reichswehr_loyalty < 0.15)); switch_to_papen if president != "Gessler" and (harzburg_r < 25 or seldte_times >= 1) and not (army_force+sh_force >= 50 and dnvp+sh_force < 50 and reichswehr_loyalty < 0.3 and strife >= 4 and not presidential_powers and (president == "Hindenburg" or (president == "Gessler" and reichswehr_loyalty < 0.15))); seldte_continue if (harzburg_r >= 25 and seldte_times < 1) and not (army_force+sh_force >= 50 and dnvp+sh_force < 50 and reichswehr_loyalty < 0.3 and strife >= 4 and not presidential_powers and (president == "Hindenburg" or (president == "Gessler" and reichswehr_loyalty < 0.15)))
+
+@switch_to_papen
+on-arrival: chancellor = "Papen"; chancellor_party = "I"; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; sa_banned = 0; pro_republic -= 8; finance_minister_party = "I"; interior_minister_party = "I"; economic_minister_party = "I"; labor_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "I"; reichswehr_minister = "I";
+
+Following the elections, there is no clear majority. Rather than appoint a continuation of the Harzburg Cabinet however, disappointed with their performance, Hindenburg appoints the independent Franz von Papen, who calls snap elections in a gambit to gain majority Reichstag support through a coalition with the Nazis. Papen is a indenpendent formerly from the <span style="color: #000000;">Center Party</span>, and is significantly to the right of the majority of the <span style="color: #000000;">Center Party</span>.
+
+@seldte_continue
+on-arrival: seldte_times += 1; dvp_relation -= 5; z_relation -= 5; harzburg_r = dnvp_r; harzburg_r += other_r; harzburg_r += 3; harzburg_r += dvp_r if dvp_relation + pro_republic < 85; harzburg_r += z_minus_bvp_r if z_relation + pro_republic < 60 and z_party_leader != "Joos"; stalhelm_strength += 50; stalhelm_militancy += 0.02; reichswehr_loyalty -= 0.05 if reichswehr_loyalty >= 0.05
+go-to: seldte_minority if harzburg_r < 50; seldte_majority if harzburg_r >= 50
+
+@seldte_minority
+on-arrival: time_to_election = 3; old_middle_nsdap -= 3; rural_nsdap -= 2; old_middle_dnvp += 3 if dnvp_ideology == "Radical"; rural_dnvp += 3 if dnvp_ideology == "Radical"; new_middle_dnvp += 3 if dnvp_ideology == "Radical"; old_middle_dnf += 2 if dnvp_ideology == "Moderate"; rural_dnf += 2 if dnvp_ideology == "Moderate"; new_middle_dnf += 2 if dnvp_ideology == "Moderate"; workers_spd -= 3; workers_kpd -= 3
+call: set_next_election_time
+
+After the election, the Harzburg Cabinet still lacks a majority. The Reichstag is dissolved for elections once more, while Seldte continues his agendas. 
+
+@seldte_majority
+on-arrival: workers_spd -= 5; workers_kpd -= 5; workers_dnvp += 5 if dnvp_ideology != "Moderate"; new_middle_dnvp += 7 if dnvp_ideology != "Moderate"; old_middle_nsdap -= 5; rural_nsdap -= 5; old_middle_dnvp += 8 if dnvp_ideology != "Moderate"; rural_dnvp += 8 if dnvp_ideology != "Moderate"; stalhelm_strength += 50; {!
+if (Q.dnvp_ideology == "Moderate) {
+    Q.workers_dnf += 4;
+    Q.new_middle_dnf += 6;
+    Q.old_middle_dnf += 6;
+    Q.rural_dnf += 6;
+}
+!}
+
+
+Somehow, the Harzburg Cabinet has this time secured a majority mandate. The continued regression of Germany continues, as does suppression of the left.
+
+- @fight_harzburg: Rise up before it is too late!
+- @nothing_to_do: There's nothing we can do.
+
+@fight_harzburg
+on-arrival: spd_rebel = 1
+go-to: civil_war
+
+@nothing_to_do
+on-arrival: rb_militancy -= 0.05; rb_strength -= 100; left_dissent += 5; unemployed_nsdap += 5
+
+There is, unfortunately, nothing we can do. We will have to bide our time until we can recapture power.
+
+@martial_law
+
+Seeing the continuing collapse of order in Germany, and convinced that they would be able to quell any resistance, President [+ president +] and Chancellor Seldte have come together to declare a state of **martial law** in Germany. Though this is unconstitutional, the courts have little sway over the enthusiastic army.
+
+- @seldte_takes_power: What now?
+
+@seldte_takes_power
+subtitle: The beginning of the end.
+
+The destruction of German democracy has begun, not at the hands of the Nazis but at the hands of the reactionaries who wish to see a return to the days of the German Empire. If we do not fight back now, then we may never get another chance, and all we as a party have stood for will be gone in an instant.
+
+- @fight_harzburg: Mobilize our forces and declare a general strike!
+- @reactionary_victory: We have lost.
+
+@reactionary_victory
+
+Party offices are raided by army and police forces. Our leaders are rounded up and arrested. Any and all of our reforms are undone, and a police state under the army's control is cemented. The Nazis have failed to take power, but we cannot take much comfort in the fact when a dictatorial fascist government rules all the same. Perhaps in the far future, we may have our moment in the sun once more. We will have a duty to do better then than we have now.
+
+- @game_over: Game over.
 
 @no_majority_spd
 on-arrival: chancellor = "Brüning"; chancellor_party = "Z"
@@ -1128,7 +1191,7 @@ go-to: no_majority_bruning_toleration if (no_majority_elections <= 3 and anti_de
 
 
 @hindenburg_appoints_papen
-on-arrival: chancellor = "Papen"; chancellor_party = "I"; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; sa_banned = 0; pro_republic -= 8; finance_minister_party = "I"; interior_minister_party = "I"; economic_minister_party = "I"; labor_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "I"; reichswehr_minister = "I"; papen_chancellor_timer = 4
+on-arrival: chancellor = "Papen"; chancellor_party = "I"; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; sa_banned = 0; pro_republic -= 8; finance_minister_party = "I"; interior_minister_party = "I"; economic_minister_party = "I"; labor_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "I"; reichswehr_minister = "I"; papen_chancellor_timer = 4; papen_two_term = 1
 face-image: img/portraits/PapenFranz.jpg
 
 There is no path to a majority government. President Hindenburg is tired of the chaos, and appoints Franz von Papen as chancellor instead of Brüning. Papen is a independent formerly from the <span style="color: #000000;">Center Party</span>, and is significantly to the right of the majority of the <span style="color: #000000;">Center Party</span>.
@@ -1323,11 +1386,29 @@ We have supported a minority government led by the <span style="color: #000000;"
 
 @no_majority_papen
 on-arrival: pro_republic -= 5; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; old_middle_nsdap -= 4; new_middle_nsdap -= 4; rural_nsdap -= 6; old_middle_dnvp += 4; new_middle_dnvp += 4; rural_dnvp += 6; no_majority_papen_elections += 1; workers_spd -= 3 if pro_republic < 40; workers_nsdap += 3 if pro_republic < 40;
+go-to: papen_second_term if papen_two_term
 
 After the elections, Papen is still deeply unpopular, without any hint of coalition support, and there is a vote of no confidence called against him almost immediately. No matter how we vote, the measure would pass. The Reichstag is dissolved once more.
 
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
 
+@papen_second_term
+on-arrival: judicial_reform -= 2 if judicial_reform >= 2; reichswehr_loyalty -= 0.05; sh_strength += 50; workers_spd -= 3; workers_kpd -= 3; unemployed_kpd -= 2; dvp_relation -= 5; {!
+if (Q.dnvp_ideology == "Radical) {
+    Q.workers_dnvp += 2;
+    Q.new_middle_dnvp += 5;
+    Q.old_middle_dnvp += 6;
+    Q.rural_dnvp += 6; 
+    Q.catholics_dnvp += 3;
+} else {
+    Q.new_middle_dnf += 3;
+    Q.old_middle_dnf += 4;
+    Q.rural_dnf += 4; 
+    Q.catholics_dnf += 2;
+}
+!}
+
+Papen has spent this time passing, with Hindenburg's consent, decree after decree that has launched his primary backers in the [? if dnvp_ideology == "Radical" : <span style="color: #3E88B3;">**DNVP**</span> ?][? if dnvp_ideology == "Moderate" : <span style="color: #003755;">, **DNF**</span> ?] back into the forefront of reactionary politics and dismantled our democratic reforms across the country.
 
 @no_majority_papen_2
 on-arrival: chancellor = "Schleicher"; pro_republic -= 5; next_election_time = time+5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 10; workers_spd -= 4 if pro_republic < 40; workers_nsdap += 4 if pro_republic < 40; finance_minister_party = "I"; interior_minister_party = "I"; economic_minister_party = "I"; labor_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "I"; reichswehr_minister = "I"; schleicher_chancellor_timer = 3

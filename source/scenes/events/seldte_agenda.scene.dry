@@ -1,0 +1,49 @@
+title: The Seldte Agenda
+subtitle: The Harzburg Cabinet takes action...
+view-if: chancellor == "Seldte" and march_on_berlin_seen and ((president != "Braun" and president != "Schumacher" and president != "Juchacz") or seldte_enabled)
+new-page: true
+max-visits: 1
+on-arrival: nazi_seldte = 1; judicial_reform -= 2 if judicial_reform >= 2; judicial_reform = 0 if judicial_reform < 2; reichswehr_loyalty -= 0.15 if reichswehr_loyalty >= 0.15; reichswehr_loyalty = 0 if reichswehr_loyalty < 0.15; interior_police_loyalty -= 0.1 if interior_police_loyalty >= 0.1; interior_police_loyalty = 0 if interior_police_loyalty < 0.1; workers_kpd -= 10; unemployed_kpd -= 10; rfb_harzburg = 1 if rfb_banned != 1; harzburg_rb = 1 if rb_militancy >= 0.2; rfb_strength -= 50 if rfb_strength >= 50 and rfb_banned != 1; rfb_banned = 1 if rfb_banned != 1; rfb_strength *= 0.7; rb_strength -= 25; rb_strengh *= 0.9 if rb_militancy >= 0.2; rb_militancy *= 0.9 if rb_militancy >= 0.2; rb_militancy -= 0.05 if rb_militancy >= 0.05; pro_republic -= 10; nationalism += 10; democratization -= 3 if democratization >= 3; democratization = 0 if democratization < 3; stalhelm_militancy += 0.05; workers_nsdap += 5; unemployed_nsdap += 5; stalhelm_strength += 60; sa_strength += 40; reichswehr_strength += 20 if reichswehr_strength <= 80; budget -= 1 if reuchswehr_strength <= 80; reichswehr_militancy += 1 if reichswehr_militancy <= 4; budget -= 1 if reichswehr_militancy <= 4; budget += 1 if welfare >= 2; welfare -= 1 if welfare >= 2; unemployed += 1.1; workers_spd -= 5; new_middle_spd -= 4; rural_spd -= 4; old_middle_spd -= 4; unemployed_spd -= 5; catholics_spd -= 4; left_dissent -= 5; left_strength -= 10
+tags: event
+
+= The Seldte Agenda
+
+With the assumption of power by the Harzburg Cabinet following the March on Berlin, work was quickly begun in undoing our progress democratizing Germany. With the help of President Hindenburg and his generous use of Article 48 to allow minority rule by decree, state institutions are once again turned into reactionary organs while the <span style="color: #3E88B3;">**Stahlhelm**</span> begins a heavy-handed campaign of political violence against the left-wing. The communist <span style="color: #700000;">**RFB**</span> has [? if rfb_harzburg == 1 : been banned for suspicion of preparing a revolution and been ?] heavily persecuted by the reactionary government, with mass arrests of communist politicians for ties to it being conducted as well. <span style="color: #c00000;">Social Democracy</span> is not spared in these purges, either. Those on the Left of our party are persecuted aggressively as well[? if harzburg_rb == 1 :, while the Reichsbanner sees its armories raided and arms confiscated, clearly viewed as a credible threat to the Harzburg Cabinet's aspirations ?].
+
+Many in our party are calling for us to reverse course from our previous decision not to rebel, arguing that now may be the last chance to prevent a full reactionary victory. The Nazis have used the Harzburg Cabinet's suppression of the left to prepare a campaign of their own, and many fear that even if Seldte fails to fully bring down German democracy as Chancellor, Hitler will finish the job for him.
+
+- @fight: We will rise up now, before it is too late.
+- @submit: There is nothing we can do.
+
+@fight
+on-arrival: spd_rebel = 1
+
+We mobilize our forces for an uprising against Seldte, and they are quickly met with units of the Harzburg Front and government.
+
+- @civil_war: It is a civil war.
+
+@submit
+on-arrival: rb_strength *= 0.9; kpd_relation -= 15; left_dissent += 10; neorevisionist_dissent += 10; rb_militancy *= 0.95; rfb_strength *= 0.8; workers_spd -= 3; workers_kpd -= 5; unemployed_nsdap += 5; sh_strength += 20; sa_strengh += 40; new_middle_nsdap -= 5; old_middle_nsdap -= 5; sh_strength += 100; sa_strength -= 50; sh_militancy += 0.02; z_relation -= 5; dvp_relation -= 5; dvp_relation -= 5 if pro_republic < 45; catholics_spd -= 5; socialism -= 6; {!
+if (Q.dnvp_ideology == "Radical) {
+    Q.rural_dnvp += 15;
+    Q.new_middle_dnvp += 15;
+    Q.old_middle_dnvp += 15;
+    Q.catholics_dnvp += 5;
+    Q.workers_dnvp += 5;
+    Q.unemployed_dnvp += 5;
+} else {
+    Q.rural_dnf += 10;
+    Q.new_middle_dnf += 10;
+    Q.old_middle_dnf += 10;
+    Q.catholics_dnf += 3;
+    Q.workers_dnvp += 3;
+    Q.unemployed_dnvp += 3;
+}
+!}
+
+Realistically, there is nothing we can do at this stage but hope for the best. The reactionary consolidation of power continues, and we do nothing to stop it.
+
+## note: new_middle_nsdap -= 5; old_middle_nsdap -= 5; should be in the original on arrival, not the submit result, but wont work
+
+# todo: should nazi peak and nazi decline apply post-cw?
+

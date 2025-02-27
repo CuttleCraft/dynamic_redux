@@ -2387,6 +2387,11 @@ if (!Q.nazi_peak_triggered) {
     } else if (Q.year >= 1934) {
         Q.nazi_peak -= 15;
     }
+    if (Q.nazi_seldte && Q.dnvp_ideology == "Moderate") {
+        Q.nazi_peak -= Q.dnf_votes;
+    } else if (Q.nazi_seldte && Q.dnvp_ideology == "Radical") {
+        Q.nazi_peak -= Q.dnvp_votes;
+    }
 }   
 if (Q.nsdap_votes >= Q.nazi_peak && !Q.nazi_peak_triggered && Q.nsdap_votes >= 24) {
     Q.nazi_peak_triggered = 1;
