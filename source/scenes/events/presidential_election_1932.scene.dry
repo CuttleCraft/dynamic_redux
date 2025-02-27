@@ -323,7 +323,7 @@ if (Q.braun_campaign) {
 } else if (Q.spd_support_thalmann) {
     Q.thalmann_votes += Q.kpd_normalized;
     Q.thalmann_votes += Q.spd_normalized;
-    if (Q.sapd_formed &&& Q.sapd_votes) {
+    if (Q.sapd_formed && Q.sapd_votes) {
         Q.thalmann_votes += Q.sapd_normalized;
     }
     Q.hindenburg_votes += Q.z_normalized;
