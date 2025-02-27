@@ -711,6 +711,7 @@ There are some potential coalition arrangements.
 - @unity_government
 - @far_right_coalition
 - @no_majority
+- @no_majority_gessler
 - @brauns_dilemma
 - @left_coalition
 - @popular_front_coalition
@@ -1102,6 +1103,51 @@ view-if: bourgeois_coalition >= 50
 on-arrival: spd_in_government = 0; spd_toleration = 0; in_bourgeois_coalition = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; foreign_minister_party = "LVP" if lvp_formed; interior_minister_party = "Z"; justice_minister_party = ddp_name; justice_minister_party = "LVP" if lvp_formed; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; economic_minister_party = "LVP" if lvp_formed; finance_minister_party = ddp_name; finance_minister_party = "LVP" if lvp_formed; agriculture_minister_party = "Z"; secret_mode = 1; bourgeois_cooperation += 10
 
 The Bourgeois Coalition is formed, with Brüning as its chancellor. We will have to contend with opposition politics for the time being. Secret Mode has been enabled.
+
+@no_majority_gessler
+title: There is no clear governing majority.
+view-if: (weimar_coalition < 50 or weimar_coalition_failed == 1 or ddp_relation < 30 or z_relation < 30 or lvp_relation < 30) and (grand_coalition < 50 or grand_coalition_failed == 1) or (grand_coalition >= 50 and (dvp_ideology == "Right" and black_thursday_seen == 1)) and president == "Gessler" and far_right_coalition < 50 and (right_coalition < 50) or (right_coalition >= 50 and dnvp_ideology == "Radical") and center_right_coalition < 50 or (center_right_coalition >= 50 and dnvp_ideology == "Radical")
+on-arrival: no_majority_elections += 1
+go-to: bruning_lead if no_majority_elections < 3 and (chancellor != "Seldte" or ((harzburg_r < 25 or seldte_times >= 1) and not (army_force+sh_force >= 50 and dnvp+sh_force < 50 and reichswehr_loyalty < 0.3 and strife >= 4 and not presidential_powers and (president == "Hindenburg" or (president == "Gessler" and reichswehr_loyalty < 0.15))))); luther_lead if no_majority_elections >= 3 and (dvp_relation < 55 or bourgeois_coalition+far_right_coalition >= 50 or ddp_votes < 3) and (chancellor != "Seldte" or ((harzburg_r < 25 or seldte_times >= 1) and not (army_force+sh_force >= 50 and dnvp+sh_force < 50 and reichswehr_loyalty < 0.3 and strife >= 4 and not presidential_powers and (president == "Hindenburg" or (president == "Gessler" and reichswehr_loyalty < 0.15))))); kulz_lead if dvp_relation >= 45 and bourgeois_coalition+far_right_coalition < 50 and ddp_votes >= 3 and (chancellor != "Seldte" or ((harzburg_r < 25 or seldte_times >= 1) and not (army_force+sh_force >= 50 and dnvp+sh_force < 50 and reichswehr_loyalty < 0.3 and strife >= 4 and not presidential_powers and (president == "Hindenburg" or (president == "Gessler" and reichswehr_loyalty < 0.15))))); no_majority_seldte if chancellor == "Seldte" and (harzburg_r >= 25 and seldte_times < 1) or (army_force+sh_force >= 50 and dnvp+sh_force < 50 and reichswehr_loyalty < 0.3 and strife >= 4 and not presidential_powers and (president == "Hindenburg" or (president == "Gessler" and reichswehr_loyalty < 0.15)))
+
+@luther_lead
+on-arrival: chancellor = "Luther"; chancellor_party = "DVP" if not lvp_formed; chancellor_party = "LVP" if lvp_formed
+
+There is no path to an obviously workable majority. President [+ president +] has given Hans Luther the task of forming a government, tired of Brüning's repeated failures to govern and hoping that Hans Luther would be able to gain broad Reichstag support.
+
+- @toleration_luther: We will tolerate Luther.
+- @new_elections: We will have new elections.
+
+@toleration_luther
+choose-if: neo_weimar_coalition >= 50
+unavailable-subtitle: The parties supporting Luther do not have a majority.
+on-arrival: spd_in_government = 0; spd_toleration = 1; dvp_relation += 3 if not lvp_formed; lvp_relation += 3 if lvp_formed; lvp_relation += 2 if lvp_leader == "Luther"; foreign_minister_party = "DVP"; foreign_minister_party = "LVP" if lvp_formed; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = ddp_name; economic_minister_party = "LVP" if lvp_formed; finance_minister_party = "DVP"; finance_minister_party = "LVP" if lvp_formed; agriculture_minister_party = "Z"; pro_republic -= 4; left_dissent += 5; labor_dissent += 3; center_dissent += 2; workers_spd -= 5; unemployed_spd -= 5
+
+We have decided to tolerate Luther's minority bourgeois government, a controversial decision in our party due to his economic policies and right-wing leanings.
+
+@kulz_lead
+on-arrival: chancellor = "Külz"; chancellor_party = ddp_name
+
+There is no path to an obviously workable majority. President Gessler has given Wilhelm Külz, member of the [+ ddp_name +], the task of forming a government, tired of Brüning's repeated failures to govern and hoping to gain our backing.
+
+- @toleration_kulz: We will tolerate Külz.
+- @new_elections: We will have new elections.
+
+@toleration_kulz
+choose-if: neo_weimar_coalition >= 50 or (neo_weimar_coalition+sapd_r >= 50 and kpd_relation >= 30)
+unavailable-subtitle: The parties supporting Külz do not have a majority.
+on-arrival: spd_in_government = 0; spd_toleration = 1; ddp_relation += 5; foreign_minister_party = "DVP"; foreign_minister_party = "LVP" if lvp_formed; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = ddp_name; economic_minister_party = "LVP" if lvp_formed; finance_minister_party = "DVP"; finance_minister_party = "LVP" if lvp_formed; agriculture_minister_party = "Z"; pro_republic -= 2
+
+We have decided to tolerate Külz's minority bourgeois government.
+
+@bruning_lead
+on-arrival: chancellor = "Brüning"; chancellor_party = "Z"
+
+There is no path to an obviously workable majority. President [+ president +] has given Heinrich Brüning of the Center Party the task of forming a government. As the bourgeois parties lack a majority on their own, the task falls on us to decide the fate of Brüning's government.
+
+- @toleration_bruning: We will tolerate Brüning.
+- @toleration_bruning_right: We will tolerate Brüning's right coalition.
+- @new_elections: We will have new elections.
 
 @no_majority
 title: There is no clear governing majority.
