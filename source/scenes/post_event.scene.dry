@@ -379,7 +379,7 @@ if (Q.month_actions >= 1) {
     if (Q.sapd_formed == 1 && Q.unions_independent == 1) {
         Q.center_dissent += 5/12;
     }
-    if (Q.sapd_formed == 1 && Q.pro_republic >= 75 && Q.kpd_party_leader != "Conciliators") {
+    if (Q.sapd_formed == 1 && Q.pro_republic >= 75 && Q.kpd_leader != "Conciliators") {
         Q.workers_kpd -= 3/12;
         Q.workers_sapd += 3/12;
     }
@@ -697,7 +697,6 @@ if (Q.month_actions >= 1) {
             Q.old_middle_lvp -= 2/12;
         }
         Q.sa_strength += 75/12;
-        Q.sh_strength += 50/12;
         Q.new_middle_nsdap += 6/12;
         Q.old_middle_nsdap += 8/12;
         Q.rural_other -= 2/12;
@@ -735,7 +734,6 @@ if (Q.month_actions >= 1) {
             Q.workers_nsdap += 4/12;
             Q.workers_kpd += 3/12;
             Q.sa_strength += 100/12;
-            Q.sh_strength += 75/12;
             Q.sa_militancy += 0.1/12;
             Q.rfb_strength += 25/12;
             Q.catholics_nsdap += 3/12;
@@ -1152,18 +1150,13 @@ if (Q.year == 1929 && Q.month == 12 && Q.dnf_formed == 1 && Q.dvp_relation_9 >= 
     Q.weimar_ref_votes = Math.round(Q.weimar_ref_signatures * 10) / 10;
 }
 
-if (Q.year == 1931 && Q.month == 3 && Q.dnf_formed == 0) {
-    Q.landtag_ref_signatures = (Q.dnvp_votes + Q.nsdap_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+if (Q.year == 1931 && Q.month == 4 && Q.PLR_launched && Q.landtag_ref_dvp) {
+    Q.landtag_ref_signatures = (Q.dnvp_votes + Q.nsdap_votes + Q.other_votes + Q.dnf_votes + Q.dvp_votes) * ((100 - Q.pro_republic) / 100);
     Q.landtag_ref_signatures = Math.round(Q.landtag_ref_signatures * 10) / 10;
-} else if (Q.year == 1931 && Q.month == 3 && Q.dnf_formed == 1 && Q.pro_republic_8 < 70) {
-    Q.landtag_ref_signatures = ((Q.dnvp_votes / 2) + Q.nsdap_votes + Q.dnf_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
-    Q.landtag_ref_signatures = Math.round(Q.landtag_ref_signatures * 10) / 10;
-} else if (Q.year == 1931 && Q.month == 3 && Q.dnf_formed == 1 && Q.pro_republic_8 >= 70) {
-    Q.landtag_ref_signatures = (Q.dnf_votes + Q.nsdap_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+} else if (Q.year == 1931 && Q.month == 4 && Q.PLR_launched && !Q.landtag_ref_dvp) {
+    Q.landtag_ref_signatures = (Q.dnvp_votes + Q.nsdap_votes + Q.other_votes + Q.dnf_votes) * ((100 - Q.pro_republic) / 100);
     Q.landtag_ref_signatures = Math.round(Q.landtag_ref_signatures * 10) / 10;
 }
-
-// 20 percent quota ^^^
 
 if (Q.in_grand_coalition == 1 && Q.dvp_relation >= 50 && !Q.lvp_formed) {
     Q.capital_strike_progress -= 0.25

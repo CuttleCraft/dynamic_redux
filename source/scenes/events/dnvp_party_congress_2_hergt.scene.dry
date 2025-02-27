@@ -11,7 +11,7 @@ new-page: true
 
 The internal dissent within the <span style="color: #3E88B3;">**DNVP**</span> has risen again with conflict over their participation in the referendum against the Young Plan[? if was_in_right_coalition == 1:&nbsp;and their withdrawal from the government[? if spd_in_government == 1:&nbsp;leaving us in power?]?]. 
 
-The "unity of the no" against Marxism has been losing its force over the years, and now is the time for the <span style="color: #3E88B3;">**DNVP**</span> to define itself through the next challenging years. [? if young_plan_signatures >= 10: The success of the Young Plan referendum to reach the adequate signatures has bolstered the current leadership.?][? if weimar_ref_signatures >= 30: The high support for the referendum for the revision of the constitution has bolstered the current leadership.?]
+The "unity of the no" against <span style="color: #9B0000;">Marxism</span> has been losing its force over the years, and now is the time for the <span style="color: #3E88B3;">**DNVP**</span> to define itself through the next challenging years. [? if young_plan_signatures >= 10: The success of the Young Plan referendum to reach the adequate signatures has bolstered the current leadership.?][? if weimar_ref_signatures >= 30: The high support for the referendum for the revision of the constitution has bolstered the current leadership.?]
 
 - @resultsdnvp: The congress unfolds...
 
