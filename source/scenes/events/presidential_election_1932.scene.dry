@@ -268,7 +268,7 @@ if (Q.eckener_campaign) {
     Q.eckener_votes += (Q.nationalism/1000);
     Q.eckener_votes += ((Math.floor(Math.random() * 11))/350);
     Q.thalmann_votes += Q.kpd_normalized;
-    if (Q.sapd_formed &&& Q.sapd_votes) {
+    if (Q.sapd_formed && Q.sapd_votes) {
         Q.thalmann_votes += Q.sapd_normalized;
     }
     if (Q.dvp_support_eckener) {
@@ -286,7 +286,7 @@ if (Q.burgerblock_campaign) {
         Q.gessler_votes += Q.z_normalized;
         Q.gessler_votes += Q.ddp_normalized;
         Q.thalmann_votes += Q.kpd_normalized;
-        if (Q.sapd_formed &&& Q.sapd_votes) {
+        if (Q.sapd_formed && Q.sapd_votes) {
             Q.thalmann_votes += Q.sapd_normalized;
         }
     }
@@ -294,7 +294,7 @@ if (Q.burgerblock_campaign) {
 if (Q.braun_campaign) {
     Q.braun_votes += Q.spd_normalized;
     Q.braun_votes += Q.ddp_normalized;
-    if (Q.sapd_formed &&& Q.sapd_votes) {
+    if (Q.sapd_formed && Q.sapd_votes) {
         Q.braun_votes += Q.sapd_normalized;
     }
     Q.braun_votes += (Q.pro_republic/1000);
@@ -338,7 +338,7 @@ if (Q.braun_campaign) {
     Q.hindenburg_votes += (Q.pro_republic/1000);
     Q.hindenburg_votes += (Q.nationalism/2250);
     Q.thalmann_votes += Q.kpd_normalized;
-    if (Q.sapd_formed &&& Q.sapd_votes) {
+    if (Q.sapd_formed && Q.sapd_votes) {
         Q.thalmann_votes += Q.sapd_normalized;
     }
 }
