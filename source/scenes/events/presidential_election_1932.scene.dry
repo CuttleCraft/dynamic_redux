@@ -376,6 +376,14 @@ if (Q.thalmann_to_braun_bonus) {
     Q.thalmann_votes -= Q.thalmann_to_braun_bonus;
     Q.braun_votes += Q.thalmann_to_braun_bonus;
 }
+console.log("Hindenburg:", Q.hindenburg_votes);
+console.log("Hitler:", Q.hitler_votes);
+console.log("Braun:", Q.braun_votes);
+console.log("Thalmann:", Q.thalmann_votes);
+console.log("Eckener:", Q.eckener_votes);
+console.log("Gessler:", Q.gessler_votes);
+console.log("Duesterberg:", Q.duesterburg_votes);
+console.log("Seldte:", Q.seldte_votes);
 
 Q.total_votes_pres = Q.hindenburg_votes + Q.hitler_votes + Q.thalmann_votes + Q.braun_votes + Q.eckener_votes + Q.gessler_votes + Q.duesterburg_votes + Q.seldte_votes;
 Q.hindenburg_votes_normalized = (Q.hindenburg_votes/Q.total_votes_pres);
