@@ -24,7 +24,7 @@ We mobilize our forces for an uprising against Seldte, and they are quickly met 
 
 @submit
 on-arrival: rb_strength *= 0.9; kpd_relation -= 15; left_dissent += 10; neorevisionist_dissent += 10; rb_militancy *= 0.95; rfb_strength *= 0.8; workers_spd -= 3; workers_kpd -= 5; unemployed_nsdap += 5; sh_strength += 20; sa_strengh += 40; new_middle_nsdap -= 5; old_middle_nsdap -= 5; sh_strength += 100; sa_strength -= 50; sh_militancy += 0.02; z_relation -= 5; dvp_relation -= 5; dvp_relation -= 5 if pro_republic < 45; catholics_spd -= 5; socialism -= 6; {!
-if (Q.dnvp_ideology == "Radical) {
+if (Q.dnvp_ideology == "Radical") {
     Q.rural_dnvp += 15;
     Q.new_middle_dnvp += 15;
     Q.old_middle_dnvp += 15;
