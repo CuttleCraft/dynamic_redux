@@ -781,6 +781,7 @@ Q.dnvp_westarp = 1;
 Q.ddp_factionless_time = 0;
 Q.wp_conflict_time = 0;
 Q.bruning_austerity_limited = 0;
+Q.political_decree = 0;
 
 // flavour text stuff
 for (let i = 0; i <= 100; i++) {

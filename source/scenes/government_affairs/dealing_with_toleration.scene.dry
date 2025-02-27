@@ -60,7 +60,7 @@ unavailable-subtitle: This can only happen with a budget surplus.
 go-to: urge_success if z_relation >= 45 and ((ddp_relation >= 40 and not lvp_formed) or (lvp_relation >= 40 and lvp_formed)); urge_failure if z_relation < 45 or ((ddp_relation < 40 and not lvp_formed) or (lvp_relation < 40 and lvp_formed))
 
 @urge_success
-on-arrival: welfare += 1; budget -= 1; workers_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent); new_middle_ddp += 1; old_middle_ddp += 1; new_middle_dvp += 1.5; old_middle_dvp += 1.5; new_middle_other += 1.5; old_middle_other += 1.5; z_relation -= 3; dvp_relation -= 3; ddp_relation -= 3; lvp_relation -= 3; reformist_dissent -= 5; center_dissent -= 5; labor_dissent -= 5; dvp_right += 1; ddp_right += 0.5; lvp_right += 1; hindenburg_angry_bruning += 10; economic_growth += 0.2; unemployed -= 0.2
+on-arrival: welfare += 1; budget -= 1; workers_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent); new_middle_ddp += 1; old_middle_ddp += 1; new_middle_dvp += 1.5; old_middle_dvp += 1.5; new_middle_other += 1.5; old_middle_other += 1.5; new_middle_lvp += 3; old_middle_lvp += 3; z_relation -= 3; dvp_relation -= 3; ddp_relation -= 3; lvp_relation -= 3; reformist_dissent -= 5; center_dissent -= 5; labor_dissent -= 5; dvp_right += 1; ddp_right += 0.5; lvp_right += 1; hindenburg_angry_bruning += 10; economic_growth += 0.2; unemployed -= 0.2
 
 We have successfully urged the coalition parties to increase social spending! Unfortunately, the center-right parties increasingly see us as a nuisance, and might not wish to continue these negotiations. [? if president == "Hindenburg": President Hindenburg is also losing patience with Brüning for yielding to our demands.?]
 
@@ -74,7 +74,7 @@ title: Attempt to pressure Brüning to curb the worse excesses of his austerity 
 go-to: urge_success_limited if z_relation >= 35; urge_failure if z_relation < 35
 
 @urge_success_limited
-on-arrival: bruning_austerity_limited += 1; workers_spd += 3*(1-dissent); unemployed_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent) if bruning_austerity_limited >= 3; new_middle_ddp += 1; old_middle_ddp += 1; new_middle_dvp += 1; old_middle_dvp += 1; new_middle_other += 1; old_middle_other += 1; new_middle_nsdap -= 2; old_middle_nsdap -= 2; z_relation -= 3; reformist_dissent -= 3; center_dissent -= 3; labor_dissent -= 3; dvp_right += 1; ddp_right += 0.5; lvp_right += 1; hindenburg_angry_bruning += 5; economic_growth += 0.1; unemployed -= 0.1
+on-arrival: bruning_austerity_limited += 1; workers_spd += 3*(1-dissent); unemployed_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent) if bruning_austerity_limited >= 3; new_middle_ddp += 1; old_middle_ddp += 1; new_middle_dvp += 1; old_middle_dvp += 1; new_middle_other += 1; old_middle_other += 1; new_middle_nsdap -= 2; old_middle_nsdap -= 2; new_middle_lvp += 2; old_middle_lvp += 2; z_relation -= 3; reformist_dissent -= 3; center_dissent -= 3; labor_dissent -= 3; dvp_right += 1; ddp_right += 0.5; lvp_right += 1; hindenburg_angry_bruning += 5; economic_growth += 0.1; unemployed -= 0.1
 
 We have successfully pressured Brüning to tone down the severity of his austerity policies in his emergency decrees. Unfortunately, the center-right parties increasingly see us as a nuisance, and will attempt to force Brüning to form a majority coalition with the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> instead. [? if president == "Hindenburg": President Hindenburg is also losing patience with Brüning for yielding to our demands.?]
 
@@ -84,11 +84,11 @@ We have successfully pressured Brüning to tone down the severity of his austeri
 choose-if: spd_prussia and strife >= 3 and z_relation >= 35
 unavailable-subtitle: [? if not spd_prussia: We don't control the Prussian government. ?] [? if strife < 3: Paramilitary violence isn't severe enough to justify an emergency decree. ?] [? if z_relation < 35: We lack sufficient relations with Brüning. ?]
 title: Urge Brüning to grant us stronger actions against political extremists, and to restrict certain rights.
-on-arrival: prussian_police_loyalty += 0.02; prussian_police_strength += 2; kpd_relation -= 6; rfb_militancy *= 0.9; rfb_strength *= 0.85; sa_militancy *= 0.96; sa_strength *= 0.96; sh_militancy *= 0.98; sh_militancy *= 0.98; hindenburg_angry_bruning += 5
+on-arrival: political_decree += 1; prussian_police_loyalty += 0.04; prussian_police_strength += 5; kpd_relation -= 6; rfb_militancy *= 0.9; rfb_strength *= 0.85; sa_militancy *= 0.96; sa_strength *= 0.96; sh_militancy *= 0.98; sh_militancy *= 0.98; workers_kpd -= 1; workers_nsdap -= 1; unemployed_kpd -= 3; unemployed_nsdap -= 3; new_middle_nsdap -= 2; hindenburg_angry_bruning += 5
 
-Carl Severing and other Prussian officials have successfully urged Brüning to issue an emergency decree granting the Prussian police greater authority to crack down on political extremists. The decree also imposes certain restrictions on fundamental rights such as a ban on certain marches.
+Carl Severing and other Prussian officials have successfully urged Brüning to issue an emergency decree expanding police authority to suppress political extremism. The decree imposes restrictions on political meetings, organizations, newspapers, and posters, all of which now require police approval beforehand.
 
-[? if president == "Hindenburg": President Hindenburg has reluctantly signed the decree, but is losing patience with Brüning for yielding to our demands. ?]
+As a result, several <span style="color: #7A3C00;">Nazi</span> and <span style="color: #700000;">Communist</span> newspapers have been banned, triggering violent clashes between their supporters and the police. [? if president == "Hindenburg": President Hindenburg has reluctantly signed the decree, but is losing patience with Brüning for yielding to our demands. ?]
 
 @improve_relations
 title: Improve relations with the parties of the coalition.

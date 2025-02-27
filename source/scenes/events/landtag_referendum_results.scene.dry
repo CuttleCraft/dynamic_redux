@@ -1,0 +1,40 @@
+title: Prussian Landtag Referendum
+subtitle: The results have come in.
+new-page: true
+#tags: event
+view-if: year = 1931 and month >= 8 and next_election_time_prussia - time >= 12 and spd_prussia
+on-arrival: {!
+if (Q.year == 1931 && Q.month == 8 && Q.dnf_formed == 0) {
+    Q.landtag_ref_votes = (Q.dnvp_votes + Q.nsdap_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+    Q.landtag_ref_votes = Math.round(Q.landtag_ref_votes * 10) / 10;
+} else if (Q.year == 1931 && Q.month == 8 && Q.dnf_formed == 1 && Q.pro_republic_8 < 70) {
+    Q.landtag_ref_votes = ((Q.dnvp_votes / 2) + Q.nsdap_votes + Q.dnf_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+    Q.landtag_ref_votes = Math.round(Q.landtag_ref_votes * 10) / 10;
+} else if (Q.year == 1931 && Q.month == 8 && Q.dnf_formed == 1 && Q.pro_republic_8 >= 70) {
+    Q.landtag_ref_votes = (Q.dnf_votes + Q.nsdap_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+    Q.landtag_ref_votes = Math.round(Q.landtag_ref_votes * 10) / 10;
+}
+!}
+max-visits: 1
+
+= Prussian Landtag referendum
+
+[+ landtag_ref_votes +] voted for it
+
+- @PLR_results: 
+
+@PLR_results
+title: u/Con-All please save us...
+go-to: PLR_passed_votes if landtag_ref_votes >= 50; PLR_failed_votes if landtag_ref_votes < 50
+
+results here
+
+@PLR_passed_votes
+title: It passes!
+
+[+ landtag_ref_votes +] voted for it, passes
+
+@PLR_failed_votes
+title: It fails!
+
+[+ landtag_ref_votes +] voted for it, fails

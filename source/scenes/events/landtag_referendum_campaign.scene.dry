@@ -1,0 +1,74 @@
+title: Prussian Landtag referendum
+subtitle: How should we campaign against the referendum?
+new-page: true
+#tags: event
+view-if: year = 1931 and month >= 7 and next_election_time_prussia - time >= 12 and spd_prussia
+on-arrival: landtag_ref_kpd = 1 if kpd_relation < 40 and not kpd_leader == "Conciliators"; landtag_ref_kpd = 0 if kpd_relation >= 40 or kpd_leader == "Conciliators"
+max-visits: 1
+
+= Prussian Landtag referendum
+
+campaign activities
+
+[? if landtag_ref_kpd: kpd support ref ?][? if not landtag_ref_kpd: kpd don't support ref ?]
+
+- @do_campaign: campaign against
+- @no_campaign: don't campaign
+
+@do_campaign
+subtitle: [? if spd_in_government: -1 resources ?][? if not spd_in_government: -2 resources ?]
+choose-if: (resources >= 1 and spd_in_government = 1) or (resources >= 2 and spd_in_government = 0)
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1 if spd_in_government; resources -= 2 if not spd_in_government;
+
+cool, here are some options
+
+- @bourgeois: bourgeois parties pls help us
+- @radio: use da radio
+- @urge_paramilitary
+- @rb: reichsbanner gang rise up
+- @kpd: red-brown referendum is real... real kpd workers don't vote for this
+
+@bourgeois
+subtitle: The bourgeois will be more inclined to work with us on this.
+on-arrival: pro_republic -= 3; pro_republic += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); nationalism += 5; nationalism -= 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); old_middle_spd += 2 if radio >= 2; new_middle_spd += 2 if radio >= 2; old_middle_spd += 2; new_middle_spd += 2; workers_nsdap += 4; rural_nsdap += 5; rural_nsdap -= 3 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); catholics_spd -= 3; workers_spd -= 3; workers_spd += 1 if radio >= 2; rural_dvp -= 4; rural_dvp += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); z_relation += 5; dvp_relation += 5; ddp_relation += 5; ddp_left += 1; ddp_cohesion += 1; dvp_left += 2
+
+We argue that the Young Plan is simply the most rational choice for Germany. Although it doesn't advance any broader political objectives, most people can get behind economic stability and recovery. [? if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)): The bourgeois parties have rallied with us to campaign against the referendum and for the Young Plan.&nbsp;?][? if radio >= 2: Our radio network has helped us spread our message.&nbsp;?]
+
+@internationalism
+on-arrival: pro_republic -= 3 if pacifism < 3; workers_spd += 2 if radio >= 2; nationalism -= 5*(1-dissent) if pacifism >= 2 else nationalism += 3; pacifism += 1; workers_spd += 5*(1-dissent) if pacifism >= 3 and nationalism <= 50; workers_spd += 1; workers_nsdap += 4 if pacifism < 3; rural_nsdap += 5; catholics_spd -= 3 if pacifism < 3; rural_dvp -= 4
+
+We rail hard against nationalism and in favor of pacifism and belonging to the international community of nations. [? if radio >= 2: Our radio network has helped us spread our message.&nbsp;?][? if pacifism >= 3 and nationalism <= 50 : We have rallied the workers to the cause of internationalism. ?]Although the bourgeois are not too pleased for us having monopolized the campaign for the Young Plan.
+
+@radio
+subtitle: The bourgeois will be more inclined to work with us on this.
+on-arrival: pro_republic -= 3; pro_republic += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); nationalism += 5; nationalism -= 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); old_middle_spd += 2 if radio >= 2; new_middle_spd += 2 if radio >= 2; old_middle_spd += 2; new_middle_spd += 2; workers_nsdap += 4; rural_nsdap += 5; rural_nsdap -= 3 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); catholics_spd -= 3; workers_spd -= 3; workers_spd += 1 if radio >= 2; rural_dvp -= 4; rural_dvp += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); z_relation += 5; dvp_relation += 5; ddp_relation += 5; ddp_left += 1; ddp_cohesion += 1; dvp_left += 2
+
+We argue that the Young Plan is simply the most rational choice for Germany. Although it doesn't advance any broader political objectives, most people can get behind economic stability and recovery. [? if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)): The bourgeois parties have rallied with us to campaign against the referendum and for the Young Plan.&nbsp;?][? if radio >= 2: Our radio network has helped us spread our message.&nbsp;?]
+
+@urge_paramilitary
+choose-if: spd_prussia and strife >= 3 and z_relation >= 35
+unavailable-subtitle: [? if not spd_prussia: We don't control the Prussian government. ?] [? if strife < 3: Paramilitary violence isn't severe enough to justify an emergency decree. ?] [? if z_relation < 35: We lack sufficient relations with Brüning. ?]
+title: Urge Brüning to grant us stronger actions against political extremists, and to restrict certain rights.
+on-arrival: political_decree += 1; prussian_police_loyalty += 0.02; prussian_police_strength += 2; kpd_relation -= 6; rfb_militancy *= 0.9; rfb_strength *= 0.85; sa_militancy *= 0.96; sa_strength *= 0.96; sh_militancy *= 0.98; sh_militancy *= 0.98; hindenburg_angry_bruning += 5
+
+Carl Severing and other Prussian officials have successfully urged Brüning to issue an emergency decree granting the Prussian police greater authority to crack down on political extremists. The decree also imposes certain restrictions on fundamental rights such as a ban on certain marches.
+
+[? if president == "Hindenburg": President Hindenburg has reluctantly signed the decree, but is losing patience with Brüning for yielding to our demands. ?]
+
+@rb
+subtitle: The bourgeois will be more inclined to work with us on this.
+on-arrival: pro_republic -= 3; pro_republic += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); nationalism += 5; nationalism -= 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); old_middle_spd += 2 if radio >= 2; new_middle_spd += 2 if radio >= 2; old_middle_spd += 2; new_middle_spd += 2; workers_nsdap += 4; rural_nsdap += 5; rural_nsdap -= 3 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); catholics_spd -= 3; workers_spd -= 3; workers_spd += 1 if radio >= 2; rural_dvp -= 4; rural_dvp += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); z_relation += 5; dvp_relation += 5; ddp_relation += 5; ddp_left += 1; ddp_cohesion += 1; dvp_left += 2
+
+We argue that the Young Plan is simply the most rational choice for Germany. Although it doesn't advance any broader political objectives, most people can get behind economic stability and recovery. [? if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)): The bourgeois parties have rallied with us to campaign against the referendum and for the Young Plan.&nbsp;?][? if radio >= 2: Our radio network has helped us spread our message.&nbsp;?]
+
+@kpd
+subtitle: The bourgeois will be more inclined to work with us on this.
+on-arrival: pro_republic -= 3; pro_republic += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); nationalism += 5; nationalism -= 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); old_middle_spd += 2 if radio >= 2; new_middle_spd += 2 if radio >= 2; old_middle_spd += 2; new_middle_spd += 2; workers_nsdap += 4; rural_nsdap += 5; rural_nsdap -= 3 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); catholics_spd -= 3; workers_spd -= 3; workers_spd += 1 if radio >= 2; rural_dvp -= 4; rural_dvp += 2 if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)); z_relation += 5; dvp_relation += 5; ddp_relation += 5; ddp_left += 1; ddp_cohesion += 1; dvp_left += 2
+
+We argue that the Young Plan is simply the most rational choice for Germany. Although it doesn't advance any broader political objectives, most people can get behind economic stability and recovery. [? if (z_relation >= 50 and (dvp_relation >= 40 and ddp_relation >= 40 and dvp_ideology != "Right" and not lvp_formed) or (lvp_relation >= 40 and lvp_ideology != "Right" and lvp_formed)): The bourgeois parties have rallied with us to campaign against the referendum and for the Young Plan.&nbsp;?][? if radio >= 2: Our radio network has helped us spread our message.&nbsp;?]
+
+@no_campaign
+on-arrival: nationalism += 5; workers_spd -= 3; old_middle_spd -= 3; new_middle_spd -= 3; pacifism -= 1; workers_nsdap += 5; rural_nsdap += 5; catholics_spd -= 5; rural_dvp -= 5; pro_republic -= 6
+
+The referendum is easily going to fail with or without our presence in the campaign. However, nationalist sentiment is inflamed, and the right-wing parties are using our silence around the Plan as a tacit admission of its faults. Our silence has only emboldened the Right, especially the <span style="color: #7A3C00;">**NSDAP**</span>.

@@ -11,12 +11,11 @@ for (var c of Q.classes) {
     }
 }
 
-Q.pro_republic = Math.round(Q.pro_republic);
-Q.nationalism = Math.round(Q.nationalism);
-Q.socialism = Math.round(Q.socialism);
-
 if (Q.pro_republic < 0) {
     Q.pro_republic = 0;
+}
+if (Q.reichswehr_strength < 0) {
+    Q.reichswehr_strength = 0;
 }
 if (Q.pro_republic >= 100) {
     Q.pro_republic = 99;
@@ -101,20 +100,57 @@ Q.sa_force = Q.sa_strength*Q.sa_militancy;
 Q.sh_force = Q.sh_strength*Q.sh_militancy;
 Q.rb_force = Q.rb_strength*Q.rb_militancy;
 Q.rfb_force = Q.rfb_strength*Q.rfb_militancy;
-Q.army_force = Q.reichswehr_strength*Q.reichswehr_militancy;
-Q.prussia_force = Q.prussian_police_strength*Q.prussian_police_militancy;
-var total_force = (Q.sa_force+Q.sh_force+Q.rb_force+Q.rfb_force+Q.army_force+Q.prussia_force);
+Q.prussia_force = Q.prussian_police_strength*Q.prussian_police_militancy*Q.prussian_police_loyalty;
+var total_force = (Q.sa_force+Q.sh_force+Q.rb_force+Q.rfb_force+Q.prussia_force);
 
 Q.sa_force = Math.round((Q.sa_force/total_force)*100);
 Q.sh_force = Math.round((Q.sh_force/total_force)*100);
 Q.rb_force = Math.round((Q.rb_force/total_force)*100);
 Q.rfb_force = Math.round((Q.rfb_force/total_force)*100);
-Q.army_force = Math.round((Q.army_force/total_force)*100);
 Q.prussia_force = Math.round((Q.prussia_force/total_force)*100);
 
-// further
-Q.loyal_army = Q.army_force*Q.reichswehr_loyalty;
-Q.loyal_prussia = Q.prussian_police_loyalty*Q.prussia_force;
+Q.far_right_force = Q.sh_force + Q.sa_force;
+Q.democracy_force = Q.rb_force + Q.prussia_force;
+
+Q.far_right_paramilitary = 0;
+Q.democracy_paramilitary = 0;
+Q.far_right_paramilitary_highest = 0;
+Q.far_right_paramilitary_high = 0;
+Q.far_right_paramilitary_med = 0;
+Q.far_right_paramilitary_low = 0;
+Q.democracy_paramilitary_highest = 0;
+Q.democracy_paramilitary_high = 0;
+Q.democracy_paramilitary_med = 0;
+Q.democracy_paramilitary_low = 0;
+
+if (Q.far_right_force >= Q.democracy_force) {
+    if (Q.far_right_force - Q.democracy_force >= 30) {
+        Q.far_right_paramilitary_highest = 1;
+    } else if (Q.far_right_force - Q.democracy_force >= 20) {
+        Q.far_right_paramilitary_high = 1;
+    } else if (Q.far_right_force - Q.democracy_force >= 10) {
+        Q.far_right_paramilitary_med = 1;
+    } else if (Q.far_right_force - Q.democracy_force >= 0){
+        Q.far_right_paramilitary_low = 1;
+    }
+    if (Q.sa_force >= Q.sh_force - 10) {
+        Q.sa_paramilitary = 1;
+    } else {
+        Q.sh_paramilitary = 1;
+    }
+    Q.far_right_paramilitary = 1;
+} else if (Q.democracy_force > Q.far_right_force) {
+    if (Q.democracy_force - Q.far_right_force >= 30) {
+        Q.democracy_paramilitary_highest = 1;
+    } else if (Q.democracy_force - Q.far_right_force >= 20) {
+        Q.democracy_paramilitary_high = 1;
+    } else if (Q.democracy_force - Q.far_right_force >= 10) {
+        Q.democracy_paramilitary_med = 1;
+    } else if (Q.democracy_force - Q.far_right_force >= 0){
+        Q.democracy_paramilitary_low = 1;
+    }
+    Q.democracy_paramilitary = 1;
+}
 
 Q.dnf_r = Math.round(Q.dnf_r * 10) / 10
 Q.dnvp_r = Math.round(Q.dnvp_r * 10) / 10
@@ -522,7 +558,6 @@ if (Q.month_actions >= 1) {
         Q.new_middle_lvp -= 3/12;
         Q.workers_kpd += 3/12;
         Q.sa_strength += 50/12;
-        Q.sh_strength += 100/12;
         Q.rural_dnvp -= 4/12;
         Q.rural_nsdap += 10/12;
         Q.unemployed_nsdap += 18/12;
@@ -582,11 +617,7 @@ if (Q.month_actions >= 1) {
             Q.catholics_dnvp += 3/12;
             Q.workers_dnvp += 1.5/12;
             Q.new_middle_dnvp += 3/12;
-    }
-    if (Q.sa_force >= Q.rb_force) {
-        Q.unemployed_kpd -= 2/12;
-        Q.unemployed_nsdap += 8/12;
-    }
+        }
 } else if (Q.year == 1930) {
         Q.unemployed += 6.8/12; 
         Q.inflation -= 4/12;
@@ -610,13 +641,6 @@ if (Q.month_actions >= 1) {
         Q.new_middle_nsdap += 8/12;
         Q.old_middle_nsdap += 8/12;
         Q.unemployed_nsdap += 8/12;
-        if (Q.sa_force >= Q.rb_force) {
-            if (Q.strife > 0) {
-                Q.unemployed_kpd -= (Q.strife/12);
-                Q.unemployed_nsdap += (Q.strife/12);
-            }
-            Q.unemployed_nsdap += 6/12;
-        }
         Q.workers_z += 2/12;
         Q.old_middle_z += 2/12;
         Q.new_middle_z += 2/12;
@@ -637,20 +661,15 @@ if (Q.month_actions >= 1) {
                 Q.rural_dnf += 3/12;
                 Q.old_middle_dnf += 4/12;
                 Q.new_middle_dnf += 2/12;
-            if (Q.kvp_formed) {
+            } if (Q.kvp_formed) {
                 Q.rural_kvp -= 3/12;
                 Q.rural_dnvp += 3/12;
                 Q.old_middle_kvp -= 3/12;
                 Q.old_middle_dnvp += 3/12;
             }
-            }
         }
         Q.sa_strength += 100/12;
-        if (Q.dnf_formed == 0) { 
-            Q.sh_strength += 100/12;
-        } else {
-            Q.sh_strength += 50/12;
-        }
+        Q.rfb_strength += 25/12;
     } else if (Q.year == 1931) {
         Q.unemployed += 3/12;
         Q.inflation -= 5/12;
@@ -674,12 +693,11 @@ if (Q.month_actions >= 1) {
             Q.new_middle_ddp -= 2/12;
             Q.old_middle_dvp -= 2/12;
             Q.new_middle_dvp -= 2/12;
+            Q.new_middle_lvp -= 2/12;
+            Q.old_middle_lvp -= 2/12;
         }
-        Q.new_middle_lvp -= 4/12;
-        Q.old_middle_lvp -= 4/12;
-        Q.sa_strength += 50/12;
+        Q.sa_strength += 75/12;
         Q.sh_strength += 50/12;
-        Q.sa_militancy += 0.1/12;
         Q.new_middle_nsdap += 6/12;
         Q.old_middle_nsdap += 8/12;
         Q.rural_other -= 2/12;
@@ -717,7 +735,9 @@ if (Q.month_actions >= 1) {
             Q.workers_nsdap += 4/12;
             Q.workers_kpd += 3/12;
             Q.sa_strength += 100/12;
-            Q.sh_strength += 50/12;
+            Q.sh_strength += 75/12;
+            Q.sa_militancy += 0.1/12;
+            Q.rfb_strength += 25/12;
             Q.catholics_nsdap += 3/12;
             Q.catholics_other -= 3/12;
             if (Q.kvp_formed) {
@@ -733,13 +753,6 @@ if (Q.month_actions >= 1) {
                 Q.old_middle_dnf += 4/12;
                 Q.new_middle_dnf += 2/12;
                 }
-            if (Q.sa_force >= Q.rb_force) {
-                if (Q.strife > 0) {
-                    Q.unemployed_kpd -= (Q.strife/12);
-                    Q.unemployed_nsdap += (Q.strife/12);
-                }
-                Q.unemployed_nsdap += 5/12
-            }
         } else if (Q.unemployed > 15) {
             Q.old_middle_dvp -= 3/12;
             Q.new_middle_dvp -= 3/12;
@@ -773,6 +786,7 @@ if (Q.month_actions >= 1) {
         Q.old_middle_nsdap += 4/12;
         Q.rural_nsdap += 4/12;
         Q.unemployed_nsdap += 4/12;
+        Q.sa_strength += 100/12;
         if (!Q.works_program) {
             Q.unemployed += 3/12; 
             Q.inflation -= 2/12;
@@ -800,7 +814,8 @@ if (Q.month_actions >= 1) {
             Q.unemployed_kpd += 2/12;
             Q.workers_nsdap += 3/12;
             Q.workers_kpd += 3/12;
-            Q.sa_strength += 200/12;
+            Q.sa_strength += 300/12;
+            Q.rfb_strength += 25/12;
             Q.new_middle_dnvp += 4/12;
             if (Q.kvp_formed) {
                 Q.rural_kvp -= 3/12;
@@ -815,19 +830,15 @@ if (Q.month_actions >= 1) {
                 Q.old_middle_dvp -= 2/12;
             }
             Q.rural_dvp -= 2/12;
-            Q.new_middle_lvp -= 8/12;
-            Q.old_middle_lvp -= 8/12;
-            Q.rural_lvp -= 4/12;
-            if (Q.sa_force >= Q.rb_force) {
-                Q.unemployed_nsdap += 5/12;
-                Q.unemployed_kpd -= 3/12;
-            }
+            Q.new_middle_lvp -= 4/12;
+            Q.old_middle_lvp -= 4/12;
+            Q.rural_lvp -= 2/12;
         } else if (Q.unemployed > 25) {
             Q.rural_nsdap += 5/12;
             Q.unemployed_nsdap += 5/12;
             Q.old_middle_nsdap += 5/12;
             Q.new_middle_nsdap += 4/12;
-            Q.sa_strength += 50/12;
+            Q.sa_strength += 200/12;
             if (Q.dnf_formed) {
                 Q.workers_dnf += 2/12;
                 Q.rural_dnf += 4/12;
@@ -845,6 +856,7 @@ if (Q.month_actions >= 1) {
             Q.unemployed_nsdap += 3/12;
             Q.old_middle_nsdap += 3/12;
             Q.new_middle_nsdap += 2/12;
+            Q.sa_strength += 100/12;
             if (Q.dnf_formed) {
                 Q.workers_dnf += 1/12;
                 Q.rural_dnf += 2/12;
@@ -944,6 +956,119 @@ if (Q.dnf_decay_timer > 0) {
     Q.old_middle_dnvp += 0.4;
 }
 
+if (Q.far_right_paramilitary && Q.year >= 1930) {
+    if (Q.far_right_paramilitary_highest) {
+        Q.workers_nsdap += 4/12;
+        Q.workers_spd -= 4/12;
+        Q.unemployed_nsdap += 8/12;
+        Q.unemployed_spd -= 6/12;
+        Q.unemployed_kpd -= 2/12;
+        Q.new_middle_nsdap += 4/12;
+        Q.new_middle_spd -= 3/12;
+        Q.new_middle_ddp -= 1/12;
+        Q.new_middle_lvp -= 1/12;
+        Q.old_middle_nsdap += 2/12;
+        Q.old_middle_spd -= 2/12;
+        Q.catholics_nsdap += 2/12;
+        Q.catholics_spd -= 2/12;
+        Q.pro_republic -= 1;
+    } else if (Q.far_right_paramilitary_high) {
+        Q.workers_nsdap += 3/12;
+        Q.workers_spd -= 3/12;
+        Q.unemployed_nsdap += 6/12;
+        Q.unemployed_spd -= 5/12;
+        Q.unemployed_kpd -= 1/12;
+        Q.new_middle_nsdap += 3/12;
+        Q.new_middle_spd -= 2/12;
+        Q.new_middle_ddp -= 0.5/12;
+        Q.new_middle_lvp -= 0.5/12;
+        Q.old_middle_nsdap += 1/12;
+        Q.old_middle_spd -= 1/12;
+        Q.catholics_nsdap += 1/12;
+        Q.catholics_spd -= 1/12;
+        Q.pro_republic -= 0.75;
+    } else if (Q.far_right_paramilitary_med) {
+        Q.workers_nsdap += 2/12;
+        Q.workers_spd -= 2/12;
+        Q.unemployed_nsdap += 4/12;
+        Q.unemployed_spd -= 4/12;
+        Q.new_middle_nsdap += 2/12;
+        Q.new_middle_spd -= 2/12;
+        Q.pro_republic -= 0.5;
+    } else if (Q.far_right_paramilitary_low){
+        Q.workers_nsdap += 1/12;
+        Q.workers_spd -= 1/12;
+        Q.unemployed_nsdap += 3/12;
+        Q.unemployed_spd -= 3/12;
+        Q.new_middle_nsdap += 1/12;
+        Q.new_middle_spd -= 1/12;
+        Q.pro_republic -= 0.25;
+    }
+    if (Q.sa_paramilitary) {
+        Q.workers_nsdap += 2/12;
+        Q.unemployed_nsdap += 4/12;
+        Q.unemployed_spd -= 2/12;
+        Q.unemployed_kpd -= 2/12;
+        Q.new_middle_nsdap += 2/12;
+        Q.new_middle_spd -= 2/12;
+        Q.old_middle_nsdap += 1/12;
+        Q.old_middle_spd -= 1/12;
+        Q.catholics_nsdap += 1/12;
+        Q.catholics_spd -= 1/12;
+        Q.pro_republic -= 0.5;
+    }
+} else if (Q.democracy_paramilitary && Q.year >= 1930) {
+    if (Q.democracy_paramilitary_highest) {
+        Q.workers_spd += 4/12;
+        Q.workers_nsdap -= 4/12;
+        Q.unemployed_spd += 7/12;
+        Q.unemployed_nsdap -= 5/12;
+        Q.unemployed_kpd -= 2/12;
+        Q.new_middle_nsdap -= 4/12;
+        Q.new_middle_spd += 3/12;
+        Q.new_middle_ddp += 1/12;
+        Q.old_middle_nsdap -= 2/12;
+        Q.old_middle_spd += 2/12;
+        if (Q.catholics_nsdap >= 2) Q.catholics_nsdap -= 2/12;
+        if (Q.catholics_nsdap >= 2) Q.catholics_spd += 2/12;
+    } else if (Q.democracy_paramilitary_high) {
+        Q.workers_spd += 3/12;
+        Q.workers_nsdap -= 3/12;
+        Q.unemployed_spd += 5/12;
+        Q.unemployed_nsdap -= 4/12;
+        Q.unemployed_kpd -= 1/12;
+        Q.new_middle_nsdap -= 3/12;
+        Q.new_middle_spd += 2/12;
+        Q.new_middle_ddp += 1/12;
+        Q.old_middle_nsdap -= 1/12;
+        Q.old_middle_spd += 1/12;
+        if (Q.catholics_nsdap >= 1) Q.catholics_nsdap -= 1/12;
+        if (Q.catholics_nsdap >= 1) Q.catholics_spd += 1/12;
+    } else if (Q.democracy_paramilitary_med) {
+        Q.workers_spd += 2/12;
+        Q.workers_nsdap -= 2/12;
+        Q.unemployed_spd += 4/12;
+        Q.unemployed_nsdap -= 4/12;
+        Q.new_middle_nsdap -= 1/12;
+        Q.new_middle_spd += 1/12;
+    } else if (Q.democracy_paramilitary_low){
+        Q.unemployed_nsdap -= 2/12;
+        Q.unemployed_spd += 2/12;
+    }
+    if (Q.rfb_force >= Q.rb_force) {
+        Q.workers_kpd += 4/12;
+        Q.workers_spd -= 4/12;
+        Q.unemployed_kpd += 6/12;
+        Q.unemployed_spd -= 6/12;
+        Q.new_middle_kpd += 1/12;
+        Q.new_middle_spd -= 1/12;
+        Q.catholics_kpd += 1/12;
+        Q.catholics_spd -= 1/12;
+        Q.pro_republic -= 0.5;
+    }
+    if (Q.democracy_force >= Q.pro_republic) Q.pro_republic += 1;
+}
+
 if (Q.works_program >= 4 && Q.wtb_enactment_2_finish > Q.time) {
     if (Q.unemployed > 8) {
         Q.unemployed -= 3/10;
@@ -1026,6 +1151,19 @@ if (Q.year == 1929 && Q.month == 12 && Q.dnf_formed == 1 && Q.dvp_relation_9 >= 
     Q.weimar_ref_votes = (Q.dnvp_votes + Q.other_votes + Q.dvp_votes + 3 + ((100 - Q.pro_republic) / 2));
     Q.weimar_ref_votes = Math.round(Q.weimar_ref_signatures * 10) / 10;
 }
+
+if (Q.year == 1931 && Q.month == 3 && Q.dnf_formed == 0) {
+    Q.landtag_ref_signatures = (Q.dnvp_votes + Q.nsdap_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+    Q.landtag_ref_signatures = Math.round(Q.landtag_ref_signatures * 10) / 10;
+} else if (Q.year == 1931 && Q.month == 3 && Q.dnf_formed == 1 && Q.pro_republic_8 < 70) {
+    Q.landtag_ref_signatures = ((Q.dnvp_votes / 2) + Q.nsdap_votes + Q.dnf_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+    Q.landtag_ref_signatures = Math.round(Q.landtag_ref_signatures * 10) / 10;
+} else if (Q.year == 1931 && Q.month == 3 && Q.dnf_formed == 1 && Q.pro_republic_8 >= 70) {
+    Q.landtag_ref_signatures = (Q.dnf_votes + Q.nsdap_votes + Q.other_votes) * ((100 - Q.pro_republic) / 100);
+    Q.landtag_ref_signatures = Math.round(Q.landtag_ref_signatures * 10) / 10;
+}
+
+// 20 percent quota ^^^
 
 if (Q.in_grand_coalition == 1 && Q.dvp_relation >= 50 && !Q.lvp_formed) {
     Q.capital_strike_progress -= 0.25
@@ -1701,7 +1839,7 @@ if (Q.year == 1930 && Q.bourgeois_negotiations >= 1 && ((Q.bourgeois_negotiation
     Q.lvp_merger_2_timer = 3;
 }
 
-if (Q.lvp_formed && Q.lvp_timer_2_trigger) {
+if ((Q.lvp_formed && Q.lvp_timer_2_trigger) || (Q.lvp_formed && Q.lvp_votes < 6) && Q.nsdap_votes >= 16) {
     Q.new_middle_lvp += 4/12;
     Q.old_middle_lvp += 4/12;
     Q.new_middle_nsdap -= 4/12;
@@ -2162,7 +2300,7 @@ if (Q.bruning_time == 1) {
 }
 
 if (Q.bruning_time > 1) {
-    Q.hindenburg_angry_bruning -= 3;
+    Q.hindenburg_angry_bruning -= 5;
     if (Q.bruning_time >= 36) {
         Q.hindenburg_angry_bruning += 3;
     } else if (Q.bruning_time >= 24) {
@@ -2307,7 +2445,7 @@ if (Q.nazi_decay_timer > 0 && Q.nsdap_votes >= Q.nazi_peak_votes - 10) {
     Q.rural_dvp += 2/12;
     Q.new_middle_lvp += 10/12;
     Q.old_middle_lvp += 10/12;
-    Q.rural_lvp += 8/12;
+    Q.rural_lvp += 6/12;
     Q.unemployed_kpd += 3/12;
     Q.unemployed_spd += 5/12;
     if (Q.dnvp_ideology == "Moderate") {

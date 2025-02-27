@@ -178,6 +178,24 @@ if (Q.sa_strength) {
 
 <span style="color: #7A3C00;">**SA**</span> Militarization: [+ sa_militancy : militancy +]
 
+[? if year >= 1930: <h1>Distribution of Power</h1> ?]
+
+[? if year >= 1930: <h4><span style="color: #000000;">Dem</span><span style="color: #DD0000;">ocra</span><span style="color: #FFCC00;">tic</span> strength: [+ democracy_force +]%</h4>?]
+
+[? if year >= 1930: <span style="color: #c00000;">**Reichsbanner**</span>: [+ rb_force +]%?]
+
+[? if year >= 1930: <b>Prussian police: [+ prussia_force +]%</b>?]
+
+[? if year >= 1930: <h4><span style="color: #7A3C00;">Far</span>-<span style="color: #3E88B3;">right</span> strength: [+ far_right_force +]%</h4>?]
+
+[? if year >= 1930: <span style="color: #7A3C00;">**SA**</span>: [+ sa_force +]%?]
+
+[? if year >= 1930: <span style="color: #3E88B3;">**Stahlhelm**</span>: [+ sh_force +]%?]
+
+[? if year >= 1930: <span style="color: #8B0000;">**RFB**</span>: [+ rfb_force +]%?]
+
+[? if year >= 1930: Currently, the streets are [? if far_right_paramilitary:[? if far_right_paramilitary_highest: fully controlled by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_high: dominated by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_med: controlled by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if far_right_paramilitary_low: in the slight control of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>?][? if sa_paramilitary:, mainly by the violent <span style="color: #7A3C00;">**SA**</span>?].?][? if democracy_paramilitary:[? if democracy_paramilitary_highest: fully controlled by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_high: dominated by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_med: controlled by the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?][? if democracy_paramilitary_low: in the slight control of the <span style="color: #000000;">repu</span><span style="color: #DD0000;">bli</span><span style="color: #FFCC00;">cans</span>?].?]?]
+
 = Official military/paramilitaries
 
 Reichswehr: [+ reichswehr_strength +] thousand troops.
