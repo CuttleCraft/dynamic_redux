@@ -1,8 +1,8 @@
 title: Emergency budget cuts
 subtitle: Chancellor [+ chancellor +] proposes significant cuts to social spending.
 new-page: true
-view-if: (year == 1929 or year == 1930 or year == 1931 or year == 1932) and month >= 12 and chancellor == "Brüning" and spd_in_government == 0 and (unemployed > 15 or (year == 1929 and unemployed > 10)) and welfare >= -1 and reparations > -2 and emergency_cuts_timer = 0
-on-arrival: emergency_cuts_seen = 1; emergency_cuts_timer = 12; ddp_right += 1; dvp_right += 1; lvp_right += 1; hindenburg_angry_bruning += 10
+view-if: (year == 1929 or year == 1930 or year == 1931 or year == 1932) and month >= 12 and chancellor == "Brüning" and spd_in_government == 0 and (unemployed > 15 or (year == 1929 and unemployed > 10)) and welfare >= 0 and reparations > -2 and emergency_cuts_timer = 0
+on-arrival: emergency_cuts_seen = 1; emergency_cuts_timer = 12; ddp_right += 1; dvp_right += 1; lvp_right += 1; hindenburg_angry_bruning += 5
 tags: event
 max-visits: 4
 
@@ -18,7 +18,7 @@ Due to the crisis of the Great Depression, government budgets have fallen and we
 
 @nothing_to_do
 view-if: spd_toleration == 0
-on-arrival: welfare -= 1; unemployed += 2; unemployed_nsdap += 4; unemployed_kpd += 3; unemployed_spd += 2; pro_republic -= 4; budget += 1; inflation -= 2; economic_growth -= 0.5;
+on-arrival: welfare -= 1; unemployed += 2; unemployed_nsdap += 3; unemployed_kpd += 3; unemployed_spd += 3; pro_republic -= 4; budget += 1; inflation -= 2; economic_growth -= 0.5;
 
 The emergency policy passes under emergency rules, as the Reichstag is currently dissolved. The <span style="color: #7A3C00;">Nazis</span> use this as a recruiting tool, and so do we.
 
@@ -26,7 +26,7 @@ The emergency policy passes under emergency rules, as the Reichstag is currently
 @vote_no
 title: Vote against this measure, ending the toleration agreement.
 view-if: spd_toleration
-on-arrival: time_to_election = 3; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; pro_republic -= 5; left_strength += 8; pro_republic -= 4; reformist_dissent += 8; left_dissent -= 5; dvp_relation -= 4; z_relation -= 4; ddp_relation -= 4; lvp_relation -= 4; ddp_right += 1; dvp_right += 2
+on-arrival: time_to_election = 3; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; spd_toleration_right = 0; pro_republic -= 5; left_strength += 8; pro_republic -= 4; reformist_dissent += 8; left_dissent -= 5; dvp_relation -= 4; z_relation -= 4; ddp_relation -= 4; lvp_relation -= 4; ddp_right += 1; dvp_right += 2
 call: set_next_election_time
 go-to: new_prussia_election if in_weimar_coalition_prussia or in_grand_coalition_prussia or in_new_grand_coalition_prussia or in_popular_front_prussia and ((center_right_coalition_prussia < 50 and dnvp_ideology == "Moderate") or dnvp_ideology == "Radical"); center_right_coalition_prussia if in_weimar_coalition_prussia or in_grand_coalition_prussia or in_new_grand_coalition_prussia or in_popular_front_prussia and center_right_coalition_prussia >= 50 and dnvp_ideology == "Moderate"
 
@@ -54,6 +54,6 @@ The <span style="color: #000000;">Center</span> has called a retaliatory no conf
 @vote_yes
 title: Vote in favor of this measure to continue the toleration agreement.
 view-if: spd_toleration
-on-arrival: welfare -= 1; unemployed += 2; left_dissent += 10; labor_dissent += 10; workers_spd *= 0.9; unemployed_spd *= 0.9; unemployed_nsdap += 5; unemployed_kpd += 5; workers_nsdap += 5; workers_kpd += 3; workers_spd -= 3 if welfare < 0; unemployed_spd -= 5 if welfare < 0; pro_republic -= 4; kpd_relation -= 8; budget += 1; inflation -= 2; economic_growth -= 0.5;
+on-arrival: welfare -= 1; unemployed += 0.8; left_dissent += 10; labor_dissent += 10; workers_spd *= 0.92; unemployed_spd *= 0.92; unemployed_nsdap += 3; unemployed_kpd += 3; workers_nsdap += 3; workers_kpd += 2; workers_spd -= 2 if welfare < 0; unemployed_spd -= 4 if welfare < 0; pro_republic -= 3; kpd_relation -= 8; budget += 1; inflation -= 2; economic_growth -= 0.5;
 
 We try to convince the workers that this policy is necessary in order to maintain a stable parliamentary government, and to deal with the fiscal consequences of the depression. Still, this policy provides excellent recruiting fodder for <span style="color: #7A3C00;">Nazis</span> and <span style="color: #700000;">**Communists**</span>.

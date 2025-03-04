@@ -2,8 +2,8 @@ title: Prussian Landtag referendum
 subtitle: A petition for the dissolution of the Landtag is launched.
 new-page: true
 tags: event
-view-if: year = 1931 and month >= 3 and next_election_time_prussia - time >= 12 and spd_prussia
-on-arrival: landtag_ref_dvp = 1 if dvp_ideology == "Right" and dvp_leader == "Dingeldey" and not in_grand_coalition_prussia and not in_new_grand_coalition_prussia and not lvp_formed; liberal_cooperation -= 3 if landtag_ref_dvp; strife += 1; pro_republic -= 3; PLR_launched = 1
+view-if: year = 1931 and month >= 3 and next_election_time_prussia - time >= 6 and spd_prussia
+on-arrival: landtag_ref_dvp = 1 if dvp_ideology == "Right" and dvp_leader == "Dingeldey" and not in_grand_coalition_prussia and not in_new_grand_coalition_prussia and not lvp_formed; liberal_cooperation -= 3 if landtag_ref_dvp; strife += 1; pro_republic += dvp_votes if not landtag_ref_dvp; PLR_launched = 1
 max-visits: 1
 face-image: img/stahlhelm2.jpg
 
@@ -17,6 +17,7 @@ For the petition to proceed to a plebiscite, it must gather signatures from over
 
 @PLR_launched
 title: The collection of signatures will begin next month.
+on-arrival: political_decree_landtag = 1 if political_decree == 1
 
 As we are in control of the democratic bulwark for now, we can attempt to use our position to our advantage.
 
@@ -29,13 +30,13 @@ subtitle: -2 resources
 view-if: not campaigned_democracy
 choose-if: resources >= 2
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 2; pro_republic += 5; new_middle_nsdap -= pro_republic / 25; old_middle_nsdap -= pro_republic / 25; workers_nsdap -= pro_republic / 25; campaigned_democracy = 1
+on-arrival: resources -= 2; pro_republic += 6; new_middle_nsdap -= pro_republic / 25; old_middle_nsdap -= pro_republic / 25; workers_nsdap -= pro_republic / 25; campaigned_democracy = 1
 go-to: PLR_launched
 
 We have campaigned against the referendum, but our success ultimately depends on the people's faith in democracy.
 
 @urge_paramilitary
-view-if: not political_decree_landtag 
+view-if: not political_decree_landtag and spd_toleration
 choose-if: spd_prussia and strife >= 3 and z_relation >= 35
 unavailable-subtitle: [? if not spd_prussia: We don't control the Prussian government. ?] [? if strife < 3: Paramilitary violence isn't severe enough to justify an emergency decree. ?] [? if z_relation < 35: We lack sufficient relations with Brüning. ?]
 title: Urge Brüning to grant us stronger actions against political extremists, and to restrict certain rights.

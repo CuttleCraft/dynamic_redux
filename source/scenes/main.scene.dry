@@ -81,7 +81,7 @@ if (Q.dstp_formed && Q.next_election_time - Q.time == 1 && Q.time !== Q.last_tim
         Q.flavour_9_trigger_shown = 1;
     }
 }
-if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r >= 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+if (Q.ddp_factionless && !Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r >= 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_10_trigger += 1;
     if (Q.flavour_10_trigger && !Q.flavour_10_trigger_shown) {
         Q.flavour_10_trigger_time = Q.time;
@@ -89,7 +89,7 @@ if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament &&
         Q.flavour_10_effect_trigger = 1;
     }
 }
-if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r < 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+if (Q.ddp_factionless && !Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r < 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_11_trigger += 1;
     if (Q.flavour_11_trigger && !Q.flavour_11_trigger_shown) {
         Q.flavour_11_trigger_time = Q.time;
@@ -97,6 +97,7 @@ if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament &&
         Q.flavour_11_effect_trigger = 1;
     }
 }
+// initial spd toleration message
 if (Q.bruning_toleration_time == 1 && Q.spd_toleration && Q.year >= 1930 && Q.time !== Q.last_time_updated) {
     Q.flavour_12_trigger += 1;
     if (Q.flavour_12_trigger && !Q.flavour_12_trigger_shown) {
@@ -104,6 +105,7 @@ if (Q.bruning_toleration_time == 1 && Q.spd_toleration && Q.year >= 1930 && Q.ti
         Q.flavour_12_trigger_shown = 1;
     }
 }
+// irl austerity
 if (Q.total_bruning_time >= 12 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && Q.year >= 1930 && Q.time !== Q.last_time_updated) {
     Q.flavour_13_trigger += 1;
     if (Q.flavour_13_trigger && !Q.flavour_13_trigger_shown) {
@@ -111,6 +113,7 @@ if (Q.total_bruning_time >= 12 && !Q.in_center_right_coalition && !Q.in_right_co
         Q.flavour_13_trigger_shown = 1;
     }
 }
+// alt-his austerity
 if (Q.total_bruning_time >= 12 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.bourgeois_parliament) && Q.year >= 1930 && Q.time !== Q.last_time_updated) {
     Q.flavour_14_trigger += 1;
     if (Q.flavour_14_trigger && !Q.flavour_14_trigger_shown) {
@@ -118,13 +121,15 @@ if (Q.total_bruning_time >= 12 && (Q.in_center_right_coalition || Q.in_right_coa
         Q.flavour_14_trigger_shown = 1;
     }
 }
-if (Q.year >= 1930 && Q.total_bruning_time >= 8 && !Q.kvp_cnblp_sister && Q.time_since_election < 8 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && Q.time !== Q.last_time_updated) {
+// cnblp pt 1
+if (Q.year >= 1930 && Q.total_bruning_time >= 8 && !Q.kvp_cnblp_sister && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.spd_toleration_right && !Q.bourgeois_parliament_no_liberals && Q.time !== Q.last_time_updated) {
     Q.flavour_15_trigger += 1;
     if (Q.flavour_15_trigger && !Q.flavour_15_trigger_shown) {
         Q.flavour_15_trigger_time = Q.time;
         Q.flavour_15_trigger_shown = 1;
     }
 }
+// cnblp pt 2
 if (Q.flavour_15_trigger && Q.time == Q.flavour_15_trigger_time + 4 && Q.time !== Q.last_time_updated) {
     Q.flavour_16_trigger += 1; 
     if (Q.flavour_16_trigger == 1 && !Q.flavour_16_trigger_shown) {
@@ -132,20 +137,23 @@ if (Q.flavour_15_trigger && Q.time == Q.flavour_15_trigger_time + 4 && Q.time !=
         Q.flavour_16_trigger_shown = 1;
     }
 }
-if (Q.year >= 1930 && Q.ddp_factionless && Q.time !== Q.last_time_updated) {
+// peasants party collapse cuz they leave for ddp
+if (Q.year >= 1930 && Q.ddp_factionless && !Q.liberal_parliament && !Q.bourgeois_parliament_ddp && Q.time !== Q.last_time_updated) {
     Q.flavour_17_trigger += 1;
     if (Q.flavour_17_trigger == 2 && !Q.flavour_17_trigger_shown) {
         Q.flavour_17_trigger_time = Q.time;
         Q.flavour_17_trigger_shown = 1;
     }
 }
-if (Q.year >= 1930 && Q.total_bruning_time >= 7 && Q.time_since_election < 8 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && Q.time !== Q.last_time_updated) {
+// wp pt 1
+if (Q.year >= 1930 && Q.total_bruning_time >= 7 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.bourgeois_parliament_no_liberals && Q.time !== Q.last_time_updated) {
     Q.flavour_18_trigger += 1;
     if (Q.flavour_18_trigger && !Q.flavour_18_trigger_shown) {
         Q.flavour_18_trigger_time = Q.time;
         Q.flavour_18_trigger_shown = 1;
     }
 }
+// wp pt 2, they split
 if (Q.flavour_18_trigger && Q.time == Q.flavour_18_trigger_time + 2 && Q.time !== Q.last_time_updated) {
     Q.flavour_19_trigger += 1; 
     if (Q.flavour_19_trigger == 1 && !Q.flavour_19_trigger_shown) {
@@ -153,32 +161,140 @@ if (Q.flavour_18_trigger && Q.time == Q.flavour_18_trigger_time + 2 && Q.time !=
         Q.flavour_19_trigger_shown = 1;
     }
 }
-if (Q.flavour_19_trigger && Q.time == Q.flavour_19_trigger_time + 4 && Q.time !== Q.last_time_updated) {
+// wp pt 3, party recovers
+if ((Q.flavour_19_trigger || Q.flavour_30_trigger) && (Q.time == Q.flavour_19_trigger_time + 4 || Q.time == Q.flavour_30_trigger_time + 4) && Q.time !== Q.last_time_updated) {
     Q.flavour_20_trigger += 1; 
     if (Q.flavour_20_trigger == 1 && !Q.flavour_20_trigger_shown) {
         Q.flavour_20_trigger_time = Q.time;
         Q.flavour_20_trigger_shown = 1;
     }
 }
-if (Q.flavour_20_trigger && Q.time == Q.flavour_20_trigger_time + 2 && Q.time !== Q.last_time_updated) {
+// wp pt 4, party joever, drewitz resigns
+if (Q.flavour_20_trigger && Q.time == Q.flavour_20_trigger_time + 2 && !Q.flavour_29_trigger && Q.time !== Q.last_time_updated) {
     Q.flavour_21_trigger += 1; 
     if (Q.flavour_21_trigger == 1 && !Q.flavour_21_trigger_shown) {
         Q.flavour_21_trigger_time = Q.time;
         Q.flavour_21_trigger_shown = 1;
     }
 }
-if (Q.emergency_decree_seen && !Q.in_center_right_coalition && !Q.right_coalition && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed) {
+// dingeldey complains bout emergency decree
+if (Q.emergency_decree_seen && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.liberal_parliament && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_22_trigger += 1; 
     if (Q.flavour_22_trigger == 1 && !Q.flavour_22_trigger_shown) {
         Q.flavour_22_trigger_time = Q.time;
         Q.flavour_22_trigger_shown = 1;
     }
 }
-if (Q.total_bruning_time == 9 && !Q.in_center_right_coalition && !Q.right_coalition && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed) {
+// dingeldey schemes to remove curtius, wirth, dietrich, but postponed
+if (Q.total_bruning_time == 9 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.spd_toleration_right && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_23_trigger += 1; 
     if (Q.flavour_23_trigger == 1 && !Q.flavour_23_trigger_shown) {
         Q.flavour_23_trigger_time = Q.time;
         Q.flavour_23_trigger_shown = 1;
+    }
+}
+// dingeldey complains about banking crisis, precursor to curtius resigning
+if (Q.total_bruning_time > 0 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.spd_toleration_right && Q.banking_crisis_seen && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_24_trigger += 1; 
+    if (Q.flavour_24_trigger == 1 && !Q.flavour_24_trigger_shown) {
+        Q.flavour_24_trigger_time = Q.time;
+        Q.flavour_24_trigger_shown = 1;
+    }
+}
+// cnblp eastern aid pt 1, when they have power over bruning
+if (Q.year >= 1930 && Q.total_bruning_time >= 8 && (Q.kvp_cnblp_sister || Q.in_center_right_coalition || Q.in_right_coalition || Q.bourgeois_parliament || Q.bourgeois_parliament_no_liberals || Q.spd_toleration_right) && !Q.eastern_aid && Q.time !== Q.last_time_updated) {
+    Q.flavour_25_trigger += 1;
+    if (Q.flavour_25_trigger && !Q.flavour_25_trigger_shown) {
+        Q.flavour_25_trigger_time = Q.time;
+        Q.flavour_25_trigger_shown = 1;
+    }
+}
+// regular eastern aid, historical
+if (Q.year >= 1930 && Q.total_bruning_time >= 11 && !Q.eastern_aid && Q.time !== Q.last_time_updated) {
+    Q.flavour_26_trigger += 1;
+    if (Q.flavour_26_trigger && !Q.flavour_26_trigger_shown) {
+        Q.flavour_26_trigger_time = Q.time;
+        Q.flavour_26_trigger_shown = 1;
+    }
+}
+// cnblp eastern aid pt 2, with deficit, coalition tensions
+if (Q.flavour_25_trigger && Q.time == Q.flavour_25_trigger_time + 4 && Q.eastern_aid_deficit && Q.bruning_time && Q.time !== Q.last_time_updated) {
+    Q.flavour_27_trigger += 1; 
+    if (Q.flavour_27_trigger == 1 && !Q.flavour_27_trigger_shown) {
+        Q.flavour_27_trigger_time = Q.time;
+        Q.flavour_27_trigger_shown = 1;
+    }
+}
+// cnblp eastern aid pt 2, without deficit, no coalition tensions
+if (Q.flavour_25_trigger && Q.time == Q.flavour_25_trigger_time + 4 && !Q.eastern_aid_deficit && Q.bruning_time && Q.time !== Q.last_time_updated) {
+    Q.flavour_28_trigger += 1; 
+    if (Q.flavour_28_trigger == 1 && !Q.flavour_28_trigger_shown) {
+        Q.flavour_28_trigger_time = Q.time;
+        Q.flavour_28_trigger_shown = 1;
+    }
+}
+// wp pt 1, alt-history
+if (Q.year >= 1930 && Q.total_bruning_time >= 7 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.bourgeois_parliament || Q.bourgeois_parliament_no_liberals) && Q.time !== Q.last_time_updated) {
+    Q.flavour_29_trigger += 1;
+    if (Q.flavour_29_trigger && !Q.flavour_29_trigger_shown) {
+        Q.flavour_29_trigger_time = Q.time;
+        Q.flavour_29_trigger_shown = 1;
+    }
+}
+// wp pt 2, alt-history
+if (Q.flavour_29_trigger && Q.time == Q.flavour_29_trigger_time + 2 && Q.time !== Q.last_time_updated) {
+    Q.flavour_30_trigger += 1; 
+    if (Q.flavour_30_trigger == 1 && !Q.flavour_30_trigger_shown) {
+        Q.flavour_30_trigger_time = Q.time;
+        Q.flavour_30_trigger_shown = 1;
+    }
+}
+// wp pt 4, alt-history
+if (Q.flavour_29_trigger && Q.flavour_20_trigger && Q.time == Q.flavour_20_trigger_time + 2 && Q.time !== Q.last_time_updated) {
+    Q.flavour_31_trigger += 1; 
+    if (Q.flavour_31_trigger == 1 && !Q.flavour_31_trigger_shown) {
+        Q.flavour_31_trigger_time = Q.time;
+        Q.flavour_31_trigger_shown = 1;
+    }
+}
+if (Q.ddp_factionless && Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r >= 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_32_trigger += 1;
+    if (Q.flavour_32_trigger && !Q.flavour_32_trigger_shown) {
+        Q.flavour_32_trigger_time = Q.time;
+        Q.flavour_32_trigger_shown = 1;
+        Q.flavour_32_effect_trigger = 1;
+    }
+}
+if (Q.ddp_factionless && Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r < 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_33_trigger += 1;
+    if (Q.flavour_33_trigger && !Q.flavour_33_trigger_shown) {
+        Q.flavour_33_trigger_time = Q.time;
+        Q.flavour_33_trigger_shown = 1;
+        Q.flavour_33_effect_trigger = 1;
+    }
+}
+// dingeldey complains bout emergency decree, alt his
+if (Q.emergency_decree_alt_seen && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.liberal_parliament && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_34_trigger += 1; 
+    if (Q.flavour_34_trigger == 1 && !Q.flavour_34_trigger_shown) {
+        Q.flavour_34_trigger_time = Q.time;
+        Q.flavour_34_trigger_shown = 1;
+    }
+}
+// dingeldey schemes to remove curtius, dietrich, alt his
+if (Q.total_bruning_time == 9 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.spd_toleration_right) && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_35_trigger += 1; 
+    if (Q.flavour_35_trigger == 1 && !Q.flavour_35_trigger_shown) {
+        Q.flavour_35_trigger_time = Q.time;
+        Q.flavour_35_trigger_shown = 1;
+    }
+}
+// dingeldey complains about banking crisis, precursor to curtius resigning, alt his
+if (Q.total_bruning_time > 0 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.spd_toleration_right) && Q.banking_crisis_seen && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_36_trigger += 1; 
+    if (Q.flavour_36_trigger == 1 && !Q.flavour_36_trigger_shown) {
+        Q.flavour_36_trigger_time = Q.time;
+        Q.flavour_36_trigger_shown = 1;
     }
 }
 Q.last_time_updated = Q.time;
@@ -502,7 +618,7 @@ max-cards: 3
 
 {!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 2 and bourgeois_negotiations_1930_done and (dnvp_split_2 or kvp_formed) and liberal_parliament and not lvp_formed: Following Westarp's split from Hugenberg's <span style="color: #3E88B3;">**DNVP**</span>, [+ dvp_leader +] has shown interest towards cooperating with him and the moderate German right. The calling of new elections has given the <span style="color: #C0A054;">**DVP**</span> another opportunity to negotiate bourgeois unity. However, this time, the effort is far more ambitious—an appeal for the consolidation of all state-supporting forces, rather than just the formation of a parliamentary group. While Westarp himself has little interest in merging with other parties, he is willing to participate due to conditional industrial funding, which is contingent on achieving bourgeois unity. The betrayal of the <span style="color: #C0A054;">**DVP**</span> still lingers in their minds, with many within the German right reluctant to cooperate with [+ dvp_leader +] in this endeavor. ?]{!</p>!}
 
-{!<p class="dnvp">!}[? if bourgeois_negotiations_1930_aftermath_timer == 2 and liberal_parliament and not lvp_formed: Following the success of the liberals in consolidating their parliamentary groups, big businesses have increased pressure to either expand the parliamentary group to include other bourgeois parties or encourage the other parties on the bourgeois right to form their own separate parliamentary faction. Only the latter appears to be possible currently, with the hostility that has developed between the liberal parties and the conservative right. New negotiations have been initiated by Treviranus of the [? if (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">**KVP**</span>?][? if not (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">People's Conservative Association</span>?], featuring the <span style="color: #7FCEB1;">**CNBLP**</span> and <span style="color: #b8996f;">**WP**</span>. ?]{!</p>!}
+{!<p class="dnvp">!}[? if bourgeois_negotiations_1930_aftermath_timer == 2 and liberal_parliament and not lvp_formed and (dnvp_split_2 or kvp_formed): Following the success of the liberals in consolidating their parliamentary groups, big businesses have increased pressure to either expand the parliamentary group to include other bourgeois parties or encourage the other parties on the bourgeois right to form their own separate parliamentary faction. Only the latter appears to be possible currently, with the hostility that has developed between the liberal parties and the conservative right. New negotiations have been initiated by Treviranus of the [? if (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">**KVP**</span>?][? if not (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">People's Conservative Association</span>?], featuring the <span style="color: #7FCEB1;">**CNBLP**</span> and <span style="color: #b8996f;">**WP**</span>. ?]{!</p>!}
 
 {!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 2 and bourgeois_negotiations_1930_done and not (dnvp_split_2 or kvp_formed) and (dvp_leader == "Scholz" or dvp_leader == "Dingeldey") and not liberal_parliament and not lvp_formed: The calling of new elections has given [? if dvp_leader == "Scholz": Scholz?][? if dvp_leader != "Scholz": the <span style="color: #C0A054;">**DVP**</span>?] another opportunity to negotiate bourgeois unity. However, this time, the effort is far more ambitious—an appeal for the consolidation of all state-supporting forces, rather than just the formation of a parliamentary group. The failure of the last negotiations has left a bad taste in the parties' mouths, with many within the German right reluctant to cooperate with [+ dvp_leader +] in this endeavor. ?]{!</p>!}
 
@@ -516,13 +632,13 @@ max-cards: 3
 
 {!<p class="dnvp">!}[? if bourgeois_negotiations_elections_1930_timer == 2 and bourgeois_negotiations_1930_done and not csvd_formed and dnvp_historical_1929 and lvp_formed: The <span style="color: #7FCEB1;">**CNBLP**</span> and <span style="color: #b8996f;">**WP**</span> have responded coldly to the consolidation of the vocational parties with the more ideologically oriented <span style="color: #0087DC;">**KVP**</span>. It is up to people like Martin Schiele, a former <span style="color: #3E88B3;">**DNVP**</span> member advocating for a party akin to the pre-Hugenberg <span style="color: #3E88B3;">**DNVP**</span> to persuade the reluctant old guard of the vocational parties. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_scholz and not liberal_parliament:  In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. However, the right-wing tilt of the parties involved will likely make future cooperation near-impossible. ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_scholz and not liberal_parliament:  In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban [? if kvp_formed or dnvp_split_2: <span style="color: #0087DC;">**KVP**</span>, ?] <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. However, the right-wing tilt of the parties involved will likely make future cooperation near-impossible. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_moderate and not liberal_parliament: In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. Despite the right-wing tilt of the parties involved, the somewhat friendly leadership of the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> and <span style="color: #C0A054;">**DVP**</span> will make future cooperation somewhat possible. ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_moderate and not liberal_parliament: In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban [? if kvp_formed or dnvp_split_2: <span style="color: #0087DC;">**KVP**</span>, ?] <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. Despite the right-wing tilt of the parties involved, the somewhat friendly leadership of the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> and <span style="color: #C0A054;">**DVP**</span> will make future cooperation somewhat possible. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list: The momentum for bourgeois unity has culminated in an agreement for a shared electoral list supported by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list: The momentum for bourgeois unity has culminated in an agreement for a shared electoral list supported by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban [? if kvp_formed or dnvp_split_2: <span style="color: #0087DC;">**KVP**</span>, ?]<span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list_fail: The movement for bourgeois unity has failed to achieve any meaningful goals this time around. The leadership of the vocational parties recoiled at the suggestion of a shared list between the plethora of bourgeois parties, as it would destroy their vocational identity. In spite of this defeat, some smaller agreements are able to be reached aiming to minimize interparty animosity.  ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list_fail: The movement for bourgeois unity has failed to achieve any meaningful goals this time around. The leadership of the vocational parties recoiled at the suggestion of a shared list between the plethora of bourgeois parties, as it would destroy their vocational identity. In spite of this defeat, some smaller agreements are able to be reached aiming to minimize interparty animosity. ?]{!</p>!}
 
 {!<p class="dnvp">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_parliament_no_liberals: The negotiations between the non-liberal bourgeois parties led by Treviranus of the <span style="color: #0087DC;">**KVP**</span> have finally ended with an agreement for a parliamentary alliance featuring the <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span> and the <span style="color: #7FCEB1;">**CNBLP**</span>. This is later joined by the <span style="color: #007A00;">German Peasants' Party</span>, who, despite their objections, would be factionless in parliament otherwise. ?]{!</p>!}
 
@@ -574,9 +690,15 @@ max-cards: 3
 
 {!<p class="other">!}[? if flavour_11_trigger and flavour_11_trigger_time == time : For one reason or another, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> lacks the Reichstag delegates to form a parliamentary faction and is now required to negotiate with another party to join forces. In this case, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has decided to work with the <span style="color: #C0A054;">**DVP**</span> to establish a parliamentary faction. Surprisingly, the <span style="color: #C0A054;">**DVP**</span> was interested in accommodating with the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>, [? if dvp_leader == "Scholz" and dstp_formed: but just as they were about to finalize their agreement, an angry Ernst Scholz torpedoed the negotiations, still furious about how the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> disrupted his efforts toward bourgeois unity. As a result of this, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has formed an agreement with the <span style="color: #b8996f;">**WP**</span> instead, having exhausted its choices. ?][? if dvp_leader != "Scholz" or not dstp_formed: [? if chancellor == "Brüning" and not spd_in_government: having ceased their intrigues against Brüning's government in order to finalize the agreement.?][? if not (chancellor == "Brüning" and not spd_in_government): having put aside their grudges to finalize the agreement.?]?] ?]{!</p>!}
 
+{!<p class="other">!}[? if flavour_32_trigger and flavour_32_trigger_time == time : For one reason or another, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> lacks the Reichstag delegates to form a parliamentary faction and is now required to negotiate with another party to join forces. With the bourgeois parties already grouped together, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> is forced to negotiate with them. Surprisingly, the bourgeois parties have gotten over their grudges against the party, and are open to cooperation. [? if dvp_leader == "Scholz" and dstp_formed: However, just as they were about to finalize their agreement, an angry Ernst Scholz torpedoed the negotiations, still furious about how the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> disrupted his efforts toward bourgeois unity. Fortunately, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> was able to accept a few defections from the various parties within the group to reach the required size for a parliamentary faction.?][? if dvp_leader != "Scholz" or not dstp_formed: [? if chancellor == "Brüning" and not spd_in_government: They have all agreed to cease their intrigues against Brüning's government in order to finalize the agreement.?][? if not (chancellor == "Brüning" and not spd_in_government): With past disputes set aside, they've finalized the agreement.?]?] ?]{!</p>!}
+
+{!<p class="other">!}[? if flavour_33_trigger and flavour_33_trigger_time == time : For one reason or another, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> lacks the Reichstag delegates to form a parliamentary faction and is now required to negotiate with another party to join forces. With the bourgeois parties already grouped together, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> is forced to negotiate with them. Surprisingly, the bourgeois parties have gotten over their grudges against the party, and are open to cooperation. [? if dvp_leader == "Scholz" and dstp_formed: However, just as they were about to finalize their agreement, an angry Ernst Scholz torpedoed the negotiations, still furious about how the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> disrupted his efforts toward bourgeois unity. As a result of this, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> is forced to enter the <span style="color: #000000;">Center</span>'s parliamentary group. ?][? if dvp_leader != "Scholz" or not dstp_formed: [? if chancellor == "Brüning" and not spd_in_government: They have all agreed to cease their intrigues against Brüning's government in order to finalize the agreement.?][? if not (chancellor == "Brüning" and not spd_in_government): With past disputes set aside, they've finalized the agreement.?]?] ?]{!</p>!}
+
 {!<p class="dnvp">!}[? if year = 1930 and month = 9 : Adolf Hitler of the <span style="color: #7A3C00;">**NSDAP**</span> has taken an oath of legality, pledging to use constitutional means to gain power. This occurred during a court case involving <span style="color: #7A3C00;">Nazi</span> members and Reichswehr officers Richard Scheringer and Hanns Ludin, who were accused of plotting a national uprising by establishing <span style="color: #7A3C00;">**NSDAP**</span> cells within the Reichswehr. Under normal circumstances, Hitler's statements—tantamount to preparing for high treason—would have led to prosecution. Instead, the authorities are tolerating, even legitimizing the <span style="color: #7A3C00;">Nazi</span> agenda. ?]{!</p>!}
 
 {!<p class="dnvp">!}[? if flavour_18_trigger and flavour_18_trigger_time == time: The <span style="color: #b8996f;">**WP**</span>, once an enthusiastic supporter of Brüning's bourgeois government—and the only special interest party to secure a cabinet position—is now scrambling to extricate itself from government following its electoral defeat. While the party reports gains from expanding its electoral base into new states, these are more than offset by disproportionately heavy losses in the regions where it first found success. The same trend can also be observed with the <span style="color: #7FCEB1;">**CNBLP**</span>. Currently, a divisive internal struggle has emerged between chairman Hermann Drewitz and the party’s anti-Brüning faction on the right. The latter seeks to compel the resignation of their sole minister from the government, aiming to pressure Brüning into abandoning his reliance on our votes and instead forming a coalition with the <span style="color: #7A3C00;">**NSDAP**</span>. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_29_trigger and flavour_29_trigger_time == time: The <span style="color: #b8996f;">**WP**</span>, once an enthusiastic supporter of Brüning's bourgeois government, is now scrambling to distance itself following its electoral defeat. While the party has gained from expanding into new states, these are more than outweighed by steep losses in its original strongholds. A similar trend can be seen with the <span style="color: #7FCEB1;">**CNBLP**</span>. An internal power struggle has emerged between the pro-Brüning faction—led by party chairman Hermann Drewitz and Justice Minister Johann Bredt—and increasingly anti-Brüning district organizations. These anti-Brüning factions are demanding that the party pressure Brüning into forming a coalition with the <span style="color: #7A3C00;">**NSDAP**</span>[? if spd_toleration:&nbsp;to reduce his dependence on our votes?], or they threaten to dissolve or even break away from the party. ?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1930 and month = 10 and spd_prussia: The <span style="color: #3E88B3;">**Stahlhelm**</span> is once again attempting to destabilize and polarize Germany amidst the economic depression following the failed Young Plan referendum. At their annual congress, the <span style="color: #3E88B3;">**Stahlhelm**</span> announced plans for a referendum to prematurely dissolve the Prussian Landtag. Frustrated by the dominant position the <span style="color: #c00000;">socialists</span> have held in Prussia since the founding of the Weimar Republic, they seek to force new elections that would better reflect the national shift to the right. [? if dnvp_ideology == "Radical":Despite strong enthusiasm from other right-wing parties,?][? if dnvp_ideology == "Moderate":This is met with skepticism from the right-wing parties, and?] Hitler himself has shown little interest in the initiative and has refused to commit the <span style="color: #7A3C00;">**NSDAP**</span>, even as some <span style="color: #7A3C00;">Nazi</span> leaders express strong support. [? if dvp_ideology == "Right" and not in_grand_coalition_prussia and not in_new_grand_coalition_prussia and (dvp_leader == "Scholz" or dvp_leader == "Dingeldey"): The <span style="color: #C0A054;">**DVP**</span> was also invited to join the "national front," but its leadership has refused to commit as long as the <span style="color: #7A3C00;">Nazis</span> remain undecided. The fact that they haven’t outright rejected the offer, is a testament to how far they have strayed from democracy.?] At this stage, the success of the plan appears to hinge on Hitler’s support. ?]{!</p>!}
 
@@ -598,21 +720,33 @@ max-cards: 3
 
 {!<p class="dnvp">!}[? if flavour_15_trigger and flavour_15_trigger_time == time: The combination of our influence over the Brüning government, the ineffectiveness of his agrarian relief plan, the radicalization of the rural electorate signaled by Martin Schiele's resignation from the RLB, and the <span style="color: #7FCEB1;">**CNBLP**</span>'s third-place finish in rural areas behind the <span style="color: #3E88B3;">**DNVP**</span> and <span style="color: #7A3C00;">**NSDAP**</span> has led the party to reconsider its support for Brüning. An anti-Brüning right-wing faction now dominates within the <span style="color: #7FCEB1;">**CNBLP**</span>, successfully pushing through a resolution chastising the Chancellor and demanding a reorganization of the coalition to include the <span style="color: #7A3C00;">Nazis</span>. Brüning has refused to comply, prompting the <span style="color: #7FCEB1;">**CNBLP**</span> to become one of the first parties to bolt from his coalition, now voting against his decrees and supporting right-wing motions of no confidence. ?]{!</p>!}
 
-{!<p class="other">!}[? if year = 1930 and month = 12 and kpd_leader == "Thälmann" : Ernst Thälmann has embraced a new <span style='color: #7A3C00;'>national-populist</span> strategy, rallying under the slogan of the *Volksrevolution*. This move is an attempt by the <span style='color: #700000;'>**KPD**</span> to expand its influence in the bourgeosi social groups where the <span style='color: #7A3C00;'>**NSDAP**</span> are the strongest in. Leon Trotsky and many other <span style='color: #700000;'>**Communists**</span> have condemned this shift, denouncing the use of 'people's revolution' instead of 'proletarian revolution' as a distortion of <span style="color: #9B0000;">Marxism</span>. They also pointed out that its the exact same slogan used by Otto Strasser and the left-wing faction of the <span style='color: #7A3C00;'>**NSDAP**</span>. ?]{!</p>!}
+{!<p class="dnvp">!}[? if flavour_25_trigger and flavour_25_trigger_time == time: The general ineffectiveness of Brüning's agrarian relief, led by Agriculture Minister Martin Schiele of the [? if dnvp_split_2: <span style="color: #7FCEB1;">**CNBLP**</span>?][? if kvp_formed: <span style="color: #0087DC;">**KVP**</span>?][? if dnvp_ideology == "Moderate": <span style="color: #3E88B3;">**DNVP**</span>?], has led to growing dissatisfaction within his own party. To retain their support, Schiele and Brüning have introduced a formal *Eastern Aid Act*, a policy designed to relieve the debts of agricultural enterprises in the east—despite the heavy financial burden it imposes. While this measure has placated organized agriculture and Hindenburg himself, it stands in direct contradiction to Brüning’s broader strategy of economic recovery through a balanced budget. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1930 and month = 12 and kpd_leader == "Thälmann" : Ernst Thälmann has embraced a new <span style='color: #7A3C00;'>national-populist</span> strategy, rallying under the slogan of the *Volksrevolution*. This move is an attempt by the <span style='color: #700000;'>**KPD**</span> to expand its influence in the bourgeoisie social groups where the <span style='color: #7A3C00;'>**NSDAP**</span> are the strongest in. Leon Trotsky and many other <span style='color: #700000;'>**Communists**</span> have condemned this shift, denouncing the use of 'people's revolution' instead of 'proletarian revolution' as a distortion of <span style="color: #9B0000;">Marxism</span>. They also pointed out that its the exact same slogan used by Otto Strasser and the left-wing faction of the <span style='color: #7A3C00;'>**NSDAP**</span>.  ?]{!</p>!}
 
 {!<p class="dnvp">!}[? if flavour_17_trigger and flavour_17_trigger_time == time: The defection of the northern wing’s Reichstag members from the <span style="color: #007A00;">German Peasants' Party</span> to the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has effectively ended the party as a national political force. All that remains is the original <span style="color: #38C538;">Bavarian Peasants’ League</span>, which, amid a prevailing mood of resignation, is expected to secure only a fraction of its former support in the next election, as most peasants turn further to the right in search of a solution to Germany's crisis. ?]{!</p>!}
 
-{!<p class="dnvp">!}[? if flavour_19_trigger and flavour_19_trigger_time == time: The <span style="color: #b8996f;">**WP**</span> has issued a vote of no confidence against Brüning, formally ending any possibility of reconciliation with his government and joining the growing ranks of once-supportive bourgeois parties now in opposition. This decision comes after the party’s sole minister resigned under pressure from its anti-Brüning right wing. He is not alone in stepping down, the party’s vice chairman Otto Colosser and effective propagandist has also resigned in protest against Drewitz’s "one-man dictatorship," further accusing him of financial impropriety and other shenanigans. The internal strife has escalated to such an extent that numerous local branches have defected, effectively ending the <span style="color: #b8996f;">**WP**</span> as a viable national political force. ?]{!</p>!}
+{!<p class="dnvp">!}[? if flavour_19_trigger and flavour_19_trigger_time == time: The <span style="color: #b8996f;">**WP**</span> has issued a vote of no confidence against Brüning, formally ending any possibility of reconciliation with his government and joining the growing ranks of once-supportive bourgeois parties now in opposition. This decision comes after the party’s sole minister resigned under pressure from its anti-Brüning right wing. He is not alone in stepping down, the party’s vice chairman and effective propagandist Otto Colosser has also resigned in protest against Drewitz’s "one-man dictatorship," further accusing him of financial impropriety and other shenanigans. The internal strife has escalated to such an extent that numerous local branches have defected, effectively ending the <span style="color: #b8996f;">**WP**</span> as a viable national political force. ?]{!</p>!}
 
-{!<p class="other">!}[? if year = 1931 and month = 1 and dvp_leader == "Dingeldey" and not bourgeois_list and dnvp_split_2 and not lvp_formed and not lvp_timer_2_trigger: Despite previous setbacks for liberal and bourgeois unity, the push for closer ties between centrist and moderate right-wing parties remains alive, particularly at the local level. Politicians from the [? if dstp_formed: <span style="color: #E0B0FF;">**Radical Democrats**</span>?][? if not dstp_formed: <span style="color: #D3C24D;">**Democrats**</span>?], the <span style="color: #0087DC;">**KVP**</span>, and the <span style="color: #8ED8E4;">**CSVD**</span> in the State of Hesse have met to discuss closer cooperation. Their initiative has received a surprisingly positive response, leading to the formation of a new national organization and invitations to figures like Hans Luther and Otto Gessler. However, the effort has been disappointing, as many declined to participate[? if spd_prussia:—largely due to the deep divisions caused by the <span style="color: #3E88B3;">**Stahlhelm**</span>'s planned Prussian referendum, which has split the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> from the rest of the moderate right.?][? if not spd_prussia:—largely due to the strong animosity between the leadership of the national parties.?]?]{!</p>!}
+{!<p class="dnvp">!}[? if flavour_30_trigger and flavour_30_trigger_time == time: Despite pressure from the <span style="color: #b8996f;">**WP**</span>'s anti-Brüning right wing for its lone minister, Johann Bredt, to resign, party chairman Hermann Drewitz has successfully rallied a majority of the parliamentary delegation to support him [? if not in_right_coalition and not in_center_right_coalition: after securing key concessions for the middle class in negotiations with Brüning?][? if in_right_coalition or in_center_right_coalition: after persuading the wider cabinet to abandon tax increases that would have affected the middle class?]. However, this victory comes at a cost—vice chairman and chief propagandist Otto Colosser has resigned in protest, denouncing Drewitz’s 'one-man dictatorship' and accusing him of financial impropriety and other misconduct. The internal strife has escalated to such an extent that numerous local branches have defected, severely weakening the <span style="color: #b8996f;">**WP**</span>'s standing as a viable national political force. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month = 1 and dvp_leader == "Dingeldey" and not bourgeois_list and (dnvp_split_2 or kvp_formed) and not lvp_formed and not lvp_timer_2_trigger: Despite previous setbacks for liberal and bourgeois unity, the push for closer ties between centrist and moderate right-wing parties remains alive, particularly at the local level. Politicians from the [? if dstp_formed: <span style="color: #E0B0FF;">**Radical Democrats**</span>?][? if not dstp_formed: <span style="color: #D3C24D;">**Democrats**</span>?], the <span style="color: #0087DC;">**KVP**</span>, and the <span style="color: #8ED8E4;">**CSVD**</span> in the State of Hesse have met to discuss closer cooperation. Their initiative has received a surprisingly positive response, leading to the formation of a new national organization and invitations to figures like Hans Luther and Otto Gessler. However, the effort has been disappointing, as many declined to participate[? if spd_prussia:—largely due to the deep divisions caused by the <span style="color: #3E88B3;">**Stahlhelm**</span>'s planned Prussian referendum, which has split the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> from the rest of the moderate right.?][? if not spd_prussia:—largely due to the strong animosity between the leadership of the national parties.?]?]{!</p>!}
 
 {!<p class="other">!}[? if flavour_23_trigger and flavour_23_trigger_time == time: Dingeldey of the <span style="color: #C0A054;">**DVP**</span> has attempted to pressure Brüning into reorganizing his cabinet by removing relatively left-leaning ministers, including their own Julius Curtius, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>'s Vice-Chancellor Hermann Dietrich, and the <span style="color: #000000;">Center</span>'s Interior Minister Joseph Wirth. However, these efforts failed to secure majority support within the <span style="color: #C0A054;">**DVP**</span>'s Reichstag delegation, forcing Dingeldey to put the plan on hold, as he still resents how [+ chancellor +] has effectively excluded his supporting parties in the formulation of his decrees. In the meantime, Dingeldey has been working on establishing closer relations with the "<span style="color: #7A3C00;">national</span> <span style="color: #3E88B3;">opposition</span>". ?]{!</p>!}
 
+{!<p class="other">!}[? if flavour_35_trigger and flavour_35_trigger_time == time: Dingeldey of the <span style="color: #C0A054;">**DVP**</span> has attempted to pressure Brüning into reorganizing his cabinet by removing relatively left-leaning ministers, including their own Julius Curtius, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>'s Vice-Chancellor Hermann Dietrich. However, these efforts failed to secure support within the <span style="color: #C0A054;">**DVP**</span>'s Reichstag delegation, forcing Dingeldey to abandon his plans. The inclusion of the right-wing <span style="color: #3E88B3;">**DNVP**</span> in the government has led the <span style="color: #C0A054;">**DVP**</span>’s right wing to abandon its efforts to court Hugenberg’s <span style="color: #003755;">**DNF**</span> and Hitler’s <span style="color: #7A3C00;">**NSDAP**</span>, as they believe the cabinet is already sufficiently right-wing. ?]{!</p>!}
+
 {!<p class="other">!}[? if year = 1931 and month = 2 and dstp_formed and not lvp_formed and not lvp_timer_2_trigger : Most local organizations that have formerly belonged to the <span style="color: #D3C24D;">**DDP**</span> are extremely hesitant about becoming involved in the new party, and many of the <span style="color: #D3C24D;">**DDP**</span> auxiliary organizations, such as their youth and women's groups have collapsed and need to be built anew. All of this combined with the heavy psychological toll under which the leaders of the <span style="color: #D3C24D;">**State Party**</span> were already laboring as a result of the deepening economic crisis to produce a mood of growing resignation and pessimism about the future of the party.?]{!</p>!}
 
-{!<p class="dnvp">!}[? if year = 1931 and month = 3 and PLR_launched : The <span style="color: #7A3C00;">**NSDAP**</span> has finally agreed to support the referendum for the dissolution of the Landtag[? if not hitler_deported:, though Hitler remains personally skeptical about its chances of success?].[? if dnvp_ideology == "Moderate": With backing from both the <span style="color: #3E88B3;">**Stahlhelm**</span> and the <span style="color: #7A3C00;">**NSDAP**</span>, the <span style="color: #3E88B3;">**DNVP**</span> has also thrown its support behind the initiative. [? if dnvp_leader == "Treviranus": However, Treviranus remains hesitant, but still allows his party members to vote according to their conscience. ?]?] [? if landtag_ref_dvp: Additionally, the <span style="color: #C0A054;">**DVP**</span> has aligned with the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>, with Dingeldey reaffirming his party’s commitment to the struggle against <span style="color: #c00000;">socialism</span>.?] Fortunately, the <span style="color: #700000;">**KPD**</span> has refused to cooperate with figures like Hugenberg and [+ nsdap_leader +] in this initiative[? if kpd_leader != "Conciliators":, keeping the anti-democratic vote divided?]. ?]{!</p>!}
+{!<p class="both">!}[? if year = 1931 and month = 3 and PLR_launched : The <span style="color: #7A3C00;">**NSDAP**</span> has finally agreed to support the referendum for the dissolution of the Landtag[? if not hitler_deported:, though Hitler remains personally skeptical about its chances of success?].[? if dnvp_ideology == "Moderate": With backing from both the <span style="color: #3E88B3;">**Stahlhelm**</span> and the <span style="color: #7A3C00;">**NSDAP**</span>, the <span style="color: #3E88B3;">**DNVP**</span> has also thrown its support behind the initiative. [? if dnvp_leader == "Treviranus": However, Treviranus remains hesitant, but still allows his party members to vote according to their conscience. ?]?] [? if landtag_ref_dvp: Additionally, the <span style="color: #C0A054;">**DVP**</span> has aligned with the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>, with Dingeldey reaffirming his party’s commitment to the struggle against <span style="color: #c00000;">socialism</span>.?] Fortunately, the <span style="color: #700000;">**KPD**</span> has refused to cooperate with figures like Hugenberg and [+ nsdap_leader +] in this initiative[? if kpd_leader != "Conciliators":, keeping the anti-democratic vote divided?]. ?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1931 and month = 3 and kpd_leader == "Thälmann" : Richard Scheringer, a former Reichswehr officer and prominent member of the <span style='color: #7A3C00;'>**NSDAP**</span> and <span style='color: #7A3C00;'>**SA**</span>, was imprisoned for attempting to establish <span style='color: #7A3C00;'>Nazi</span> cells within the military. In a shocking turn, after extensive discussions with his <span style='color: #700000;'>**Communist**</span> cellmates, he has defected to the <span style='color: #700000;'>**KPD**</span>. Seizing this opportunity, the <span style="color: #700000;">**KPD**</span> is now embracing the so-called 'Scheringer Line,' incorporating more nationalist rhetoric into its messaging to attract <span style="color: #7A3C00;">Nazi</span> defectors. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_27_trigger and flavour_27_trigger_time == time: The Eastern Aid Act, introduced months ago to relieve the debts of agricultural enterprises in the east, has created tension within the coalition, as it directly contradicts Brüning’s goal of maintaining a balanced budget. The reparation tax—now obsolete due to the Young Plan—continues to be used to fund agricultural subsidies, sparking fierce protests from the [? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span>?][? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>?]. They argue that this tax, primarily levied on businesses, is an unreasonable burden on job creators given the current economic crisis. Fortunately for Brüning, the [? if budget >= 0: budget surplus?][? if reparations == -2: pause in reparations?] has enabled him to abolish the tax while still maintaining full funding for the program. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_28_trigger and flavour_28_trigger_time == time: The Eastern Aid Act, introduced months ago to relieve the debts of agricultural enterprises in the east, has created tension within the coalition, as it directly contradicts Brüning’s goal of maintaining a balanced budget. The reparation tax—now obsolete due to the Young Plan—continues to be used to fund agricultural subsidies, sparking fierce protests from the [? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span>?][? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>?]. They argue that this tax, primarily levied on businesses, is an unreasonable burden on job creators given the current economic crisis. Brüning now finds himself caught between appeasing big industry on one side and placating organized agriculture and Hindenburg on the right. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_26_trigger and flavour_26_trigger_time == time: The Brüning cabinet has introduced the Eastern Aid Act, a policy aimed at relieving the debts of agricultural enterprises in the east—despite the significant financial burden it imposes. This measure directly contradicts Brüning’s broader strategy of economic recovery through budget austerity. To partially fund the policy, the government has retained outdated reparation taxes that became obsolete after the Young Plan. However, the lack of full funding for debt relief has frustrated many influential landowners, prompting them to take their complaints directly to Hindenburg, over whom they wield considerable influence. ?]{!</p>!}
 
 {!<p class="other">!}[? if flavour_13_trigger and flavour_13_trigger_time == time: Brüning’s decision to sideline the Reichstag and its parties from any meaningful role in shaping his fiscal and economic policies severely undermined the legitimacy of the bourgeois parties in the eyes of their traditional electorates, due to their powerlessness to dismantle his more repugnant policies. One clear example is the plight of civil servants, who have borne the brunt of salary cuts of approximately 20 percent, pushing many toward the <span style="color: #7A3C00;">Nazis</span>. His deflationary and austerity measures deepened the economic crisis, radicalizing the very social groups upon which these moderate parties relied for electoral support. This has led to heightened tensions between Brüning and his supporting parties, some of whom are even threatening to abandon his coalition. ?]{!</p>!}
 
@@ -620,7 +754,7 @@ max-cards: 3
 
 {!<p class="dnvp">!}[? if flavour_16_trigger and flavour_16_trigger_time == time: Four members of the <span style="color: #7FCEB1;">**CNBLP**</span>’s Reichstag delegation have defected, joining the <span style="color: #7A3C00;">Nazis</span> in the national opposition. The internal split between the pro-Brüning moderates and the anti-Brüning radical right has shattered the party’s already fragile unity and damaged its standing among its own electorate. The <span style="color: #7FCEB1;">**CNBLP**</span> has all but ceased to exist as a viable political force. ?]{!</p>!}
 
-{!<p class="other">!}[? if year = 1931 and month = 4 and PLR_launched : The collection of signatures for the proposed Prussian Landtag referendum has ended, with [+ landtag_ref_signatures +] voting in favor of the petition. [? if landtag_ref_signatures < 20: Therefore, with a 20% quota, the petition has failed. This is a small victory for the survival of our democracy, and has demoralized and wasted the funds of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>. ?][? if landtag_ref_signatures >= 20: Therefore, with a 20% quota, the petition has passed. This is unexpected, and now we urgently need to step up our propaganda game, to rival the storm from the <span style="color: #3E88B3;">right</span>. The plebiscite is set to be voted on this August.?] ?]{!</p>!}
+{!<p class="other">!}[? if year = 1931 and month = 4 and PLR_launched : The collection of signatures for the proposed Prussian Landtag referendum has ended, with [+ landtag_ref_signatures +]% voting in favor of the petition. [? if landtag_ref_signatures < 20: Therefore, with a 20% quota, the petition has failed. This is a small victory for the survival of our democracy, and has demoralized and wasted the funds of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>. ?][? if landtag_ref_signatures >= 20: Therefore, with a 20% quota, the petition has passed. This is unexpected, and now we urgently need to step up our propaganda game, to rival the storm from the <span style="color: #3E88B3;">right</span>. The plebiscite is set to be voted on this August.?] ?]{!</p>!}
 
 {!<p class="other">!}[? if year == 1931 and month == 4 and dvp_leader == "Dingeldey" and not lvp_formed: In an effort to reverse the <span style="color: #C0A054;">**DVP**</span>’s declining fortunes and stem further defections to the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>, the party leadership has adopted a new approach to propaganda, drawing inspiration from the <span style="color: #7A3C00;">Nazis</span>. They have published a program that reframes traditional <span style="color: #FFCC00;">liberal</span> goals through the language of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>. For example, on the issue of individual rights, the program commits the <span style="color: #C0A054;">**DVP**</span> to defending the rights of “the ethically responsible individual”—defined as someone whose individuality is rooted in faith and religiosity—against <span style="color: #700000;">revolution</span>, <span style="color: #c00000;">socialism</span>, and materialism. This is a clear retreat from the unabashed defense of <span style="color: #FFCC00;">liberal</span> principles that had characterized Stresemann’s tenure as party chairman. ?]{!</p>!}
 
@@ -642,11 +776,27 @@ max-cards: 3
 
 {!<p class="other">!}[? if flavour_22_trigger and flavour_22_trigger_time == time: Dingeldey and the right wing of the <span style="color: #C0A054;">**DVP**</span> are outraged by Brüning's emergency decree, assailing the new tax levies and cuts to civil servant salaries. Dingeldey has strongly urged Brüning to restore bourgeois confidence in his government by severing all ties with the <span style="color: #c00000;">**SPD**</span>. To pressure Brüning, Dingeldey has threatened to vote to reconvene the Reichstag, to allow the <span style="color: #7A3C00;">national</span> <span style="color: #3E88B3;">opposition</span> to introduce a vote of no confidence with their support. This move has gained significant support among the <span style="color: #C0A054;">**DVP**</span>’s right wing, which has long sought to force a cabinet reshuffle. However, with only a narrow majority of the delegation backing him, Brüning—along with Reichsbank President and <span style="color: #C0A054;">**DVP**</span> member Hans Luther—has pleaded for patience, promising a gradual shift to the right and a relaxation of labor laws. Faced with these assurances, as well as threats of resignation from Curtius and other key figures on the party’s left wing, the delegation ultimately reversed its stance. ?]{!</p>!}
 
+{!<p class="other">!}[? if flavour_34_trigger and flavour_34_trigger_time == time: Dingeldey and the right wing of the <span style="color: #C0A054;">**DVP**</span> are outraged by Brüning's emergency decree, criticizing the new tax levies and cuts to civil servant salaries. Dingeldey has strongly urged Brüning to restore bourgeois confidence in his government by severing all ties with the <span style="color: #c00000;">**SPD**</span>. This push has gained significant support from the <span style="color: #C0A054;">**DVP**</span>’s right wing, which has long advocated for a cabinet reshuffle. In response, Brüning—along with Reichsbank President and <span style="color: #C0A054;">**DVP**</span> member Hans Luther—has pleaded for patience, promising a shift to the right in a cabinet reorganization and a relaxation of labor laws. With these assurances, Dingeldey is no longer working to bring down the government. ?]{!</p>!}
+
+{!<p class="other">!}[? if flavour_24_trigger and flavour_24_trigger_time == time: The Banking Crisis[? if emergency_decree_seen:&nbsp;and the fallout from Brüning's second emergency decree?] has significantly intensified anti-Brüning sentiment among the bourgeois parties, especially the <span style="color: #C0A054;">**DVP**</span>[? if emergency_decree_seen:, which only narrowly secured a majority within its own ranks to support Brüning?]. The right wing of the <span style="color: #C0A054;">**DVP**</span> is increasingly frustrated by Brüning’s failure to follow through on his promise to shift the cabinet further to the right. However, Dingeldey remains hesitant to bring down the government, fearing it would further destabilize Germany’s financial situation. Additionally, the <span style="color: #7A3C00;">national</span> <span style="color: #3E88B3;">opposition</span> has shown no interest in joining Brüning’s cabinet. Under these circumstances, the <span style="color: #C0A054;">**DVP**</span> has little choice but to continue supporting Brüning. ?]{!</p>!}
+
+{!<p class="other">!}[? if flavour_36_trigger and flavour_36_trigger_time == time: The Banking Crisis[? if emergency_decree_seen:&nbsp;and the fallout from Brüning's second emergency decree?][? if emergency_act_seen:&nbsp;and the fallout from Brüning's emergency act?] has intensified anti-Brüning sentiment among the bourgeois parties, especially the <span style="color: #C0A054;">**DVP**</span>[? if emergency_decree_seen:, which already been frustrated with his actions?][? if emergency_act_seen:, which already been frustrated by the lack of consultation with his supporting parties?]. However, Dingeldey remains hesitant to bring down the government, fearing it would further destabilize Germany’s financial situation. Additionally, the <span style="color: #7A3C00;">national</span> <span style="color: #003755;">opposition</span> still shows no interest in joining Brüning’s cabinet. Under these circumstances, the <span style="color: #C0A054;">**DVP**</span> has little choice but to continue supporting Brüning. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month >= 7 and landtag_ref_signatures_passed and not landtag_ref_dvp and not lvp_formed: The <span style="color: #C0A054;">**DVP**</span> has unexpectedly taken a stand against the Prussian Landtag referendum, campaigning in favor of stability and democracy. This move has disrupted the <span style="color: #3E88B3;">**Stahlhelm**</span>'s plan for a united right-wing front in support of the referendum, significantly reducing its chances of success. ?]{!</p>!}
+
 {!<p class="dnvp">!}[? if flavour_21_trigger and flavour_21_trigger_time == time: The controversy surrounding <span style="color: #b8996f;">**WP**</span> leader Hermann Drewitz’s scandals has finally forced him to relinquish the party chairmanship to prevent an even more damaging secession than the one that occurred months earlier. [? if not lvp_formed: Many of their Reichstag members, including Otto Colosser, have defected to the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>, which is seeking to capitalize on their internal discord. ?]With ongoing internal strife and resignations of its most effective leaders, the <span style="color: #b8996f;">**WP**</span> is barely able to function as a political force anymore. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_31_trigger and flavour_31_trigger_time == time: The controversy surrounding <span style="color: #b8996f;">**WP**</span> leader Hermann Drewitz and his scandals has finally settled, as he steps down from the chairmanship in favor of the highly respected Johann Bredt. This move has drawn Otto Colosser and the rebellious district organizations back into the fold. Despite enduring internal strife and multiple splits, the <span style="color: #b8996f;">**WP**</span> has managed to survive as a national force, continuing to represent the conservative middle class that might have otherwise turned to the <span style="color: #7A3C00;">**NSDAP**</span>. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month == 8 and landtag_ref_votes and landtag_ref_dvp and not lvp_formed: The remaining influential members of the <span style="color: #C0A054;">**DVP**</span>'s left wing, has denounced the party’s strong endorsement of the Prussian Landtag referendum. Some even call refusing to support the referendum a "patriotic duty", with Curtius giving a speech over the radio announcing that he won't be following his party's position on the plebiscite. Unfortunately, the pro-democratic forces within the party are powerless and impotent, but every little bit helps. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month == 9 and banking_crisis_seen: The Austro-German customs union is officially dead, with international courts striking down the project. [? if foreign_minister_party == "DVP": Julius Curtius of the <span style="color: #C0A054;">**DVP**</span>, the architect of this project, has suffered a severe blow to his reputation, with growing calls from within his own party for his resignation. [? if bruning_toleration_time and dvp_ideology == "Right": If he steps down, the <span style="color: #C0A054;">**DVP**</span> will no longer have any representation in the cabinet, freeing them to support votes of no confidence against Brüning.?]?]?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1931 and month = 9: The Japanese have invaded Manchuria following the Mukden incident. ?]{!</p>!}
 
-{!<p class="both">!}[? if year = 1931 and month = 10: The recent United Kingdom general elections have resulted in the greatest landslide in the country's history, with <span style="color: #f0456a;">Labour</span> receiving only a meager 52 seats, losing 235 of them from the previous election. Despite this, the incumbent <span style="color: #008000;">National Labour</span> Prime Minister Ramsay MacDonald has remained in office, ruling with the <span style="color: #0087DC;">Tories</span>. ?]{!</p>!}
+{!<p class="other">!}[? if year == 1931 and month == 10 and not bourgeois_list and not bourgeois_parliament and (dnvp_split_2 or kvp_formed) and dvp_leader == "Dingeldey" and not lvp_formed and not lvp_timer_2_trigger: The <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has reached out to moderate right-wing parties instead of the <span style="color: #C0A054;">**DVP**</span>, whose leader, Dingeldey, doesn't plan to take meaningful action on the issue. This effort stems from a shared fear of being politically destroyed by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>[? if bruning_toleration_time:, and to influence Brüning's legislative agenda?]. Hans Schlange-Schöningen, one of [? if not bruning_toleration_time: the strongest supporters for bourgeois unity?][? if bruning_toleration_time: Brüning's strongest supporters?] in the [? if not kvp_formed: <span style="color: #7FCEB1;">**CNBLP**</span>?][? if kvp_formed: <span style="color: #0087DC;">**KVP**</span>?][? if cnblp_defect:, which has since split from Brüning,?], has pleaded with Westarp[? if csvd_formed:, the <span style="color: #8ED8E4;">**CSVD**</span>,?] and some representatives from the <span style="color: #C0A054;">**DVP**</span> to put aside their differences. [? if bruning_toleration_time: With Brüning's strong encouragement, they agreed to issue a joint statement in the Reichstag affirming their support for his government. However, leaks about the plan surfaced, forcing them to abandon it after multiple parties withdrew from negotiations.?]?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month = 10: The recent United Kingdom general elections have resulted in the greatest landslide in the country's history, with <span style="color: #f0456a;">Labour</span> receiving only a meager 52 seats, losing 235 of them from the previous election. Despite this, the incumbent <span style="color: #008000;">National Labour</span> Prime Minister Ramsay MacDonald has remained in office, ruling with the <span style="color: #0087DC;">Tories</span>. ?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1931 and month = 12 : The new Second Spanish Republic has adopted its new democratic constitution, establishing a secular, progressive, and republican government. Times are looking bright for Spain. ?]{!</p>!}
 
@@ -760,7 +910,7 @@ if (Q.dstp_formed && Q.next_election_time - Q.time == 1 && Q.time !== Q.last_tim
         Q.flavour_9_trigger_shown = 1;
     }
 }
-if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r >= 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+if (Q.ddp_factionless && !Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r >= 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_10_trigger += 1;
     if (Q.flavour_10_trigger && !Q.flavour_10_trigger_shown) {
         Q.flavour_10_trigger_time = Q.time;
@@ -768,7 +918,7 @@ if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament &&
         Q.flavour_10_effect_trigger = 1;
     }
 }
-if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r < 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+if (Q.ddp_factionless && !Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r < 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_11_trigger += 1;
     if (Q.flavour_11_trigger && !Q.flavour_11_trigger_shown) {
         Q.flavour_11_trigger_time = Q.time;
@@ -776,6 +926,7 @@ if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament &&
         Q.flavour_11_effect_trigger = 1;
     }
 }
+// initial spd toleration message
 if (Q.bruning_toleration_time == 1 && Q.spd_toleration && Q.year >= 1930 && Q.time !== Q.last_time_updated) {
     Q.flavour_12_trigger += 1;
     if (Q.flavour_12_trigger && !Q.flavour_12_trigger_shown) {
@@ -783,6 +934,7 @@ if (Q.bruning_toleration_time == 1 && Q.spd_toleration && Q.year >= 1930 && Q.ti
         Q.flavour_12_trigger_shown = 1;
     }
 }
+// irl austerity
 if (Q.total_bruning_time >= 12 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && Q.year >= 1930 && Q.time !== Q.last_time_updated) {
     Q.flavour_13_trigger += 1;
     if (Q.flavour_13_trigger && !Q.flavour_13_trigger_shown) {
@@ -790,6 +942,7 @@ if (Q.total_bruning_time >= 12 && !Q.in_center_right_coalition && !Q.in_right_co
         Q.flavour_13_trigger_shown = 1;
     }
 }
+// alt-his austerity
 if (Q.total_bruning_time >= 12 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.bourgeois_parliament) && Q.year >= 1930 && Q.time !== Q.last_time_updated) {
     Q.flavour_14_trigger += 1;
     if (Q.flavour_14_trigger && !Q.flavour_14_trigger_shown) {
@@ -797,13 +950,15 @@ if (Q.total_bruning_time >= 12 && (Q.in_center_right_coalition || Q.in_right_coa
         Q.flavour_14_trigger_shown = 1;
     }
 }
-if (Q.year >= 1930 && Q.total_bruning_time >= 8 && !Q.kvp_cnblp_sister && Q.time_since_election < 8 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && Q.time !== Q.last_time_updated) {
+// cnblp pt 1
+if (Q.year >= 1930 && Q.total_bruning_time >= 8 && !Q.kvp_cnblp_sister && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.spd_toleration_right && !Q.bourgeois_parliament_no_liberals && Q.time !== Q.last_time_updated) {
     Q.flavour_15_trigger += 1;
     if (Q.flavour_15_trigger && !Q.flavour_15_trigger_shown) {
         Q.flavour_15_trigger_time = Q.time;
         Q.flavour_15_trigger_shown = 1;
     }
 }
+// cnblp pt 2
 if (Q.flavour_15_trigger && Q.time == Q.flavour_15_trigger_time + 4 && Q.time !== Q.last_time_updated) {
     Q.flavour_16_trigger += 1; 
     if (Q.flavour_16_trigger == 1 && !Q.flavour_16_trigger_shown) {
@@ -811,20 +966,23 @@ if (Q.flavour_15_trigger && Q.time == Q.flavour_15_trigger_time + 4 && Q.time !=
         Q.flavour_16_trigger_shown = 1;
     }
 }
-if (Q.year >= 1930 && Q.ddp_factionless && Q.time !== Q.last_time_updated) {
+// peasants party collapse cuz they leave for ddp
+if (Q.year >= 1930 && Q.ddp_factionless && !Q.liberal_parliament && !Q.bourgeois_parliament_ddp && Q.time !== Q.last_time_updated) {
     Q.flavour_17_trigger += 1;
     if (Q.flavour_17_trigger == 2 && !Q.flavour_17_trigger_shown) {
         Q.flavour_17_trigger_time = Q.time;
         Q.flavour_17_trigger_shown = 1;
     }
 }
-if (Q.year >= 1930 && Q.total_bruning_time >= 7 && Q.time_since_election < 8 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && Q.time !== Q.last_time_updated) {
+// wp pt 1
+if (Q.year >= 1930 && Q.total_bruning_time >= 7 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.bourgeois_parliament_no_liberals && Q.time !== Q.last_time_updated) {
     Q.flavour_18_trigger += 1;
     if (Q.flavour_18_trigger && !Q.flavour_18_trigger_shown) {
         Q.flavour_18_trigger_time = Q.time;
         Q.flavour_18_trigger_shown = 1;
     }
 }
+// wp pt 2, they split
 if (Q.flavour_18_trigger && Q.time == Q.flavour_18_trigger_time + 2 && Q.time !== Q.last_time_updated) {
     Q.flavour_19_trigger += 1; 
     if (Q.flavour_19_trigger == 1 && !Q.flavour_19_trigger_shown) {
@@ -832,32 +990,148 @@ if (Q.flavour_18_trigger && Q.time == Q.flavour_18_trigger_time + 2 && Q.time !=
         Q.flavour_19_trigger_shown = 1;
     }
 }
-if (Q.flavour_19_trigger && Q.time == Q.flavour_19_trigger_time + 4 && Q.time !== Q.last_time_updated) {
+// wp pt 3, party recovers
+if ((Q.flavour_19_trigger || Q.flavour_30_trigger) && (Q.time == Q.flavour_19_trigger_time + 4 || Q.time == Q.flavour_30_trigger_time + 4) && Q.time !== Q.last_time_updated) {
     Q.flavour_20_trigger += 1; 
     if (Q.flavour_20_trigger == 1 && !Q.flavour_20_trigger_shown) {
         Q.flavour_20_trigger_time = Q.time;
         Q.flavour_20_trigger_shown = 1;
     }
 }
-if (Q.flavour_20_trigger && Q.time == Q.flavour_20_trigger_time + 2 && Q.time !== Q.last_time_updated) {
+// wp pt 4, party joever, drewitz resigns
+if (Q.flavour_20_trigger && Q.time == Q.flavour_20_trigger_time + 2 && !Q.flavour_29_trigger && Q.time !== Q.last_time_updated) {
     Q.flavour_21_trigger += 1; 
     if (Q.flavour_21_trigger == 1 && !Q.flavour_21_trigger_shown) {
         Q.flavour_21_trigger_time = Q.time;
         Q.flavour_21_trigger_shown = 1;
     }
 }
-if (Q.emergency_decree_seen && !Q.in_center_right_coalition && !Q.right_coalition && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed) {
+// dingeldey complains bout emergency decree
+if (Q.emergency_decree_seen && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.liberal_parliament && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_22_trigger += 1; 
     if (Q.flavour_22_trigger == 1 && !Q.flavour_22_trigger_shown) {
         Q.flavour_22_trigger_time = Q.time;
         Q.flavour_22_trigger_shown = 1;
     }
 }
-if (Q.total_bruning_time == 9 && !Q.in_center_right_coalition && !Q.right_coalition && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed) {
+// dingeldey schemes to remove curtius, wirth, dietrich, but postponed
+if (Q.total_bruning_time == 9 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.spd_toleration_right && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
     Q.flavour_23_trigger += 1; 
     if (Q.flavour_23_trigger == 1 && !Q.flavour_23_trigger_shown) {
         Q.flavour_23_trigger_time = Q.time;
         Q.flavour_23_trigger_shown = 1;
+    }
+}
+// dingeldey complains about banking crisis, precursor to curtius resigning
+if (Q.total_bruning_time > 0 && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.spd_toleration_right && Q.banking_crisis_seen && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_24_trigger += 1; 
+    if (Q.flavour_24_trigger == 1 && !Q.flavour_24_trigger_shown) {
+        Q.flavour_24_trigger_time = Q.time;
+        Q.flavour_24_trigger_shown = 1;
+    }
+}
+// cnblp eastern aid pt 1, when they have power over bruning
+if (Q.year >= 1930 && Q.total_bruning_time >= 8 && (Q.kvp_cnblp_sister || Q.in_center_right_coalition || Q.in_right_coalition || Q.bourgeois_parliament || Q.bourgeois_parliament_no_liberals || Q.spd_toleration_right) && !Q.eastern_aid && Q.time !== Q.last_time_updated) {
+    Q.flavour_25_trigger += 1;
+    if (Q.flavour_25_trigger && !Q.flavour_25_trigger_shown) {
+        Q.flavour_25_trigger_time = Q.time;
+        Q.flavour_25_trigger_shown = 1;
+    }
+}
+// regular eastern aid, historical
+if (Q.year >= 1930 && Q.total_bruning_time >= 11 && !Q.eastern_aid && Q.time !== Q.last_time_updated) {
+    Q.flavour_26_trigger += 1;
+    if (Q.flavour_26_trigger && !Q.flavour_26_trigger_shown) {
+        Q.flavour_26_trigger_time = Q.time;
+        Q.flavour_26_trigger_shown = 1;
+    }
+}
+// cnblp eastern aid pt 2, with deficit, coalition tensions
+if (Q.flavour_25_trigger && Q.time == Q.flavour_25_trigger_time + 4 && Q.eastern_aid_deficit && Q.bruning_time && Q.time !== Q.last_time_updated) {
+    Q.flavour_27_trigger += 1; 
+    if (Q.flavour_27_trigger == 1 && !Q.flavour_27_trigger_shown) {
+        Q.flavour_27_trigger_time = Q.time;
+        Q.flavour_27_trigger_shown = 1;
+    }
+}
+// cnblp eastern aid pt 2, without deficit, no coalition tensions
+if (Q.flavour_25_trigger && Q.time == Q.flavour_25_trigger_time + 4 && !Q.eastern_aid_deficit && Q.bruning_time && Q.time !== Q.last_time_updated) {
+    Q.flavour_28_trigger += 1; 
+    if (Q.flavour_28_trigger == 1 && !Q.flavour_28_trigger_shown) {
+        Q.flavour_28_trigger_time = Q.time;
+        Q.flavour_28_trigger_shown = 1;
+    }
+}
+// wp pt 1, alt-history
+if (Q.year >= 1930 && Q.total_bruning_time >= 7 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.bourgeois_parliament || Q.bourgeois_parliament_no_liberals) && Q.time !== Q.last_time_updated) {
+    Q.flavour_29_trigger += 1;
+    if (Q.flavour_29_trigger && !Q.flavour_29_trigger_shown) {
+        Q.flavour_29_trigger_time = Q.time;
+        Q.flavour_29_trigger_shown = 1;
+    }
+}
+// wp pt 2, alt-history
+if (Q.flavour_29_trigger && Q.time == Q.flavour_29_trigger_time + 2 && Q.time !== Q.last_time_updated) {
+    Q.flavour_30_trigger += 1; 
+    if (Q.flavour_30_trigger == 1 && !Q.flavour_30_trigger_shown) {
+        Q.flavour_30_trigger_time = Q.time;
+        Q.flavour_30_trigger_shown = 1;
+    }
+}
+// wp pt 4, alt-history
+if (Q.flavour_29_trigger && Q.flavour_20_trigger && Q.time == Q.flavour_20_trigger_time + 2 && Q.time !== Q.last_time_updated) {
+    Q.flavour_31_trigger += 1; 
+    if (Q.flavour_31_trigger == 1 && !Q.flavour_31_trigger_shown) {
+        Q.flavour_31_trigger_time = Q.time;
+        Q.flavour_31_trigger_shown = 1;
+    }
+}
+if (Q.ddp_factionless && Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r >= 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_32_trigger += 1;
+    if (Q.flavour_32_trigger && !Q.flavour_32_trigger_shown) {
+        Q.flavour_32_trigger_time = Q.time;
+        Q.flavour_32_trigger_shown = 1;
+        Q.flavour_32_effect_trigger = 1;
+    }
+}
+if (Q.ddp_factionless && Q.bourgeois_parliament && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r < 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_33_trigger += 1;
+    if (Q.flavour_33_trigger && !Q.flavour_33_trigger_shown) {
+        Q.flavour_33_trigger_time = Q.time;
+        Q.flavour_33_trigger_shown = 1;
+        Q.flavour_33_effect_trigger = 1;
+    }
+}
+// dingeldey complains bout emergency decree, alt his
+if (Q.emergency_decree_alt_seen && !Q.in_center_right_coalition && !Q.in_right_coalition && !Q.bourgeois_parliament && !Q.liberal_parliament && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_34_trigger += 1; 
+    if (Q.flavour_34_trigger == 1 && !Q.flavour_34_trigger_shown) {
+        Q.flavour_34_trigger_time = Q.time;
+        Q.flavour_34_trigger_shown = 1;
+    }
+}
+// dingeldey schemes to remove curtius, dietrich, alt his
+if (Q.total_bruning_time == 9 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.spd_toleration_right) && Q.dvp_leader == "Dingeldey" && !Q.dvp_defect && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_35_trigger += 1; 
+    if (Q.flavour_35_trigger == 1 && !Q.flavour_35_trigger_shown) {
+        Q.flavour_35_trigger_time = Q.time;
+        Q.flavour_35_trigger_shown = 1;
+    }
+}
+// dingeldey complains about banking crisis, precursor to curtius resigning, alt his
+if (Q.total_bruning_time > 0 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.spd_toleration_right) && Q.banking_crisis_seen && Q.dvp_leader == "Dingeldey" && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_36_trigger += 1; 
+    if (Q.flavour_36_trigger == 1 && !Q.flavour_36_trigger_shown) {
+        Q.flavour_36_trigger_time = Q.time;
+        Q.flavour_36_trigger_shown = 1;
+    }
+}
+// center-right coalition complains about banking crisis, alt his
+if (Q.total_bruning_time > 0 && (Q.in_center_right_coalition || Q.in_right_coalition || Q.spd_toleration_right) && Q.banking_crisis_seen && !Q.lvp_formed && Q.time !== Q.last_time_updated) {
+    Q.flavour_37_trigger += 1; 
+    if (Q.flavour_37_trigger == 1 && !Q.flavour_37_trigger_shown) {
+        Q.flavour_37_trigger_time = Q.time + 1;
+        Q.flavour_37_trigger_shown = 1;
     }
 }
 Q.last_time_updated = Q.time;
@@ -1181,7 +1455,7 @@ max-cards: 4
 
 {!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 2 and bourgeois_negotiations_1930_done and (dnvp_split_2 or kvp_formed) and liberal_parliament and not lvp_formed: Following Westarp's split from Hugenberg's <span style="color: #3E88B3;">**DNVP**</span>, [+ dvp_leader +] has shown interest towards cooperating with him and the moderate German right. The calling of new elections has given the <span style="color: #C0A054;">**DVP**</span> another opportunity to negotiate bourgeois unity. However, this time, the effort is far more ambitious—an appeal for the consolidation of all state-supporting forces, rather than just the formation of a parliamentary group. While Westarp himself has little interest in merging with other parties, he is willing to participate due to conditional industrial funding, which is contingent on achieving bourgeois unity. The betrayal of the <span style="color: #C0A054;">**DVP**</span> still lingers in their minds, with many within the German right reluctant to cooperate with [+ dvp_leader +] in this endeavor. ?]{!</p>!}
 
-{!<p class="dnvp">!}[? if bourgeois_negotiations_1930_aftermath_timer == 2 and liberal_parliament and not lvp_formed: Following the success of the liberals in consolidating their parliamentary groups, big businesses have increased pressure to either expand the parliamentary group to include other bourgeois parties or encourage the other parties on the bourgeois right to form their own separate parliamentary faction. Only the latter appears to be possible currently, with the hostility that has developed between the liberal parties and the conservative right. New negotiations have been initiated by Treviranus of the [? if (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">**KVP**</span>?][? if not (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">People's Conservative Association</span>?], featuring the <span style="color: #7FCEB1;">**CNBLP**</span> and <span style="color: #b8996f;">**WP**</span>. ?]{!</p>!}
+{!<p class="dnvp">!}[? if bourgeois_negotiations_1930_aftermath_timer == 2 and liberal_parliament and not lvp_formed and (dnvp_split_2 or kvp_formed): Following the success of the liberals in consolidating their parliamentary groups, big businesses have increased pressure to either expand the parliamentary group to include other bourgeois parties or encourage the other parties on the bourgeois right to form their own separate parliamentary faction. Only the latter appears to be possible currently, with the hostility that has developed between the liberal parties and the conservative right. New negotiations have been initiated by Treviranus of the [? if (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">**KVP**</span>?][? if not (dnvp_split_2 or kvp_formed): <span style="color: #0087DC;">People's Conservative Association</span>?], featuring the <span style="color: #7FCEB1;">**CNBLP**</span> and <span style="color: #b8996f;">**WP**</span>. ?]{!</p>!}
 
 {!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 2 and bourgeois_negotiations_1930_done and not (dnvp_split_2 or kvp_formed) and (dvp_leader == "Scholz" or dvp_leader == "Dingeldey") and not liberal_parliament and not lvp_formed: The calling of new elections has given [? if dvp_leader == "Scholz": Scholz?][? if dvp_leader != "Scholz": the <span style="color: #C0A054;">**DVP**</span>?] another opportunity to negotiate bourgeois unity. However, this time, the effort is far more ambitious—an appeal for the consolidation of all state-supporting forces, rather than just the formation of a parliamentary group. The failure of the last negotiations has left a bad taste in the parties' mouths, with many within the German right reluctant to cooperate with [+ dvp_leader +] in this endeavor. ?]{!</p>!}
 
@@ -1195,13 +1469,13 @@ max-cards: 4
 
 {!<p class="dnvp">!}[? if bourgeois_negotiations_elections_1930_timer == 2 and bourgeois_negotiations_1930_done and not csvd_formed and dnvp_historical_1929 and lvp_formed: The <span style="color: #7FCEB1;">**CNBLP**</span> and <span style="color: #b8996f;">**WP**</span> have responded coldly to the consolidation of the vocational parties with the more ideologically oriented <span style="color: #0087DC;">**KVP**</span>. It is up to people like Martin Schiele, a former <span style="color: #3E88B3;">**DNVP**</span> member advocating for a party akin to the pre-Hugenberg <span style="color: #3E88B3;">**DNVP**</span> to persuade the reluctant old guard of the vocational parties. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_scholz and not liberal_parliament:  In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. However, the right-wing tilt of the parties involved will likely make future cooperation near-impossible. ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_scholz and not liberal_parliament:  In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban [? if kvp_formed or dnvp_split_2: <span style="color: #0087DC;">**KVP**</span>, ?] <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. However, the right-wing tilt of the parties involved will likely make future cooperation near-impossible. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_moderate and not liberal_parliament: In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. Despite the right-wing tilt of the parties involved, the somewhat friendly leadership of the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> and <span style="color: #C0A054;">**DVP**</span> will make future cooperation somewhat possible. ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_elections_1930_timer == 1 and bourgeois_merger_trigger_moderate and not liberal_parliament: In a great deal of surprise, [+ dvp_leader +] has managed to rally the bourgeois parties together, whether because a mutual fear of <span style="color: #c00000;">socialism</span>, past instances of cooperation, or stacks of cash offered by their wealthy donors; a shared electoral list is agreed upon by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban [? if kvp_formed or dnvp_split_2: <span style="color: #0087DC;">**KVP**</span>, ?] <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. Despite the right-wing tilt of the parties involved, the somewhat friendly leadership of the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> and <span style="color: #C0A054;">**DVP**</span> will make future cooperation somewhat possible. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list: The momentum for bourgeois unity has culminated in an agreement for a shared electoral list supported by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list: The momentum for bourgeois unity has culminated in an agreement for a shared electoral list supported by the majority of the bourgeois parties. The [? if kvp_cnblp_sister: <span style="color: #385A38;">**Landbund**</span>?][? if not kvp_cnblp_sister: <span style="color: #7FCEB1;">**CNBLP**</span>?] and <span style="color: #007A00;">German Peasants' Party</span> will candidates will be the dominant parties on the rural lists, while the more urban [? if kvp_formed or dnvp_split_2: <span style="color: #0087DC;">**KVP**</span>, ?]<span style="color: #b8996f;">**WP**</span>[? if bourgeois_list_ddp:, <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?] and <span style="color: #C0A054;">**DVP**</span> will be the main parties on the ballot in urban areas. The national list seats are equitably distributed between the parties. This will severely impair the <span style="color: #7A3C00;">**NSDAP**</span>'s ability to appeal to the German middle. ?]{!</p>!}
 
-{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list_fail: The movement for bourgeois unity has failed to achieve any meaningful goals this time around. The leadership of the vocational parties recoiled at the suggestion of a shared list between the plethora of bourgeois parties, as it would destroy their vocational identity. In spite of this defeat, some smaller agreements are able to be reached aiming to minimize interparty animosity.  ?]{!</p>!}
+{!<p class="other">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_list_fail: The movement for bourgeois unity has failed to achieve any meaningful goals this time around. The leadership of the vocational parties recoiled at the suggestion of a shared list between the plethora of bourgeois parties, as it would destroy their vocational identity. In spite of this defeat, some smaller agreements are able to be reached aiming to minimize interparty animosity. ?]{!</p>!}
 
 {!<p class="dnvp">!}[? if bourgeois_negotiations_1930_aftermath_timer == 1 and bourgeois_parliament_no_liberals: The negotiations between the non-liberal bourgeois parties led by Treviranus of the <span style="color: #0087DC;">**KVP**</span> have finally ended with an agreement for a parliamentary alliance featuring the <span style="color: #0087DC;">**KVP**</span>, <span style="color: #b8996f;">**WP**</span> and the <span style="color: #7FCEB1;">**CNBLP**</span>. This is later joined by the <span style="color: #007A00;">German Peasants' Party</span>, who, despite their objections, would be factionless in parliament otherwise. ?]{!</p>!}
 
@@ -1253,9 +1527,15 @@ max-cards: 4
 
 {!<p class="other">!}[? if flavour_11_trigger and flavour_11_trigger_time == time : For one reason or another, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> lacks the Reichstag delegates to form a parliamentary faction and is now required to negotiate with another party to join forces. In this case, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has decided to work with the <span style="color: #C0A054;">**DVP**</span> to establish a parliamentary faction. Surprisingly, the <span style="color: #C0A054;">**DVP**</span> was interested in accommodating with the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>, [? if dvp_leader == "Scholz" and dstp_formed: but just as they were about to finalize their agreement, an angry Ernst Scholz torpedoed the negotiations, still furious about how the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> disrupted his efforts toward bourgeois unity. As a result of this, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has formed an agreement with the <span style="color: #b8996f;">**WP**</span> instead, having exhausted its choices. ?][? if dvp_leader != "Scholz" or not dstp_formed: [? if chancellor == "Brüning" and not spd_in_government: having ceased their intrigues against Brüning's government in order to finalize the agreement.?][? if not (chancellor == "Brüning" and not spd_in_government): having put aside their grudges to finalize the agreement.?]?] ?]{!</p>!}
 
+{!<p class="other">!}[? if flavour_32_trigger and flavour_32_trigger_time == time : For one reason or another, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> lacks the Reichstag delegates to form a parliamentary faction and is now required to negotiate with another party to join forces. With the bourgeois parties already grouped together, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> is forced to negotiate with them. Surprisingly, the bourgeois parties have gotten over their grudges against the party, and are open to cooperation. [? if dvp_leader == "Scholz" and dstp_formed: However, just as they were about to finalize their agreement, an angry Ernst Scholz torpedoed the negotiations, still furious about how the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> disrupted his efforts toward bourgeois unity. Fortunately, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> was able to accept a few defections from the various parties within the group to reach the required size for a parliamentary faction.?][? if dvp_leader != "Scholz" or not dstp_formed: [? if chancellor == "Brüning" and not spd_in_government: They have all agreed to cease their intrigues against Brüning's government in order to finalize the agreement.?][? if not (chancellor == "Brüning" and not spd_in_government): With past disputes set aside, they've finalized the agreement.?]?] ?]{!</p>!}
+
+{!<p class="other">!}[? if flavour_33_trigger and flavour_33_trigger_time == time : For one reason or another, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> lacks the Reichstag delegates to form a parliamentary faction and is now required to negotiate with another party to join forces. With the bourgeois parties already grouped together, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> is forced to negotiate with them. Surprisingly, the bourgeois parties have gotten over their grudges against the party, and are open to cooperation. [? if dvp_leader == "Scholz" and dstp_formed: However, just as they were about to finalize their agreement, an angry Ernst Scholz torpedoed the negotiations, still furious about how the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> disrupted his efforts toward bourgeois unity. As a result of this, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> is forced to enter the <span style="color: #000000;">Center</span>'s parliamentary group. ?][? if dvp_leader != "Scholz" or not dstp_formed: [? if chancellor == "Brüning" and not spd_in_government: They have all agreed to cease their intrigues against Brüning's government in order to finalize the agreement.?][? if not (chancellor == "Brüning" and not spd_in_government): With past disputes set aside, they've finalized the agreement.?]?] ?]{!</p>!}
+
 {!<p class="dnvp">!}[? if year = 1930 and month = 9 : Adolf Hitler of the <span style="color: #7A3C00;">**NSDAP**</span> has taken an oath of legality, pledging to use constitutional means to gain power. This occurred during a court case involving <span style="color: #7A3C00;">Nazi</span> members and Reichswehr officers Richard Scheringer and Hanns Ludin, who were accused of plotting a national uprising by establishing <span style="color: #7A3C00;">**NSDAP**</span> cells within the Reichswehr. Under normal circumstances, Hitler's statements—tantamount to preparing for high treason—would have led to prosecution. Instead, the authorities are tolerating, even legitimizing the <span style="color: #7A3C00;">Nazi</span> agenda. ?]{!</p>!}
 
 {!<p class="dnvp">!}[? if flavour_18_trigger and flavour_18_trigger_time == time: The <span style="color: #b8996f;">**WP**</span>, once an enthusiastic supporter of Brüning's bourgeois government—and the only special interest party to secure a cabinet position—is now scrambling to extricate itself from government following its electoral defeat. While the party reports gains from expanding its electoral base into new states, these are more than offset by disproportionately heavy losses in the regions where it first found success. The same trend can also be observed with the <span style="color: #7FCEB1;">**CNBLP**</span>. Currently, a divisive internal struggle has emerged between chairman Hermann Drewitz and the party’s anti-Brüning faction on the right. The latter seeks to compel the resignation of their sole minister from the government, aiming to pressure Brüning into abandoning his reliance on our votes and instead forming a coalition with the <span style="color: #7A3C00;">**NSDAP**</span>. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_29_trigger and flavour_29_trigger_time == time: The <span style="color: #b8996f;">**WP**</span>, once an enthusiastic supporter of Brüning's bourgeois government, is now scrambling to distance itself following its electoral defeat. While the party has gained from expanding into new states, these are more than outweighed by steep losses in its original strongholds. A similar trend can be seen with the <span style="color: #7FCEB1;">**CNBLP**</span>. An internal power struggle has emerged between the pro-Brüning faction—led by party chairman Hermann Drewitz and Justice Minister Johann Bredt—and increasingly anti-Brüning district organizations. These anti-Brüning factions are demanding that the party pressure Brüning into forming a coalition with the <span style="color: #7A3C00;">**NSDAP**</span>[? if spd_toleration:&nbsp;to reduce his dependence on our votes?], or they threaten to dissolve or even break away from the party. ?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1930 and month = 10 and spd_prussia: The <span style="color: #3E88B3;">**Stahlhelm**</span> is once again attempting to destabilize and polarize Germany amidst the economic depression following the failed Young Plan referendum. At their annual congress, the <span style="color: #3E88B3;">**Stahlhelm**</span> announced plans for a referendum to prematurely dissolve the Prussian Landtag. Frustrated by the dominant position the <span style="color: #c00000;">socialists</span> have held in Prussia since the founding of the Weimar Republic, they seek to force new elections that would better reflect the national shift to the right. [? if dnvp_ideology == "Radical":Despite strong enthusiasm from other right-wing parties,?][? if dnvp_ideology == "Moderate":This is met with skepticism from the right-wing parties, and?] Hitler himself has shown little interest in the initiative and has refused to commit the <span style="color: #7A3C00;">**NSDAP**</span>, even as some <span style="color: #7A3C00;">Nazi</span> leaders express strong support. [? if dvp_ideology == "Right" and not in_grand_coalition_prussia and not in_new_grand_coalition_prussia and (dvp_leader == "Scholz" or dvp_leader == "Dingeldey"): The <span style="color: #C0A054;">**DVP**</span> was also invited to join the "national front," but its leadership has refused to commit as long as the <span style="color: #7A3C00;">Nazis</span> remain undecided. The fact that they haven’t outright rejected the offer, is a testament to how far they have strayed from democracy.?] At this stage, the success of the plan appears to hinge on Hitler’s support. ?]{!</p>!}
 
@@ -1277,21 +1557,33 @@ max-cards: 4
 
 {!<p class="dnvp">!}[? if flavour_15_trigger and flavour_15_trigger_time == time: The combination of our influence over the Brüning government, the ineffectiveness of his agrarian relief plan, the radicalization of the rural electorate signaled by Martin Schiele's resignation from the RLB, and the <span style="color: #7FCEB1;">**CNBLP**</span>'s third-place finish in rural areas behind the <span style="color: #3E88B3;">**DNVP**</span> and <span style="color: #7A3C00;">**NSDAP**</span> has led the party to reconsider its support for Brüning. An anti-Brüning right-wing faction now dominates within the <span style="color: #7FCEB1;">**CNBLP**</span>, successfully pushing through a resolution chastising the Chancellor and demanding a reorganization of the coalition to include the <span style="color: #7A3C00;">Nazis</span>. Brüning has refused to comply, prompting the <span style="color: #7FCEB1;">**CNBLP**</span> to become one of the first parties to bolt from his coalition, now voting against his decrees and supporting right-wing motions of no confidence. ?]{!</p>!}
 
-{!<p class="other">!}[? if year = 1930 and month = 12 and kpd_leader == "Thälmann" : Ernst Thälmann has embraced a new <span style='color: #7A3C00;'>national-populist</span> strategy, rallying under the slogan of the *Volksrevolution*. This move is an attempt by the <span style='color: #700000;'>**KPD**</span> to expand its influence in the bourgeosi social groups where the <span style='color: #7A3C00;'>**NSDAP**</span> are the strongest in. Leon Trotsky and many other <span style='color: #700000;'>**Communists**</span> have condemned this shift, denouncing the use of 'people's revolution' instead of 'proletarian revolution' as a distortion of <span style="color: #9B0000;">Marxism</span>. They also pointed out that its the exact same slogan used by Otto Strasser and the left-wing faction of the <span style='color: #7A3C00;'>**NSDAP**</span>.  ?]{!</p>!}
+{!<p class="dnvp">!}[? if flavour_25_trigger and flavour_25_trigger_time == time: The general ineffectiveness of Brüning's agrarian relief, led by Agriculture Minister Martin Schiele of the [? if dnvp_split_2: <span style="color: #7FCEB1;">**CNBLP**</span>?][? if kvp_formed: <span style="color: #0087DC;">**KVP**</span>?][? if dnvp_ideology == "Moderate": <span style="color: #3E88B3;">**DNVP**</span>?], has led to growing dissatisfaction within his own party. To retain their support, Schiele and Brüning have introduced a formal *Eastern Aid Act*, a policy designed to relieve the debts of agricultural enterprises in the east—despite the heavy financial burden it imposes. While this measure has placated organized agriculture and Hindenburg himself, it stands in direct contradiction to Brüning’s broader strategy of economic recovery through a balanced budget. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1930 and month = 12 and kpd_leader == "Thälmann" : Ernst Thälmann has embraced a new <span style='color: #7A3C00;'>national-populist</span> strategy, rallying under the slogan of the *Volksrevolution*. This move is an attempt by the <span style='color: #700000;'>**KPD**</span> to expand its influence in the bourgeoisie social groups where the <span style='color: #7A3C00;'>**NSDAP**</span> are the strongest in. Leon Trotsky and many other <span style='color: #700000;'>**Communists**</span> have condemned this shift, denouncing the use of 'people's revolution' instead of 'proletarian revolution' as a distortion of <span style="color: #9B0000;">Marxism</span>. They also pointed out that its the exact same slogan used by Otto Strasser and the left-wing faction of the <span style='color: #7A3C00;'>**NSDAP**</span>.  ?]{!</p>!}
 
 {!<p class="dnvp">!}[? if flavour_17_trigger and flavour_17_trigger_time == time: The defection of the northern wing’s Reichstag members from the <span style="color: #007A00;">German Peasants' Party</span> to the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has effectively ended the party as a national political force. All that remains is the original <span style="color: #38C538;">Bavarian Peasants’ League</span>, which, amid a prevailing mood of resignation, is expected to secure only a fraction of its former support in the next election, as most peasants turn further to the right in search of a solution to Germany's crisis. ?]{!</p>!}
 
-{!<p class="dnvp">!}[? if flavour_19_trigger and flavour_19_trigger_time == time: The <span style="color: #b8996f;">**WP**</span> has issued a vote of no confidence against Brüning, formally ending any possibility of reconciliation with his government and joining the growing ranks of once-supportive bourgeois parties now in opposition. This decision comes after the party’s sole minister resigned under pressure from its anti-Brüning right wing. He is not alone in stepping down, the party’s vice chairman Otto Colosser and effective propagandist has also resigned in protest against Drewitz’s "one-man dictatorship," further accusing him of financial impropriety and other shenanigans. The internal strife has escalated to such an extent that numerous local branches have defected, effectively ending the <span style="color: #b8996f;">**WP**</span> as a viable national political force. ?]{!</p>!}
+{!<p class="dnvp">!}[? if flavour_19_trigger and flavour_19_trigger_time == time: The <span style="color: #b8996f;">**WP**</span> has issued a vote of no confidence against Brüning, formally ending any possibility of reconciliation with his government and joining the growing ranks of once-supportive bourgeois parties now in opposition. This decision comes after the party’s sole minister resigned under pressure from its anti-Brüning right wing. He is not alone in stepping down, the party’s vice chairman and effective propagandist Otto Colosser has also resigned in protest against Drewitz’s "one-man dictatorship," further accusing him of financial impropriety and other shenanigans. The internal strife has escalated to such an extent that numerous local branches have defected, effectively ending the <span style="color: #b8996f;">**WP**</span> as a viable national political force. ?]{!</p>!}
 
-{!<p class="other">!}[? if year = 1931 and month = 1 and dvp_leader == "Dingeldey" and not bourgeois_list and dnvp_split_2 and not lvp_formed and not lvp_timer_2_trigger: Despite previous setbacks for liberal and bourgeois unity, the push for closer ties between centrist and moderate right-wing parties remains alive, particularly at the local level. Politicians from the [? if dstp_formed: <span style="color: #E0B0FF;">**Radical Democrats**</span>?][? if not dstp_formed: <span style="color: #D3C24D;">**Democrats**</span>?], the <span style="color: #0087DC;">**KVP**</span>, and the <span style="color: #8ED8E4;">**CSVD**</span> in the State of Hesse have met to discuss closer cooperation. Their initiative has received a surprisingly positive response, leading to the formation of a new national organization and invitations to figures like Hans Luther and Otto Gessler. However, the effort has been disappointing, as many declined to participate[? if spd_prussia:—largely due to the deep divisions caused by the <span style="color: #3E88B3;">**Stahlhelm**</span>'s planned Prussian referendum, which has split the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> from the rest of the moderate right.?][? if not spd_prussia:—largely due to the strong animosity between the leadership of the national parties.?]?]{!</p>!}
+{!<p class="dnvp">!}[? if flavour_30_trigger and flavour_30_trigger_time == time: Despite pressure from the <span style="color: #b8996f;">**WP**</span>'s anti-Brüning right wing for its lone minister, Johann Bredt, to resign, party chairman Hermann Drewitz has successfully rallied a majority of the parliamentary delegation to support him [? if not in_right_coalition and not in_center_right_coalition: after securing key concessions for the middle class in negotiations with Brüning?][? if in_right_coalition or in_center_right_coalition: after persuading the wider cabinet to abandon tax increases that would have affected the middle class?]. However, this victory comes at a cost—vice chairman and chief propagandist Otto Colosser has resigned in protest, denouncing Drewitz’s 'one-man dictatorship' and accusing him of financial impropriety and other misconduct. The internal strife has escalated to such an extent that numerous local branches have defected, severely weakening the <span style="color: #b8996f;">**WP**</span>'s standing as a viable national political force. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month = 1 and dvp_leader == "Dingeldey" and not bourgeois_list and (dnvp_split_2 or kvp_formed) and not lvp_formed and not lvp_timer_2_trigger: Despite previous setbacks for liberal and bourgeois unity, the push for closer ties between centrist and moderate right-wing parties remains alive, particularly at the local level. Politicians from the [? if dstp_formed: <span style="color: #E0B0FF;">**Radical Democrats**</span>?][? if not dstp_formed: <span style="color: #D3C24D;">**Democrats**</span>?], the <span style="color: #0087DC;">**KVP**</span>, and the <span style="color: #8ED8E4;">**CSVD**</span> in the State of Hesse have met to discuss closer cooperation. Their initiative has received a surprisingly positive response, leading to the formation of a new national organization and invitations to figures like Hans Luther and Otto Gessler. However, the effort has been disappointing, as many declined to participate[? if spd_prussia:—largely due to the deep divisions caused by the <span style="color: #3E88B3;">**Stahlhelm**</span>'s planned Prussian referendum, which has split the <span style="color: #D3C24D;">**[+ ddp_name +]**</span> from the rest of the moderate right.?][? if not spd_prussia:—largely due to the strong animosity between the leadership of the national parties.?]?]{!</p>!}
 
 {!<p class="other">!}[? if flavour_23_trigger and flavour_23_trigger_time == time: Dingeldey of the <span style="color: #C0A054;">**DVP**</span> has attempted to pressure Brüning into reorganizing his cabinet by removing relatively left-leaning ministers, including their own Julius Curtius, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>'s Vice-Chancellor Hermann Dietrich, and the <span style="color: #000000;">Center</span>'s Interior Minister Joseph Wirth. However, these efforts failed to secure majority support within the <span style="color: #C0A054;">**DVP**</span>'s Reichstag delegation, forcing Dingeldey to put the plan on hold, as he still resents how [+ chancellor +] has effectively excluded his supporting parties in the formulation of his decrees. In the meantime, Dingeldey has been working on establishing closer relations with the "<span style="color: #7A3C00;">national</span> <span style="color: #3E88B3;">opposition</span>". ?]{!</p>!}
 
+{!<p class="other">!}[? if flavour_35_trigger and flavour_35_trigger_time == time: Dingeldey of the <span style="color: #C0A054;">**DVP**</span> has attempted to pressure Brüning into reorganizing his cabinet by removing relatively left-leaning ministers, including their own Julius Curtius, the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>'s Vice-Chancellor Hermann Dietrich. However, these efforts failed to secure support within the <span style="color: #C0A054;">**DVP**</span>'s Reichstag delegation, forcing Dingeldey to abandon his plans. The inclusion of the right-wing <span style="color: #3E88B3;">**DNVP**</span> in the government has led the <span style="color: #C0A054;">**DVP**</span>’s right wing to abandon its efforts to court Hugenberg’s <span style="color: #003755;">**DNF**</span> and Hitler’s <span style="color: #7A3C00;">**NSDAP**</span>, as they believe the cabinet is already sufficiently right-wing. ?]{!</p>!}
+
 {!<p class="other">!}[? if year = 1931 and month = 2 and dstp_formed and not lvp_formed and not lvp_timer_2_trigger : Most local organizations that have formerly belonged to the <span style="color: #D3C24D;">**DDP**</span> are extremely hesitant about becoming involved in the new party, and many of the <span style="color: #D3C24D;">**DDP**</span> auxiliary organizations, such as their youth and women's groups have collapsed and need to be built anew. All of this combined with the heavy psychological toll under which the leaders of the <span style="color: #D3C24D;">**State Party**</span> were already laboring as a result of the deepening economic crisis to produce a mood of growing resignation and pessimism about the future of the party.?]{!</p>!}
 
-{!<p class="dnvp">!}[? if year = 1931 and month = 3 and PLR_launched : The <span style="color: #7A3C00;">**NSDAP**</span> has finally agreed to support the referendum for the dissolution of the Landtag[? if not hitler_deported:, though Hitler remains personally skeptical about its chances of success?].[? if dnvp_ideology == "Moderate": With backing from both the <span style="color: #3E88B3;">**Stahlhelm**</span> and the <span style="color: #7A3C00;">**NSDAP**</span>, the <span style="color: #3E88B3;">**DNVP**</span> has also thrown its support behind the initiative. [? if dnvp_leader == "Treviranus": However, Treviranus remains hesitant, but still allows his party members to vote according to their conscience. ?]?] [? if landtag_ref_dvp: Additionally, the <span style="color: #C0A054;">**DVP**</span> has aligned with the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>, with Dingeldey reaffirming his party’s commitment to the struggle against <span style="color: #c00000;">socialism</span>.?] Fortunately, the <span style="color: #700000;">**KPD**</span> has refused to cooperate with figures like Hugenberg and [+ nsdap_leader +] in this initiative[? if kpd_leader != "Conciliators":, keeping the anti-democratic vote divided?]. ?]{!</p>!}
+{!<p class="both">!}[? if year = 1931 and month = 3 and PLR_launched : The <span style="color: #7A3C00;">**NSDAP**</span> has finally agreed to support the referendum for the dissolution of the Landtag[? if not hitler_deported:, though Hitler remains personally skeptical about its chances of success?].[? if dnvp_ideology == "Moderate": With backing from both the <span style="color: #3E88B3;">**Stahlhelm**</span> and the <span style="color: #7A3C00;">**NSDAP**</span>, the <span style="color: #3E88B3;">**DNVP**</span> has also thrown its support behind the initiative. [? if dnvp_leader == "Treviranus": However, Treviranus remains hesitant, but still allows his party members to vote according to their conscience. ?]?] [? if landtag_ref_dvp: Additionally, the <span style="color: #C0A054;">**DVP**</span> has aligned with the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>, with Dingeldey reaffirming his party’s commitment to the struggle against <span style="color: #c00000;">socialism</span>.?] Fortunately, the <span style="color: #700000;">**KPD**</span> has refused to cooperate with figures like Hugenberg and [+ nsdap_leader +] in this initiative[? if kpd_leader != "Conciliators":, keeping the anti-democratic vote divided?]. ?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1931 and month = 3 and kpd_leader == "Thälmann" : Richard Scheringer, a former Reichswehr officer and prominent member of the <span style='color: #7A3C00;'>**NSDAP**</span> and <span style='color: #7A3C00;'>**SA**</span>, was imprisoned for attempting to establish <span style='color: #7A3C00;'>Nazi</span> cells within the military. In a shocking turn, after extensive discussions with his <span style='color: #700000;'>**Communist**</span> cellmates, he has defected to the <span style='color: #700000;'>**KPD**</span>. Seizing this opportunity, the <span style="color: #700000;">**KPD**</span> is now embracing the so-called 'Scheringer Line,' incorporating more nationalist rhetoric into its messaging to attract <span style="color: #7A3C00;">Nazi</span> defectors. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_27_trigger and flavour_27_trigger_time == time: The Eastern Aid Act, introduced months ago to relieve the debts of agricultural enterprises in the east, has created tension within the coalition, as it directly contradicts Brüning’s goal of maintaining a balanced budget. The reparation tax—now obsolete due to the Young Plan—continues to be used to fund agricultural subsidies, sparking fierce protests from the [? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span>?][? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>?]. They argue that this tax, primarily levied on businesses, is an unreasonable burden on job creators given the current economic crisis. Fortunately for Brüning, the [? if budget >= 0: budget surplus?][? if reparations == -2: pause in reparations?] has enabled him to abolish the tax while still maintaining full funding for the program. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_28_trigger and flavour_28_trigger_time == time: The Eastern Aid Act, introduced months ago to relieve the debts of agricultural enterprises in the east, has created tension within the coalition, as it directly contradicts Brüning’s goal of maintaining a balanced budget. The reparation tax—now obsolete due to the Young Plan—continues to be used to fund agricultural subsidies, sparking fierce protests from the [? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span>?][? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>?]. They argue that this tax, primarily levied on businesses, is an unreasonable burden on job creators given the current economic crisis. Brüning now finds himself caught between appeasing big industry on one side and placating organized agriculture and Hindenburg on the right. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_26_trigger and flavour_26_trigger_time == time: The Brüning cabinet has introduced the Eastern Aid Act, a policy aimed at relieving the debts of agricultural enterprises in the east—despite the significant financial burden it imposes. This measure directly contradicts Brüning’s broader strategy of economic recovery through budget austerity. To partially fund the policy, the government has retained outdated reparation taxes that became obsolete after the Young Plan. However, the lack of full funding for debt relief has frustrated many influential landowners, prompting them to take their complaints directly to Hindenburg, over whom they wield considerable influence. ?]{!</p>!}
 
 {!<p class="other">!}[? if flavour_13_trigger and flavour_13_trigger_time == time: Brüning’s decision to sideline the Reichstag and its parties from any meaningful role in shaping his fiscal and economic policies severely undermined the legitimacy of the bourgeois parties in the eyes of their traditional electorates, due to their powerlessness to dismantle his more repugnant policies. One clear example is the plight of civil servants, who have borne the brunt of salary cuts of approximately 20 percent, pushing many toward the <span style="color: #7A3C00;">Nazis</span>. His deflationary and austerity measures deepened the economic crisis, radicalizing the very social groups upon which these moderate parties relied for electoral support. This has led to heightened tensions between Brüning and his supporting parties, some of whom are even threatening to abandon his coalition. ?]{!</p>!}
 
@@ -1299,7 +1591,7 @@ max-cards: 4
 
 {!<p class="dnvp">!}[? if flavour_16_trigger and flavour_16_trigger_time == time: Four members of the <span style="color: #7FCEB1;">**CNBLP**</span>’s Reichstag delegation have defected, joining the <span style="color: #7A3C00;">Nazis</span> in the national opposition. The internal split between the pro-Brüning moderates and the anti-Brüning radical right has shattered the party’s already fragile unity and damaged its standing among its own electorate. The <span style="color: #7FCEB1;">**CNBLP**</span> has all but ceased to exist as a viable political force. ?]{!</p>!}
 
-{!<p class="other">!}[? if year = 1931 and month = 4 and PLR_launched : The collection of signatures for the proposed Prussian Landtag referendum has ended, with [+ landtag_ref_signatures +] voting in favor of the petition. [? if landtag_ref_signatures < 20: Therefore, with a 20% quota, the petition has failed. This is a small victory for the survival of our democracy, and has demoralized and wasted the funds of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>. ?][? if landtag_ref_signatures >= 20: Therefore, with a 20% quota, the petition has passed. This is unexpected, and now we urgently need to step up our propaganda game, to rival the storm from the <span style="color: #3E88B3;">right</span>. The plebiscite is set to be voted on this August.?] ?]{!</p>!}
+{!<p class="other">!}[? if year = 1931 and month = 4 and PLR_launched : The collection of signatures for the proposed Prussian Landtag referendum has ended, with [+ landtag_ref_signatures +]% voting in favor of the petition. [? if landtag_ref_signatures < 20: Therefore, with a 20% quota, the petition has failed. This is a small victory for the survival of our democracy, and has demoralized and wasted the funds of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>. ?][? if landtag_ref_signatures >= 20: Therefore, with a 20% quota, the petition has passed. This is unexpected, and now we urgently need to step up our propaganda game, to rival the storm from the <span style="color: #3E88B3;">right</span>. The plebiscite is set to be voted on this August.?] ?]{!</p>!}
 
 {!<p class="other">!}[? if year == 1931 and month == 4 and dvp_leader == "Dingeldey" and not lvp_formed: In an effort to reverse the <span style="color: #C0A054;">**DVP**</span>’s declining fortunes and stem further defections to the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>, the party leadership has adopted a new approach to propaganda, drawing inspiration from the <span style="color: #7A3C00;">Nazis</span>. They have published a program that reframes traditional <span style="color: #FFCC00;">liberal</span> goals through the language of the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>. For example, on the issue of individual rights, the program commits the <span style="color: #C0A054;">**DVP**</span> to defending the rights of “the ethically responsible individual”—defined as someone whose individuality is rooted in faith and religiosity—against <span style="color: #700000;">revolution</span>, <span style="color: #c00000;">socialism</span>, and materialism. This is a clear retreat from the unabashed defense of <span style="color: #FFCC00;">liberal</span> principles that had characterized Stresemann’s tenure as party chairman. ?]{!</p>!}
 
@@ -1321,11 +1613,29 @@ max-cards: 4
 
 {!<p class="other">!}[? if flavour_22_trigger and flavour_22_trigger_time == time: Dingeldey and the right wing of the <span style="color: #C0A054;">**DVP**</span> are outraged by Brüning's emergency decree, assailing the new tax levies and cuts to civil servant salaries. Dingeldey has strongly urged Brüning to restore bourgeois confidence in his government by severing all ties with the <span style="color: #c00000;">**SPD**</span>. To pressure Brüning, Dingeldey has threatened to vote to reconvene the Reichstag, to allow the <span style="color: #7A3C00;">national</span> <span style="color: #3E88B3;">opposition</span> to introduce a vote of no confidence with their support. This move has gained significant support among the <span style="color: #C0A054;">**DVP**</span>’s right wing, which has long sought to force a cabinet reshuffle. However, with only a narrow majority of the delegation backing him, Brüning—along with Reichsbank President and <span style="color: #C0A054;">**DVP**</span> member Hans Luther—has pleaded for patience, promising a gradual shift to the right and a relaxation of labor laws. Faced with these assurances, as well as threats of resignation from Curtius and other key figures on the party’s left wing, the delegation ultimately reversed its stance. ?]{!</p>!}
 
+{!<p class="other">!}[? if flavour_34_trigger and flavour_34_trigger_time == time: Dingeldey and the right wing of the <span style="color: #C0A054;">**DVP**</span> are outraged by Brüning's emergency decree, criticizing the new tax levies and cuts to civil servant salaries. Dingeldey has strongly urged Brüning to restore bourgeois confidence in his government by severing all ties with the <span style="color: #c00000;">**SPD**</span>. This push has gained significant support from the <span style="color: #C0A054;">**DVP**</span>’s right wing, which has long advocated for a cabinet reshuffle. In response, Brüning—along with Reichsbank President and <span style="color: #C0A054;">**DVP**</span> member Hans Luther—has pleaded for patience, promising a shift to the right in a cabinet reorganization and a relaxation of labor laws. With these assurances, Dingeldey is no longer working to bring down the government. ?]{!</p>!}
+
+{!<p class="other">!}[? if flavour_24_trigger and flavour_24_trigger_time == time: The Banking Crisis[? if emergency_decree_seen:&nbsp;and the fallout from Brüning's second emergency decree?] has significantly intensified anti-Brüning sentiment among the bourgeois parties, especially the <span style="color: #C0A054;">**DVP**</span>[? if emergency_decree_seen:, which only narrowly secured a majority within its own ranks to support Brüning?]. The right wing of the <span style="color: #C0A054;">**DVP**</span> is increasingly frustrated by Brüning’s failure to follow through on his promise to shift the cabinet further to the right. However, Dingeldey remains hesitant to bring down the government, fearing it would further destabilize Germany’s financial situation. Additionally, the <span style="color: #7A3C00;">national</span> <span style="color: #3E88B3;">opposition</span> has shown no interest in joining Brüning’s cabinet. Under these circumstances, the <span style="color: #C0A054;">**DVP**</span> has little choice but to continue supporting Brüning. ?]{!</p>!}
+
+{!<p class="other">!}[? if flavour_36_trigger and flavour_36_trigger_time == time: The Banking Crisis[? if emergency_decree_seen:&nbsp;and the fallout from Brüning's second emergency decree?][? if emergency_act_seen:&nbsp;and the fallout from Brüning's emergency act?] has intensified anti-Brüning sentiment among the bourgeois parties, especially the <span style="color: #C0A054;">**DVP**</span>[? if emergency_decree_seen:, which already been frustrated with his actions?][? if emergency_act_seen:, which already been frustrated by the lack of consultation with his supporting parties?]. However, Dingeldey remains hesitant to bring down the government, fearing it would further destabilize Germany’s financial situation. Additionally, the <span style="color: #7A3C00;">national</span> <span style="color: #003755;">opposition</span> still shows no interest in joining Brüning’s cabinet. Under these circumstances, the <span style="color: #C0A054;">**DVP**</span> has little choice but to continue supporting Brüning. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month >= 7 and landtag_ref_signatures_passed and not landtag_ref_dvp and not lvp_formed: The <span style="color: #C0A054;">**DVP**</span> has unexpectedly taken a stand against the Prussian Landtag referendum, campaigning in favor of stability and democracy. This move has disrupted the <span style="color: #3E88B3;">**Stahlhelm**</span>'s plan for a united right-wing front in support of the referendum, significantly reducing its chances of success. ?]{!</p>!}
+
 {!<p class="dnvp">!}[? if flavour_21_trigger and flavour_21_trigger_time == time: The controversy surrounding <span style="color: #b8996f;">**WP**</span> leader Hermann Drewitz’s scandals has finally forced him to relinquish the party chairmanship to prevent an even more damaging secession than the one that occurred months earlier. [? if not lvp_formed: Many of their Reichstag members, including Otto Colosser, have defected to the <span style="color: #D3C24D;">**[+ ddp_name +]**</span>, which is seeking to capitalize on their internal discord. ?]With ongoing internal strife and resignations of its most effective leaders, the <span style="color: #b8996f;">**WP**</span> is barely able to function as a political force anymore. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_31_trigger and flavour_31_trigger_time == time: The controversy surrounding <span style="color: #b8996f;">**WP**</span> leader Hermann Drewitz and his scandals has finally settled, as he steps down from the chairmanship in favor of the highly respected Johann Bredt. This move has drawn Otto Colosser and the rebellious district organizations back into the fold. Despite enduring internal strife and multiple splits, the <span style="color: #b8996f;">**WP**</span> has managed to survive as a national force, continuing to represent the conservative middle class that might have otherwise turned to the <span style="color: #7A3C00;">**NSDAP**</span>. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month == 8 and landtag_ref_votes and landtag_ref_dvp and not lvp_formed: The remaining influential members of the <span style="color: #C0A054;">**DVP**</span>'s left wing, has denounced the party’s strong endorsement of the Prussian Landtag referendum. Some even call refusing to support the referendum a "patriotic duty", with Curtius giving a speech over the radio announcing that he won't be following his party's position on the plebiscite. Unfortunately, the pro-democratic forces within the party are powerless and impotent, but every little bit helps. ?]{!</p>!}
+
+{!<p class="dnvp">!}[? if flavour_37_trigger and flavour_37_trigger_time == time: The <span style="color: #3E88B3;">**DNVP**</span> has come under heavy fire from the <span style="color: #7A3C00;">national</span> <span style="color: #003755;">opposition</span> for their continued support of the Brüning cabinet following the Banking Crisis, with the <span style="color: #003755;">**DNF**</span> seeking to win over disillusioned <span style="color: #3E88B3;">nationalists</span>. This has caused great concern within the party, as they're[? if dnvp_votes >= nsdap_votes:&nbsp;threatening to be?] eclipsed by the more radical <span style="color: #7A3C00;">**NSDAP**</span>, whose rise has led the <span style="color: #3E88B3;">**DNVP**</span>’s industrial backers to pressure the party into cooperating with them by forcing Brüning to allow the <span style="color: #7A3C00;">far</span>-<span style="color: #003755;">right</span> into government. ?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month == 9 and banking_crisis_seen: The Austro-German customs union is officially dead, with international courts striking down the project. [? if foreign_minister_party == "DVP": Julius Curtius of the <span style="color: #C0A054;">**DVP**</span>, the architect of this project, has suffered a severe blow to his reputation, with growing calls from within his own party for his resignation. [? if bruning_toleration_time and dvp_ideology == "Right": If he steps down, the <span style="color: #C0A054;">**DVP**</span> will no longer have any representation in the cabinet, freeing them to support votes of no confidence against Brüning.?]?]?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1931 and month = 9: The Japanese have invaded Manchuria following the Mukden incident. ?]{!</p>!}
 
-{!<p class="both">!}[? if year = 1931 and month = 10: The recent United Kingdom general elections have resulted in the greatest landslide in the country's history, with <span style="color: #f0456a;">Labour</span> receiving only a meager 52 seats, losing 235 of them from the previous election. Despite this, the incumbent <span style="color: #008000;">National Labour</span> Prime Minister Ramsay MacDonald has remained in office, ruling with the <span style="color: #0087DC;">Tories</span>. ?]{!</p>!}
+{!<p class="other">!}[? if year == 1931 and month == 10 and not bourgeois_list and not bourgeois_parliament and (dnvp_split_2 or kvp_formed) and dvp_leader == "Dingeldey" and not lvp_formed and not lvp_timer_2_trigger: The <span style="color: #D3C24D;">**[+ ddp_name +]**</span> has reached out to moderate right-wing parties instead of the <span style="color: #C0A054;">**DVP**</span>, whose leader, Dingeldey, doesn't plan to take meaningful action on the issue. This effort stems from a shared fear of being politically destroyed by the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span>[? if bruning_toleration_time:, and to influence Brüning's legislative agenda?]. Hans Schlange-Schöningen, one of [? if not bruning_toleration_time: the strongest supporters for bourgeois unity?][? if bruning_toleration_time: Brüning's strongest supporters?] in the [? if not kvp_formed: <span style="color: #7FCEB1;">**CNBLP**</span>?][? if kvp_formed: <span style="color: #0087DC;">**KVP**</span>?][? if cnblp_defect:, which has since split from Brüning,?], has pleaded with Westarp[? if csvd_formed:, the <span style="color: #8ED8E4;">**CSVD**</span>,?] and some representatives from the <span style="color: #C0A054;">**DVP**</span> to put aside their differences. [? if bruning_toleration_time: With Brüning's strong encouragement, they agreed to issue a joint statement in the Reichstag affirming their support for his government. However, leaks about the plan surfaced, forcing them to abandon it after multiple parties withdrew from negotiations.?]?]{!</p>!}
+
+{!<p class="other">!}[? if year = 1931 and month = 10: The recent United Kingdom general elections have resulted in the greatest landslide in the country's history, with <span style="color: #f0456a;">Labour</span> receiving only a meager 52 seats, losing 235 of them from the previous election. Despite this, the incumbent <span style="color: #008000;">National Labour</span> Prime Minister Ramsay MacDonald has remained in office, ruling with the <span style="color: #0087DC;">Tories</span>. ?]{!</p>!}
 
 {!<p class="other">!}[? if year = 1931 and month = 12 : The new Second Spanish Republic has adopted its new democratic constitution, establishing a secular, progressive, and republican government. Times are looking bright for Spain. ?]{!</p>!}
 

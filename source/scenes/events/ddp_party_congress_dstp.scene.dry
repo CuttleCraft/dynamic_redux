@@ -74,7 +74,7 @@ Overall, this entire debacle has essentially resulted in the <span style="color:
 
 @recalculate
 on-arrival: {!
-if (Q.ddp_r < 3.6) {
+if (Q.ddp_r < 3.6 && !Q.liberal_parliament && !Q.bourgeois_parliament_ddp) {
     Q.ddp_factionless = 1
 }
 if (Q.ddp_factionless && !Q.bourgeois_parliament_ddp && !Q.liberal_parliament && Q.ddp_r >= 3 && !Q.lvp_formed && Q.time !== Q.last_time_updated) {

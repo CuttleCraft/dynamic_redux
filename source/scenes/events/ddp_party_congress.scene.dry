@@ -38,7 +38,7 @@ if (Q.major_curriculum == "humanist") {
     Q.heuss_points += 1;
 }
 if (Q.pro_republic >= 75) {
-    Q.heuss_points += 3;
+    Q.heuss_points += 2;
     Q.lemmer_points += 1;
     Q.ddp_left += 3;
 } else if (Q.pro_republic >= 60) {
@@ -82,11 +82,11 @@ if (Q.ddp_right > (Q.ddp_left + 4)) {
 }
 
 if (Q.ddp_ideology == "Right") {
-    Q.dietrich_points += 2;
+    Q.dietrich_points += 3;
 } else if (Q.ddp_ideology == "Moderate") {
     Q.heuss_points += 1;
 } else if (Q.ddp_ideology == "Left") {
-    Q.lemmer_points += 2;
+    Q.lemmer_points += 5;
 }
 
 if (Q.heuss_points > Q.dietrich_points && Q.heuss_points > Q.lemmer_points) {
@@ -107,7 +107,7 @@ if (Q.lemmer_points > Q.heuss_points && Q.lemmer_points > Q.dietrich_points) {
     Q.lemmer_lead = 0;
 }
 
-if (!Q.dietrich_lead && !Q.heuss_lead_ddp && !Q.lemmer_points) {
+if (!Q.dietrich_lead && !Q.heuss_lead_ddp && !Q.lemmer_lead) {
     Q.ddp_deadlock = 1;
 } else {
     Q.ddp_deadlock = 0;
@@ -132,7 +132,7 @@ This year’s <span style="color: #D3C24D;">**[+ ddp_name +]**</span> party cong
 
 @lemmer
 view-if: lemmer_lead
-on-arrival: ddp_leader = "Lemmer"; liberal_cooperation -= 3; ddp_relation += 10; workers_ddp += 4; catholics_ddp += 1; workers_spd -= 4; pro_republic += ddp_votes; ddp_left += 5; ddp_cohesion -= 3; new_middle_ddp -= 4 if stolper_program_adopted; old_middle_ddp -= 4 if stolper_program_adopted; new_middle_ddp -= 2; old_middle_ddp -= 2; rural_ddp -= 1;
+on-arrival: ddp_leader = "Lemmer"; liberal_cooperation -= 3; ddp_relation += 10; workers_ddp += 6; catholics_ddp += 2; workers_spd -= 4; workers_z -= 2; pro_republic += ddp_votes; ddp_left += 5; ddp_cohesion -= 3; new_middle_ddp -= 4 if stolper_program_adopted; old_middle_ddp -= 4 if stolper_program_adopted; new_middle_ddp -= 2; old_middle_ddp -= 2; rural_ddp -= 1;
 face-image: img/portraits/lemmer.jpg
 go-to: achievement_calculation
 

@@ -239,7 +239,7 @@ The <span style="color: #700000;">**KPD**</span> presents us with a list of dema
 They say that they expect to see these goals fulfilled in [+ kpd_ultimatum_prussia_timer +] months. Otherwise, they will vote to dissolve the coalition.
 
 @right_coalition_prussia
-title: Refuse to form a government, so that a right-wing coalition may be formed.
+title: A Bürgerblock is formed.
 subtitle: <span style="color: #000000;">**Z**</span> + [? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span>?][? if lvp_formed:<span style="color: #FFCC00;">**LVP**</span>?] + <span style="color: #3E88B3;">**DNVP**</span> + **Others** ([+ right_coalition_prussia +]%)
 unavailable-subtitle: <span style="color: #000000;">Z</span> + [? if not lvp_formed: <span style="color: #C0A054;">DVP</span>?][? if lvp_formed:<span style="color: #FFCC00;">LVP</span>?] + <span style="color: #3E88B3;">DNVP</span> + Others ([+ right_coalition_prussia +]%) [? if (dnvp_ideology == "Radical" and not dnvp_westarp) or (year = 1929 and month >= 7):- The <span style="color: #3E88B3;">DNVP</span> is not interested in a coalition with the <span style="color: #000000;">Center</span>.?]
 view-if: right_coalition_prussia >= 50
@@ -251,7 +251,7 @@ Letting go the democratic bulwark to the right-wing parties is deeply unpopular 
 [? if z_leader != "Stegerwald": Adam Stegerwald?][? if z_leader == "Stegerwald": Heinrich Brüning?] of the <span style="color: #000000;">Center Party</span> is selected to be the Minister-President of Prussia.
 
 @center_right_coalition_prussia
-title: Refuse to form a government, so that a center-right coalition may be formed.
+title: A Bürgerblock is formed.
 unavailable-subtitle: <span style="color: #000000;">Z</span> + [? if not lvp_formed: <span style="color: #D3C24D;">[+ ddp_name +]</span> + <span style="color: #C0A054;">DVP</span>?][? if lvp_formed:<span style="color: #FFCC00;">LVP</span>?] + Others + <span style="color: #3E88B3;">DNVP</span> ([+ center_right_coalition_prussia +]%) [? if (year = 1929 and month >= 7): The <span style="color: #3E88B3;">DNVP</span> is not interested in a coalition with the <span style="color: #000000;">Center</span>.?]
 subtitle: <span style="color: #000000;">**Z**</span> + <span style="color: #D3C24D;">**[+ ddp_name +]**</span> + <span style="color: #C0A054;">**DVP**</span> + **Others** + <span style="color: #3E88B3;">**DNVP**</span> ([+ center_right_coalition_prussia +]%)
 view-if: dnvp_ideology == "Moderate" and center_right_coalition_prussia >= 50 and dnf_formed and right_coalition_prussia < 50 and not lvp_formed

@@ -2,7 +2,7 @@ title: Brüning's government lives on?
 subtitle: Chancellor [+ chancellor +] has assembled a majority government.
 new-page: true
 view-if: spd_in_government == 0 and spd_toleration == 0 and chancellor = "Brüning" and bourgeois_coalition >= 50 and not in_bourgeois_coalition
-on-arrival: bruning_event_seen = 1; spd_in_government = 0; spd_toleration = 0; in_bourgeois_coalition = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = ddp_name; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; bruning_event_timer = 0; bourgeois_cooperation += 10
+on-arrival: bruning_event_seen = 1; spd_in_government = 0; spd_toleration = 0; spd_toleration_right = 0; in_bourgeois_coalition = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = ddp_name; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; bruning_event_timer = 0; bourgeois_cooperation += 10
 tags: event
 priority: -1
 max-visits: 1

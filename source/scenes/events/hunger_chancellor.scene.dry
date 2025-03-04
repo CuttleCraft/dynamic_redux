@@ -2,7 +2,7 @@ title: The Hunger Chancellor
 subtitle: Popular discontent with Chancellor [+ chancellor +] rises.
 new-page: true
 view-if: year >= 1931 and month >= 2 and unemployed >= 18 and welfare < 0 and works_program == 0
-on-arrival: workers_spd *= 0.9 if chancellor_party == "SPD"; workers_spd *= 0.9 if spd_in_government == 1; workers_nsdap += 5 if spd_in_government; workers_kpd += 4 if spd_in_government; unemployed_nsdap += 5 if spd_in_government; hindenburg_angry += 10; hindenburg_angry_bruning += 20
+on-arrival: workers_spd *= 0.9 if chancellor_party == "SPD"; workers_spd *= 0.9 if spd_in_government == 1; workers_nsdap += 5 if spd_in_government; workers_kpd += 4 if spd_in_government; unemployed_nsdap += 5 if spd_in_government; hindenburg_angry += 10; hindenburg_angry_bruning += 10
 tags: event
 max-visits: 1
 face-image: img/Kollwitz_Hospital.jpg
@@ -19,7 +19,7 @@ People are calling Chancellor [+ chancellor +] the Hunger Chancellor because of 
 @maintain_toleration
 subtitle: It is necessary to preserve democracy.
 view-if: spd_toleration == 1
-on-arrival: workers_nsdap += 5; workers_kpd += 4; unemployed_nsdap += 5; workers_spd -= 5; pro_republic -= 5; kpd_relation -= 5; ddp_left += 0.5
+on-arrival: workers_nsdap += 2; workers_kpd += 2; unemployed_nsdap += 2; workers_spd -= 2; pro_republic -= 2; kpd_relation -= 2; ddp_left += 0.5
 
 Our policy of toleration continues.
 
@@ -27,7 +27,7 @@ Our policy of toleration continues.
 @break_toleration
 subtitle: This is likely to result in new elections.
 view-if: spd_toleration == 1
-on-arrival: next_election_time = time+3 if next_election_time >= time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; dvp_right += 1; ddp_right += 1; lvp_right += 1
+on-arrival: next_election_time = time+3 if next_election_time >= time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; spd_toleration_right = 0; dvp_right += 1; ddp_right += 1; lvp_right += 1
 
 We have definitively broken with the [+ chancellor +] government, and have voted against them in a vote of no confidence.
 
