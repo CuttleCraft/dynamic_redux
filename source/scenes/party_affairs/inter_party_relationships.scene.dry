@@ -69,7 +69,7 @@ subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1; z_relation += 2 if z_ideology == "Left"
-go-to: center_op if z_in_government = 1 and spd_in_government = 0 and chancellor != "Brüning"; center_coalition if spd_in_government = 1 and z_in_government = 1; center_bruning if chancellor = "Brüning"
+go-to: center_op if not spd_in_government and chancellor != "Brüning"; center_coalition if spd_in_government; center_bruning if chancellor = "Brüning" and not spd_in_government
 
 @center_op
 on-arrival: z_relation += 5*(1 - dissent)

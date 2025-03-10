@@ -90,7 +90,7 @@ on-arrival: workers_spd += 3*(1-dissent); workers_spd += 3*(1-dissent) if welfar
 The reformist message appeals to the organized workers, whose benefits are the accomplishments of <span style="color: #c00000;">social democracy</span>. [? if welfare > 1 : Our achievements in expanding welfare have made this message more effective. ?]
 
 @democracy
-on-arrival: democratization += 1; pro_republic += 2*(1 - dissent); workers_spd += 4*(1-dissent) if democratization >= 3; unemployed_spd += 3*(1-dissent) if democratization >= 3; pro_republic += 4*(1 - dissent) if democratization >= 3; new_middle_spd += 4*(1-dissent) if democratization >= 3; ddp_left += 0.5 if pro_republic >= 70; lvp_left += 0.5 if pro_republic >= 70
+on-arrival: democratization += 1; pro_republic += 2*(1 - dissent); workers_spd += 4*(1-dissent) if democratization >= 3; unemployed_spd += 3*(1-dissent) if democratization >= 3; pro_republic += 2*(1 - dissent) if democratization >= 3; new_middle_spd += 4*(1-dissent) if democratization >= 3; ddp_left += 0.5 if pro_republic >= 70; lvp_left += 0.5 if pro_republic >= 70
 
 Our speakers defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #7A3C00;">authoritarians</span> who threaten it.
 

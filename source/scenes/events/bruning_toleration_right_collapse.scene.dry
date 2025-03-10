@@ -2,9 +2,10 @@ title: The <span style="color: #3E88B3;">**DNVP**</span> breaks with Brüning
 new-page: true
 subtitle: The rise of the <span style="color: #7A3C00;">national</span> <span style="color: #003755;">opposition</span> has forced them to act.
 tags: event
-view-if: total_bruning_time >= 6 and spd_toleration_right and dnf_votes + nsdap_votes >= (dnvp_votes * 3)
-on-arrival: pro_republic -= dnvp_votes / 2; hindenburg_angry_bruning += 25; moderate_dnvp_hitler = 1; dvp_right += 3; lvp_right += 3; ddp_right += 1
+view-if: total_bruning_time >= 6 and spd_toleration_right and dnf_votes + nsdap_votes + dnvp_angry >= (dnvp_votes * 3)
+on-arrival: pro_republic -= dnvp_votes / 2; hindenburg_angry_bruning += 25; moderate_dnvp_hitler = 1; dvp_right += 3; lvp_right += 3; ddp_right += 1; dnvp_angry += 3
 max-visits: 1
+face-image: img/dnvp4.jpg
 
 = The <span style="color: #3E88B3;">**DNVP**</span> breaks with Brüning
 

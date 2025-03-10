@@ -1,7 +1,7 @@
 title: The Right calls a vote of no confidence against the current government!
 subtitle: We have angered our coalition partners too much...
 new-page: true
-on-arrival: tried_supporting_kpd = 0; z_relation -= 5; dvp_relation -= 5 if in_grand_coalition; ddp_relation -= 5; lvp_relation -= 5 if in_weimar_coalition or in_grand_coalition; lvp_right += 2 if in_weimar_coalition or in_grand_coalition; dvp_right += 2 if in_grand_coalition; ddp_right += 1; hindenburg_angry += 20
+on-arrival: tried_supporting_kpd = 0; z_relation -= 5 if not in_so; dvp_relation -= 5 if in_grand_coalition; ddp_relation -= 5 if not in_social_catholic_coalition; lvp_relation -= 5 if in_weimar_coalition and not in_social_catholic_coalition or in_grand_coalition; lvp_right += 2 if in_weimar_coalition or in_grand_coalition; dvp_right += 2 if in_grand_coalition; ddp_right += 1; hindenburg_angry += 20
 view-if: chancellor_party == "SPD" and spd_in_government = 1 and ((in_grand_coalition = 1 or in_popular_front = 1 or in_minority_government = 1) and coalition_dissent >= 3) or (in_weimar_coalition = 1 and coalition_dissent >= 4) and spd_r < 50 and not constructive_vonc
 tags: event
 go-to: vonc_menu
@@ -11,7 +11,7 @@ go-to: vonc_menu
 
 = Vote of No Confidence
 
-[? if in_grand_coalition and not lvp_formed: The <span style="color: #C0A054;">**DVP**</span> ?][? if in_grand_coalition and lvp_formed: The <span style="color: #FFCC00;">**LVP**</span> ?][? if in_weimar_coalition or in_popular_front or in_minority_government: The <span style="color: #000000;">Center Party</span>[? if lvp_formed:&nbsp;and <span style="color: #FFCC00;">**LVP**</span>?]?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will likely be an election in a few months.
+[? if in_grand_coalition and not lvp_formed: The <span style="color: #C0A054;">**DVP**</span> ?][? if (in_grand_coalition or in_social_liberal_coalition) and lvp_formed: The <span style="color: #FFCC00;">**LVP**</span> ?][? if in_weimar_coalition or in_popular_front or in_minority_government and not in_social_liberal_coalition: The <span style="color: #000000;">Center Party</span>[? if lvp_formed and not in_social_catholic_coalition:&nbsp;and <span style="color: #FFCC00;">**LVP**</span>?]?][? if in_social_liberal_coalition and not lvp_formed: The <span style="color: #D3C24D;">**[+ ddp_name +]**</span> ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will likely be an election in a few months.
 
 @vonc_menu
 

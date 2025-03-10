@@ -1,25 +1,19 @@
 title: Presidential Election
 subtitle: Hindenburg runs for re-election...
-view-if: year = 1932 and month == 4 and presidential_election_seen = 0 and not hindenburg_term_extended
+view-if: year = 1932 and month == 4 and presidential_election_seen = 0
 frequency: 1000
 max-visits: 1
 new-page: true
-on-arrival: braun_campaign = 0; duesterburg_campaign = 1; seldte_campaign = 0; burgerblock_campaign = 0; hitler_support_hindenburg = 0; presidential_election_seen = 1; nsdap_candidate = "Hitler" if hitler_deported == 0 else nsdap_candidate = "Göring";
-tags: event
+on-arrival: braun_campaign = 0; hitler_support_hindenburg = 0; presidential_election_seen = 1; nsdap_candidate = "Hitler" if hitler_deported == 0 else nsdap_candidate = "Göring";
+#tags: event
 go-to: election_algorithm
 set-jump: pres_election
 face-image: img/hindenburg_election.jpg
 
 @pres_election
-on-arrival: hindenburg_running = 0; hindenburg_running = 1 if nsdap_votes > dnvp_votes + other_votes + dvp_votes + z_votes and dvp_relation < 50; 
-go-to: hindenburg_runs if hindenburg_running; hindenburg_reluctant if not hindenburg_running
 
 The presidential election is coming up soon. [? if spd_in_government = 0 : While the position of Chancellor is typically more important, recent governments have depended on the president's emergency decree powers, making the office vital. ?] [? if hitler_deported==0 : The <span style="color: #7A3C00;">Nazis</span> will run Hitler, while the <span style="color: #700000;">**KPD**</span> will run Thälmann. A victory for Hitler would mean the end of parliamentary democracy, and the beginning of an era of <span style="color: #440a0a;">unspeakable</span> <span style="color: #220303;">**horrors**</span>. ?][? if hitler_deported==1 : Since Hitler has been deported, the <span style="color: #7A3C00;">Nazis</span> will run Hermann Göring in his stead. He is widely seen as a proxy for Hitler, who, despite his legal persecution, retains a popular base who wishes to see him returned to Germany. Meanwhile, the <span style="color: #700000;">**KPD**</span> will run Ernst Thälmann. A victory for the <span style="color: #7A3C00;">Nazis</span> would mean the end of parliamentary democracy, and the beginning of an era of <span style="color: #7e0000;">**unspeakable**</span> <span style="color: #3f0000;">**horrors**</span>.?]
 [? if sapd_formed: The <span style="color: #9B0000;">**SAPD**</span>, our former leftists, are supporting Thälmann of the <span style="color: #700000;">**KPD**</span>, and will likely share an endorsement with the <span style="color: #700000;">Communists</span>. ?]
-
-@hindenburg_runs
-
-Although there was previous speculation on whether or not Hindenburg would run for re-election, he has decided to, motivated by fears of a Nazi victory.
 
 # if hitler is deported, who would nsdap run? Duesterberg? or Goering?
 # Goering runs, essentially as a proxy for Hitler, who is now stateless.
@@ -45,12 +39,10 @@ Despite his known <span style="color: #808080;">reactionary</span> nature, Hinde
 subtitle: This will cost us 2 resources.
 choose-if: resources >= 2
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 2; braun_campaign = 1; hindenburg_motivated = 1 if hindenburg_running != 1 and dvp_relation < 50; hindenburg_running = 1 if hindenburg_running != 1 and dvp_relation < 50; hitler_support_hindenburg = 1 if hindenburg_running and largest_party != "NSDAP" and nsdap_votes < dnvp_votes + other_votes + dvp_votes + z_votes; hitler_dropped = 1 if hitler_support_hindenburg
+on-arrival: resources -= 2; braun_campaign = 1
 go-to: braun_campaign
 
 It takes effort to run a somewhat unexpected campaign. First, Braun has to be convinced to run. He himself had supported voting for Hindenburg, and it takes a good deal of prodding to convince him of his destiny.
-
-[? if hindenburg_motivated : Our decision to run Otto Braun has motivated Hindenburg to stay in the race and run for re-election with the backing of the remaining Bürgerblock, unwilling to allow a <span style="color: #c00000;">socialist</span> into power. [? if hitler_support_hindenburg : He has even won the backing of the Nazis, who have chosen not to run after all and instead rally the reactionaries around Hindenburg. ?] ?]
 
 The miniscule remnants of the [? if ddp_name == "DDP": <span style="color: #D3C24D;">**Democratic Party**</span>?][? if ddp_name == "DStP": <span style="color: #D3C24D;">**State Party**</span>?] will likely support us. Who else will? Can we convince the <span style="color: #000000;">Center</span> to support Braun? What about the <span style="color: #700000;">**Communists**</span>?
 
@@ -66,46 +58,9 @@ Supporting Thälmann is rather unpopular in our party, even if the <span style="
 - @support_hindenburg: Support <span style="color: #808080;">**Hindenburg**</span> instead.
 
 @support_thalmann_2
-on-arrival: spd_support_thalmann = 1; reformist_dissent += 15; center_dissent += 10; labor_dissent += 5; neorevisionist_dissent += 10; catholics_spd -= 5; workers_spd -= 3; kpd_relation += 10; communist_coalition += 2; z_relation -= 15; dvp_relation -= 15; ddp_relation -= 10; hindenburg_motivated = 1 if not hindenburg_running; hindenburg_running = 1 if not hindenburg_running; hitler_support_hindenburg = 1 if hindenburg_running and largest_party != "NSDAP" and nsdap_votes < dnvp_votes + other_votes + dvp_votes + z_votes 
+on-arrival: spd_support_thalmann = 1; reformist_dissent += 15; center_dissent += 10; labor_dissent += 5; neorevisionist_dissent += 10; catholics_spd -= 5; workers_spd -= 3; kpd_relation += 10; communist_coalition += 2; z_relation -= 15; dvp_relation -= 15; ddp_relation -= 10
 
-Fine. We have thrown our support to Chairman Thälmann of the <span style="color: #700000;">**KPD**</span> to the dismay of our bourgeois allies. [? if hindenburg_motivated : Our decision to rally behind Thälmann has motivated Hindenburg to stay in the race and run for re-election with the backing of the remaining Bürgerblock, horrified at the prospect of a communist in power. [? if hitler_support_hindenburg : He has even won the backing of the Nazis, who have chosen not to run after all and instead rally the reactionaries around Hindenburg. ?] ?]
-
-- @final_election: The final vote...
-
-@hindenburg_reluctant
-
-Importantly, it seems highly likely that President Hindenburg will not be running for re-election. He is yet to announce his candidacy, and unless we were to run a socialist and progressive candidate for the office ourselves, or back Thälmann, it seems that he is done with the idea.
-
-- @support_eckener: Support Hugo Eckener as a joint <span style="color: #000000;">We</span><span style="color: #DD0000;">im</span><span style="color: #FFCC00;">ar</span> Coalition candidate.
-- @support_gessler: Support the presumptive Bürgerblock candidate, Otto Gessler.
-- @support_braun: Run Otto Braun of the <span style="color: #c00000;">**SPD**</span>..
-- @support_thalmann: Support Ernst Thälmann of the <span style="color: #700000;">**KPD**</span>.
-
-# what's the burgerblock color?
-
-@support_eckener
-subtitle: -1 resource
-unavailable-subtitle: -1 resource - [? if resources < 1 : Not enough resources. ?][? if z_relation < 35 : The Center Party is unwilling to run a joint candidate. ?]
-choose-if: resources >= 1 and z_relation >= 35
-on-arrival: eckener_campaign = 1; resources -= 1
-go-to: eckener_campaign
-
-## note: and nsdap_votes + dnvp_votes + kpd_votes + unemployed >= 50, [? if nsdap_votes + kpd_votes + unemployed < 50 : Hugo Eckener isn't willing to unnecessarily run, nor is our party willing to back him. ?]
-
-Hugo Eckener is originally reluctant to run, but when he hears that Hindenburg will not be running, he decides to enter as a bulwark against anti-democratic candidates. 
-
-@eckener_campaign
-on-arrival: dvp_support_eckener = 1 if dvp_relation > 40; burgerblock_campaign = 1 if dvp_relation <= 40;
-
-[? if dvp_support_eckener : The DVP has, thanks to our relatively good relations, dropped the idea of a Bürgerblock candidacy and endorsed Eckener. ?]
-
-- @final_election: The final vote...
-
-@support_gessler
-subtitle: Barring Eckener, the Bürgerblock may run Gessler.
-on-arrival: spd_support_gessler = 1; burgerblock_campaign = 1
-
-We have chosen to back the rest of the Bürgerblock in campaigning for Otto Gessler. Despite his militarism, he will hopefully keep democracy safe.
+Fine. We have thrown our support to Chairman Thälmann of the <span style="color: #700000;">**KPD**</span> to the dismay of our bourgeois allies.
 
 - @final_election: The final vote...
 
@@ -219,93 +174,19 @@ set-jump: post_election
 
 @post_election
 on-arrival: {!
+Q.braun_votes = 0;
 Q.hindenburg_votes = 0;
 Q.hitler_votes = 0;
-Q.braun_votes = 0;
 Q.thalmann_votes = 0;
-Q.eckener_votes = 0;
-Q.gessler_votes = 0;
-Q.duesterburg_votes = 0;
-Q.seldte_votes = 0;
 
 // initial phase:
 Q.hitler_votes += Q.nsdap_normalized;
-if (Q.hindenburg_running) {
-    Q.hindenburg_votes += Q.other_normalized;
-    if (Q.duesterburg_campaign) {
-        Q.hindenburg_votes += (Q.dnvp_normalized*0.8);
-        Q.duesterburg_votes += (Q.dnvp_normalized*0.2);
-    } else {
-        Q.hindenburg_votes += Q.dnvp_normalized;
-    }
-} else if (Q.duesterburg_campaign) {
-    Q.duesterburg_votes += (Q.dnvp_normalized*0.3);
-    Q.duesterburg_votes += ((Q.other_normalized*((100-Q.pro_republic)/100))*0.1);
-    Q.duesterburg_votes += ((Math.floor(Math.random() * 11))/350);
-} else if (Q.seldte_campaign) {
-    Q.seldte_votes += Q.dnvp_normalized;
-    Q.seldte_votes += Q.other_normalized*((100-Q.pro_republic)/100);
-    Q.seldte_votes += ((10-Q.democratization)/150);
-    Q.seldte_votes += ((Math.floor(Math.random() * 11))/350);
-    if (Q.hitler_support_seldte) {
-        Q.seldte_votes += (Q.nationalism/2000);
-    } else {
-        Q.seldte_votes += (Q.nationalism/2500);
-    }
-    if (Q.eckener_campaign && Q.dvp_support_eckener) {
-        Q.eckener_votes += Q.other_normalized*(Q.pro_republic/100);
-    } else if (Q.burgerblock_campaign) {
-        Q.gessler_votes += Q.other_normalized*(Q.pro_republic/100);
-        if (!Q.eckener_campaign) {
-            Q.seldte_votes += (Q.nationalism/2000)
-        }
-    }
-}
-if (Q.eckener_campaign) {
-    Q.eckener_votes += Q.spd_normalized;
-    Q.eckener_votes += Q.ddp_normalized;
-    Q.eckener_votes += Q.z_normalized;
-    Q.eckener_votes += (Q.pro_republic/1000);
-    Q.eckener_votes += (Q.nationalism/1000);
-    Q.eckener_votes += ((Math.floor(Math.random() * 11))/350);
-    Q.thalmann_votes += Q.kpd_normalized;
-    if (Q.sapd_formed && Q.sapd_votes) {
-        Q.thalmann_votes += Q.sapd_normalized;
-    }
-    if (Q.dvp_support_eckener) {
-        Q.eckener_votes += Q.dvp_normalized;
-    }
-}
-if (Q.burgerblock_campaign) {
-    Q.gessler_votes += Q.dvp_normalized;
-    Q.gessler_votes += ((10-Q.pacifism)/400);
-    Q.gessler_votes += (Q.nationalism/2250);
-    Q.gessler_votes += (Q.pro_republic/1000);
-    Q.gessler_votes += ((Math.floor(Math.random() * 11))/350);
-    if (Q.spd_support_gessler) {
-        Q.gessler_votes += Q.spd_normalized;
-        Q.gessler_votes += Q.z_normalized;
-        Q.gessler_votes += Q.ddp_normalized;
-        Q.thalmann_votes += Q.kpd_normalized;
-        if (Q.sapd_formed && Q.sapd_votes) {
-            Q.thalmann_votes += Q.sapd_normalized;
-        }
-    }
-}
+Q.hindenburg_votes += Q.other_normalized;
+Q.hindenburg_votes += Q.dnvp_normalized;
+
 if (Q.braun_campaign) {
     Q.braun_votes += Q.spd_normalized;
     Q.braun_votes += Q.ddp_normalized;
-    if (Q.sapd_formed && Q.sapd_votes) {
-        Q.braun_votes += Q.sapd_normalized;
-    }
-    Q.braun_votes += (Q.pro_republic/1000);
-    Q.braun_votes += ((100-Q.nationalism)/2500);
-    Q.braun_votes += (Q.democratization/100);
-    Q.braun_votes += ((Math.floor(Math.random() * 11))/350);
-    if (Q.works_program) {
-        Q.braun_votes += (Q.works_program/100);
-    }
-    Q.hindenburg_votes += ((100-Q.pro_republic)/1000);
     if (Q.z_support_braun && Q.z_support_braun == 1) {
         Q.braun_votes += Q.z_normalized;
     } else {
@@ -313,8 +194,14 @@ if (Q.braun_campaign) {
     }
     if (Q.kpd_support_braun) {
         Q.braun_votes += Q.kpd_normalized;
+        if (Q.sapd_formed && Q.sapd_votes) {
+            Q.braun_votes += Q.sapd_normalized;
+        }
     } else {
         Q.thalmann_votes += Q.kpd_normalized;
+        if (Q.sapd_formed && Q.sapd_votes) {
+            Q.thalmann_votes += Q.sapd_normalized;
+        }
     }
     if (Q.dvp_support_braun) {
         Q.braun_votes += Q.dvp_normalized;
@@ -324,52 +211,22 @@ if (Q.braun_campaign) {
 } else if (Q.spd_support_thalmann) {
     Q.thalmann_votes += Q.kpd_normalized;
     Q.thalmann_votes += Q.spd_normalized;
-    if (Q.sapd_formed && Q.sapd_votes) {
-        Q.thalmann_votes += Q.sapd_normalized;
-    }
     Q.hindenburg_votes += Q.z_normalized;
     Q.hindenburg_votes += Q.ddp_normalized;
     Q.hindenburg_votes += Q.dvp_normalized;
-    Q.hindenburg_votes += ((100-Q.pro_republic)/1000);
-} else if (Q.spd_support_hindenburg) {
+} else {
     Q.hindenburg_votes += Q.spd_normalized;
     Q.hindenburg_votes += Q.z_normalized;
     Q.hindenburg_votes += Q.ddp_normalized;
     Q.hindenburg_votes += Q.dvp_normalized;
-    Q.hindenburg_votes += (Q.pro_republic/1000);
-    Q.hindenburg_votes += (Q.nationalism/2250);
     Q.thalmann_votes += Q.kpd_normalized;
-    if (Q.sapd_formed && Q.sapd_votes) {
-        Q.thalmann_votes += Q.sapd_normalized;
-    }
 }
 if (Q.hitler_support_hindenburg) {
     Q.hitler_votes -= Q.nsdap_normalized;
     Q.hindenburg_votes += Q.nsdap_normalized;
-    Q.hindenburg_votes += (Q.nationalism/1500);
 }
-if (Q.hitler_support_seldte) {
-    Q.hitler_votes -= Q.nsdap_normalized;
-    Q.seldte_votes += Q.nsdap_normalized; 
-}
-if (!Q.kpd_support_braun) {
-    Q.thalmann_votes += ((100-Q.pro_republic)/1500);
-    Q.thalmann_votes += (Q.pacifism/250);
-    Q.thalmann_votes += ((Math.floor(Math.random() * 11))/350);
-}
-if (!Q.hitler_support_hindenburg && !Q.hitler_support_seldte) {
-    Q.hitler_votes += ((100-Q.pro_republic)/1000);
-    Q.hitler_votes += (Q.nationalism/1000);
-    Q.hitler_votes += ((Math.floor(Math.random() * 11))/350);
-    if (!Q.hindenburg_running && !Q.eckener_campaign) {
-        Q.hitler_votes += (Q.nationalism/2000);
-    } 
-}
-if (Q.hindenburg_running) {
-    Q.hindenburg_votes += ((Math.floor(Math.random() * 11))/350);
-    Q.hindenburg_votes += ((10-Q.democratization)/100);
-}
-if (Q.hindenburg_to_braun_bonus && Q.hindenburg_running) {
+
+if (Q.hindenburg_to_braun_bonus) {
     Q.hindenburg_votes -= Q.hindenburg_to_braun_bonus;
     Q.braun_votes += Q.hindenburg_to_braun_bonus;
 }
@@ -377,53 +234,24 @@ if (Q.thalmann_to_braun_bonus) {
     Q.thalmann_votes -= Q.thalmann_to_braun_bonus;
     Q.braun_votes += Q.thalmann_to_braun_bonus;
 }
-console.log("Hindenburg:", Q.hindenburg_votes);
-console.log("Hitler:", Q.hitler_votes);
-console.log("Braun:", Q.braun_votes);
-console.log("Thalmann:", Q.thalmann_votes);
-console.log("Eckener:", Q.eckener_votes);
-console.log("Gessler:", Q.gessler_votes);
-console.log("Duesterberg:", Q.duesterburg_votes);
-console.log("Seldte:", Q.seldte_votes);
 
-Q.total_votes_pres = Q.hindenburg_votes + Q.hitler_votes + Q.thalmann_votes + Q.braun_votes + Q.eckener_votes + Q.gessler_votes + Q.duesterburg_votes + Q.seldte_votes;
-Q.hindenburg_votes_normalized = (Q.hindenburg_votes/Q.total_votes_pres);
-Q.hitler_votes_normalized = (Q.hitler_votes/Q.total_votes_pres);
-Q.braun_votes_normalized = (Q.braun_votes/Q.total_votes_pres);
-Q.thalmann_votes_normalized = (Q.thalmann_votes/Q.total_votes_pres);
-Q.eckener_votes_normalized = (Q.eckener_votes/Q.total_votes_pres);
-Q.gessler_votes_normalized = (Q.gessler_votes/Q.total_votes_pres);
-Q.duesterburg_votes_normalized = (Q.duesterburg_votes/Q.total_votes_pres);
-Q.seldte_votes_normalized = (Q.seldte_votes/Q.total_votes_pres);
-
-Q.hindenburg_votes = Math.round(Q.hindenburg_votes_normalized*1000)/10;
-Q.braun_votes = Math.round(Q.braun_votes_normalized*1000)/10;
-Q.hitler_votes = Math.round(Q.hitler_votes_normalized*1000)/10;
-Q.thalmann_votes = Math.round(Q.thalmann_votes_normalized*1000)/10;
-Q.eckener_votes = Math.round(Q.eckener_votes_normalized*1000)/10;
-Q.gessler_votes = Math.round(Q.gessler_votes_normalized*1000)/10;
-Q.duesterburg_votes = Math.round(Q.duesterburg_votes_normalized*1000)/10;
-Q.seldte_votes = Math.round(Q.seldte_votes_normalized*1000)/10;
+// check for majority
+Q.hindenburg_votes = Math.round(Q.hindenburg_votes*1000)/10;
+Q.braun_votes = Math.round(Q.braun_votes*1000)/10;
+Q.hitler_votes = Math.round(Q.hitler_votes*1000)/10;
+Q.thalmann_votes = Math.round(Q.thalmann_votes*1000)/10;
 
 Q.hindenburg_majority = (Q.hindenburg_votes >= 50);
 Q.thalmann_majority = (Q.thalmann_votes >= 50);
 Q.hitler_majority = (Q.hitler_votes >= 50);
 Q.braun_majority = (Q.braun_votes >= 50);
-Q.eckener_majority = (Q.eckener_votes >= 50);
-Q.gessler_majority = (Q.gessler_votes >= 50);
-Q.duesterburg_majority = (Q.duesterburg_votes >= 50);
-Q.seldte_majority = (Q.seldte_votes >= 50);
-Q.any_majority = Q.hindenburg_majority | Q.thalmann_majority | Q.hitler_majority | Q.braun_majority | Q.eckener_majority | Q.gessler_majority | Q.duesterburg_majority | Q.seldte_majority;
+Q.any_majority = Q.hindenburg_majority | Q.thalmann_majority | Q.hitler_majority | Q.braun_majority;
 
 // check for plurality
-Q.hindenburg_plurality = (Q.hindenburg_votes >= Q.hitler_votes && Q.hindenburg_votes >= Q.braun_votes && Q.hindenburg_votes >= Q.thalmann_votes && Q.hindenburg_votes >= Q.duesterburg_votes);
-Q.thalmann_plurality = (Q.thalmann_votes >= Q.hindenburg_votes && Q.thalmann_votes >= Q.braun_votes && Q.thalmann_votes >= Q.hitler_votes && Q.thalmann_votes >= Q.eckener_votes && Q.thalmann_votes >= Q.gessler_votes && Q.thalmann_votes >= Q.duesterburg_votes && Q.thalmann_votes >= Q.seldte_votes && Q.hindenburg_running);
-Q.hitler_plurality = (Q.hitler_votes >= Q.hindenburg_votes && Q.hitler_votes >= Q.braun_votes && Q.hitler_votes >= Q.thalmann_votes && Q.hitler_votes >= Q.eckener_votes && Q.hitler_votes >= Q.gessler_votes && Q.hitler_votes >= Q.duesterburg_votes && Q.hitler_votes >= Q.seldte_votes && !Q.hitler_support_hindenburg && !Q.hitler_support_seldte);
-Q.braun_plurality = (Q.braun_votes >= Q.hindenburg_votes && Q.braun_votes >= Q.hitler_votes && Q.braun_votes >= Q.thalmann_votes && Q.braun_votes >= Q.gessler_votes && Q.braun_votes >= Q.duesterburg_votes && Q.braun_votes >= Q.seldte_votes && Q.braun_campaign);
-Q.eckener_plurality = (Q.eckener_votes >= Q.thalmann_votes && Q.eckener_votes >= Q.hitler_votes && Q.eckener_votes >= Q.gessler_votes && Q.eckener_votes >= Q.duesterburg_votes && Q.eckener_votes >= Q.seldte_votes && Q.eckener_campaign);
-Q.gessler_plurality = (Q.gessler_votes >= Q.thalmann_votes && Q.gessler_votes >= Q.hitler_votes && Q.gessler_votes >= Q.eckener_votes && Q.gessler_votes >= Q.duesterburg_votes && Q.gessler_votes >= Q.seldte_votes && Q.burgerblock_campaign);
-Q.duesterburg_plurality = (Q.duesterburg_votes >= Q.thalmann_votes && Q.duesterburg_votes >= Q.hitler_votes && Q.duesterburg_votes >= Q.eckener_votes && Q.duesterburg_votes >= Q.gessler_votes && Q.duesterburg_votes >= Q.hindenburg_votes && Q.duesterburg_votes >= Q.braun_votes && Q.duesterburg_campaign);
-Q.seldte_plurality = (Q.seldte_votes >= Q.thalmann_votes && Q.seldte_votes >= Q.hitler_votes && Q.seldte_votes >= Q.eckener_votes && Q.seldte_votes >= Q.gessler_votes && Q.seldte_votes >= Q.braun_votes && Q.seldte_campaign);
+Q.hindenburg_plurality = (Q.hindenburg_votes >= Q.hitler_votes && Q.hindenburg_votes >= Q.braun_votes && Q.hindenburg_votes >= Q.thalmann_votes);
+Q.thalmann_plurality = (Q.thalmann_votes >= Q.hindenburg_votes && Q.thalmann_votes >= Q.braun_votes && Q.thalmann_votes >= Q.hitler_votes);
+Q.hitler_plurality = (Q.hitler_votes >= Q.hindenburg_votes && Q.hitler_votes >= Q.braun_votes && Q.hitler_votes >= Q.thalmann_votes);
+Q.braun_plurality = (Q.braun_votes >= Q.hindenburg_votes && Q.braun_votes >= Q.hitler_votes && Q.braun_votes >= Q.thalmann_votes);
 // If no candidate gets above 50%, then there's a second round. In the second round, a plurality wins. 
 Q.election_round += 1;
 
@@ -432,44 +260,26 @@ Q.hindenburg_votes_disp = Q.hindenburg_votes.toFixed(1);
 Q.braun_votes_disp = Q.braun_votes.toFixed(1);
 Q.hitler_votes_disp = Q.hitler_votes.toFixed(1);
 Q.thalmann_votes_disp = Q.thalmann_votes.toFixed(1);
-Q.eckener_votes_disp = Q.eckener_votes.toFixed(1);
-Q.gessler_votes_disp = Q.gessler_votes.toFixed(1);
-Q.duesterburg_votes_disp = Q.duesterburg_votes.toFixed(1);
-Q.seldte_votes_disp = Q.seldte_votes.toFixed(1);
 !}
-go-to: hindenburg_wins if hindenburg_majority == 1; thalmann_wins if thalmann_majority == 1; hitler_wins if hitler_majority == 1; braun_wins if braun_majority == 1; eckener_wins if eckener_majority == 1; gessler_wins if gessler_majority == 1; duesterburg_wins if duesterburg_majority == 1; seldte_wins if seldte_majority == 1; no_majority_round1 if any_majority == 0 and election_round == 1; round2_results if election_round >= 2
+go-to: hindenburg_wins if hindenburg_majority == 1; thalmann_wins if thalmann_majority == 1; hitler_wins if hitler_majority == 1; braun_wins if braun_majority == 1; no_majority_round1 if any_majority == 0 and election_round == 1; round2_results if election_round >= 2
 
 Results:
 
-[? if eckener_campaign : <span style="color: #000000;">Ec</span><span style="color: #DD0000;">ken</span><span style="color: #FFCC00;">er</span> - [+ eckener_votes_disp +]% ?]
+<span style="color: #808080;">**Hindenburg**</span> - [+ hindenburg_votes_disp +]%
 
-[? if burgerblock_campaign : <span style="color: #D3C24D;">**Gessler**</span> - [+ gessler_votes_disp +]% ?]
-
-[? if hindenburg_running : <span style="color: #808080;">**Hindenburg**</span> - [+ hindenburg_votes_disp +]% ?]
-
-[? if duesterburg_campaign : <span style="color: #3E88B3;">**Duesterberg**</span> - [+ duesterburg_votes_disp +]% ?]
-
-[? if seldte_campaign : <span style="color: #3E88B3;">**Seldte**</span> - [+ seldte_votes_disp +]% ?]
-
-[? if not hitler_support_hindenburg and not hitler_support_seldte : <span style="color: #7A3C00;">**[+ nsdap_candidate +]**</span> - [+ hitler_votes_disp +]% ?]
+<span style="color: #7A3C00;">**[+ nsdap_candidate +]**</span> - [+ hitler_votes_disp +]%
 
 [? if kpd_support_braun == 0 : <span style="color: #700000;">**Thälmann**</span> - [+ thalmann_votes_disp +]% ?]
 
 [? if braun_campaign > 0 : <span style="color: #c00000;">**Braun**</span> - [+ braun_votes_disp +]% ?]
 
 @no_majority_round1
-on-arrival: hitler_support_hindenburg = 1 if (braun_plurality or thalmann_plurality) and hindenburg_running; hitler_support_seldte = 1 if (eckener_plurality or gessler_plurality or thalmann_plurality or braun_plurality) and not hindenburg_running; duesterburg_campaign = 0 if not duesterburg_pluality; seldte_campaign = 1 if not duesterburg_plurality and not hindenburg_running; dvp_support_eckener = 1 if hitler_plurality or thalmann_plurality and eckener_campaign and burgerblock_campaign; burgerblock_campaign = 0 if hitler_plurality or thalmann_plurality and eckener_campaign and burgerblock_campaign; 
+on-arrival: hitler_support_hindenburg = 1 if (braun_plurality or thalmann_plurality)
 go-to: round2_menu
 
 There is no majority in this round. In the second round, any candidate who wins a plurality will win overall. What should we do?
 
-[? if not duesterburg_plurality : <span style="color: #3E88B3;">Duesterberg</span> has dropped out of the race after realizing he was Jewish, a fact that completely destroyed his campaign. [? if not hindenburg_running : Replacing him is the other Stalhelm leader, <span style="color: #3E88B3;">Franz Seldte</span>. ?] ?]
-
 [? if braun_plurality or thalmann_plurality : In order to consolidate the vote for the <span style="color: #808080;">right</span>, and to prevent a <span style="color: #c00000;">socialist</span> from becoming president, <span style="color: #7A3C00;">[+ nsdap_candidate +]</span> is no longer running in the second round, and has switched his endorsement to <span style="color: #808080;">Hindenburg</span>. ?]
-
-[? if braun_plurality or thalmann_plurality or gessler_plurality or eckener_plurality and not hindenburg_running : In order to consolidate the vote for the <span style="color: #808080;">right</span>, <span style="color: #7A3C00;">[+ nsdap_candidate +]</span> is no longer running in the second round, and has switched his endorsement to <span style="color: #3E88B3;">Seldte</span>. ?]
-
-[? if hitler_plurality or thalmann_plurality and eckener_campaign and dvp_relation < 40 : In order to consolidate the vote for the moderates, <span style="color: #D3C24D;">Gessler</span> has dropped out and endorsed <span style="color: #000000;">Ec</span><span style="color: #DD0000;">ken</span><span style="color: #FFCC00;">er</span>. ?]
 
 
 @round2_menu
@@ -580,11 +390,9 @@ max-visits: 1
 Supporting Thälmann is rather unpopular in our party, even if the <span style="color: #700000;">**Communists**</span> accept our support. Are we sure?
 
 - @round2_thalmann_2: Yes, we will support <span style="color: #700000;">**Thälmann**</span>, despite the reformists' pleas against it.
-- @round2_thalmann_2_no_hindenburg: Yes, we will support <span style="color: #700000;">**Thälmann**</span>, despite the reformists' pleas against it.
 - @round2_menu: Never mind.
 
 @round2_thalmann_2
-view-if: hindenburg_running
 on-arrival: braun_campaign = 0; spd_support_thalmann = 1; reformist_dissent += 15; center_dissent += 10; labor_dissent += 5; neorevisionist_dissent += 10; catholics_spd -= 5; workers_spd -= 3; kpd_relation += 10; communist_coalition += 2; z_relation -= 15; dvp_relation -= 15
 on-departure: z_support_braun = 0; kpd_support_braun = 0;
 
@@ -594,17 +402,8 @@ Fine. We have thrown our support to Chairman Thälmann of the <span style="color
 
 - @round2_vote: Let the second round voting begin.
 
-@round2_thalmann_2_no_hindenburg
-view-if: not hindenburg_running
-on-arrival: burgerblock_campaign = 0; eckener_campaign = 0; spd_support_thalmann = 1; reformist_dissent += 15; center_dissent += 10; labor_dissent += 5; neorevisionist_dissent += 10; catholics_spd -= 5; workers_spd -= 3; kpd_relation += 10; communist_coalition += 2; z_relation -= 15; dvp_relation -= 15; ddp_relation -= 10; weimar_dissent += 3; hindenburg_motivated = 1; hindenburg_running = 1; hitler_support_hindenburg = 1 if hitler_support_seldte; seldte_campaign = 0;
-on-departure: z_support_braun = 0; kpd_support_braun = 0;
-
-Fine. We have thrown our support to Chairman Thälmann of the <span style="color: #700000;">**KPD**</span>. The move sends shockwaves across the political spectrum so strong that Hindenburg re-enters the race to unite the right-wing parties.
-
-- @round2_vote: Let the second round voting begin.
-
 @round2_hindenburg
-view-if: braun_campaign > 0 or spd_support_thalmann > 0 and hindenburg_running
+view-if: braun_campaign > 0 or spd_support_thalmann > 0
 on-arrival: braun_campaign = 0; spd_support_thalmann = 0; hindenburg_angry_bruning += 25
 
 We have switched our support to Hindenburg.
@@ -616,24 +415,13 @@ go-to: election_algorithm
 set-jump: post_election
 
 @round2_results
-go-to: hindenburg_wins if hindenburg_plurality == 1; thalmann_wins if thalmann_plurality == 1; braun_wins if braun_plurality == 1; hitler_wins if hitler_plurality == 1; eckener_wins if eckener_plurality == 1; gessler_wins if gessler_plurality == 1; seldte_wins if seldte_plurality == 1; duesterburg_wins if duesterburg_plurality == 1
+go-to: hindenburg_wins if hindenburg_plurality == 1; thalmann_wins if thalmann_plurality == 1; braun_wins if braun_plurality == 1; hitler_wins if hitler_plurality == 1
 
 
 @hindenburg_wins
-on-arrival: president = "Hindenburg"; {!
-if (Q.braun_campaign && Q.hitler_support_hindenburg) {
-    Q.workers_spd += 5*(1-dissent);
-    Q.new_middle_spd += 3*(1-dissent);
-    Q.old_middle_spd += 2*(1-dissent);
-    Q.rural_spd += 2*(1-dissent);
-    Q.unemployed_spd += 3*(1-dissent);
-    Q.center_dissent -= 5;
-    Q.labor_dissent -= 5;
-    Q.reformist_dissent -= 5;
-}
-!}
+on-arrival: president = "Hindenburg"
 
-As expected, the incumbent Hindenburg wins the presidency[? if braun_campaign and hitler_support_hindenburg :, though our ability to unite the reactionaries behind Hindenburg and become the main opposition has bolstered morale in the party?]. Let's hope he continues to keep the <span style="color: #7A3C00;">Nazis</span> out of power.
+As expected, the incumbent Hindenburg wins the presidency. Let's hope he continues to keep the <span style="color: #7A3C00;">Nazis</span> out of power.
 
 @thalmann_wins
 on-arrival: president = "Thälmann"; kpd_relation = 80;
@@ -650,46 +438,10 @@ on-arrival: president = nsdap_candidate; chancellor = "Hitler"; chancellor_party
 
 - @hitler_takes_power: What do we do now?
 
-# todo: weakened hitler path as per redux
-
 
 @braun_wins
-on-arrival: president = "Braun"; coup_progress += 0.5; coup_progress += 1 if sa_force + sh_force >= 50; reformist_dissent -= 15; center_dissent -= 15; labor_dissent -= 15; left_dissent -= 5; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent);
+on-arrival: president = "Braun"; reformist_dissent -= 15; center_dissent -= 15; labor_dissent -= 15; left_dissent -= 5; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent);
 
 Otto Braun of the <span style="color: #c00000;">**SPD**</span> has won the presidency! This is a moment of celebration for our party, and his victory is able to bolster our support.
-
-- @far_right_coup: The Harzburg Front immediately initiates a coup...
-
-@far_right_coup
-view-if: coup_progress >= 10
-on-arrival: reichswehr_loyalty -= 0.1 if reichswehr_loyalty <= 0.05; reichswehr_loyalty += 0.1; reichswehr_loyalty += 0.15 if z_support_braun; reichswehr_loyalty -= 0.05 if kpd_support_braun; rb_strength += 100
-
-Immediately following the election, forces of the <span style="color: #3E88B3;">Stalhelm</span> and <span style="color: #7A3C00;">SA</span> organized across the country under the Harzburg Front storm government offices, communications, railway, and other important infrastructure, as reactionary officers begin taking their forces out of barracks and joining in the coup.
-
-- @civil_war: This is civil war.
-
-@eckener_wins
-on-arrival: president = "Eckener"; pro_republic += 5; reformist_dissent -= 5
-
-Hugo Eckener has won the presidency! Though he is a nationalist, he hates Nazism enough to hopefully commit strongly to the Republic and its institutions.
-
-@gessler_wins
-on-arrival: president = "Gessler"; new_middle_dvp += 2; old_middle_dvp += 5; new_middle_ddp += 3; pro_republic += 5
-
-Otto Gessler has won the presidency! Though he is a bourgeois liberal with strong militarist tendencies, he can be trusted to at least uphold the constitution.
-
-@seldte_wins
-on-arrival: president = "Seldte"; chancellor = "Hitler" if presidential_powers != 1; chancellor_party = "NSDAP" if presidential_powers != 1; old_middle_dnvp += 3; rural_dnvp += 3; stalhelm_strength += 50
-
-Franz Seldte of the Stalhelm has somehow won the Presidency. [? if presidential_powers != 1 : His first act is to depose the current Chancellor and appoint Adolf Hitler. ?][? if presidential_powers : Luckily, the limits on his powers prevent him from doing anything too radical. ?]
-
-- @hitler_takes_power: What do we do now?
-
-@duesterburg_wins
-on-arrival: president = "Hindenburg"; pro_republic -= 10
-
-Somehow, despite the revelation of his Jewishness, Duesterburg has won the Presidency. However, incapable of imagining a Jew as President of Germany, and still reeling from the shock, Duesterburg has refused to take the oath of office.
-
-The courts are not sure what to do. This is an unprecedented occasion. Eventually, they agree that Hindenburg should stay President. He reluctantly agrees to avoid a constitutional crisis.
 
 # TODO ALL

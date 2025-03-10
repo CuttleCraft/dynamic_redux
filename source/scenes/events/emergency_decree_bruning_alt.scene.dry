@@ -2,7 +2,7 @@ title: Second Emergency Decree for Economy and Finance
 subtitle: Chancellor [+ chancellor +] enacts his a controversial emergency decree.
 new-page: true
 view-if: total_bruning_time == 15 and bruning_toleration_time and (hoover_moratorium_seen or reparations == -2)
-on-arrival: emergency_decree_alt_seen = 1; ddp_right += 1; dvp_right += 3; lvp_right += 2; liberal_cooperation -= 1; bourgeois_cooperation -= 1
+on-arrival: emergency_decree_alt_seen = 1; ddp_right += 1; ddp_cohesion -= 1; dvp_right += 3; lvp_right += 2; liberal_cooperation -= 1; bourgeois_cooperation -= 1
 tags: event
 face-image: img/article48.jpg
 max-visits: 1
@@ -11,7 +11,7 @@ max-visits: 1
 
 To fully eliminate the national budget deficit, the emergency decree introduces spending cuts alongside a special “crisis tax.” However, with reparation payments paused, Brüning has been able to implement these austerity measures more leniently than anticipated.
 
-Despite being less severe than expected, the decree has sparked widespread outrage, further fueling attacks from the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> against the bourgeois parties that remain aligned with Brüning—particularly the <span style="color: #C0A054;">**DVP**</span> and <span style="color: #D3C24D;">**[+ ddp_name +]**</span>. [? if not lvp_formed and not bourgeois_parliament and not liberal_parliament: The liberal parties' failure to persuade Brüning to remove cuts to civil servants’ salaries and the increase in the national sales tax has strained their relationship with his government.?]
+Despite being less severe than expected, the decree has sparked widespread outrage, further fueling attacks from the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> against the bourgeois parties that remain aligned with Brüning—particularly the [? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span> and <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?][? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>?], as they're the [? if not lvp_formed:parties?][? if lvp_formed:party?] representing the social groups most impacted by these changes. [? if not lvp_formed and not bourgeois_parliament and not liberal_parliament: The liberal parties' failure to persuade Brüning to remove cuts to civil servants’ salaries and the increase in the national sales tax has strained their relationship with his government.?]
 
 We can either continue tolerating Brüning’s government or use this decree as a pretext to break with it.
 
@@ -83,10 +83,10 @@ Q.budget += 1;
 Q.inflation -= 1;
 Q.emergency_decree_mitigated = Q.liberal_parliament || (Q.bourgeois_parliament && !Q.lvp_formed) || Q.lvp_formed;
 if (Q.emergency_decree_mitigated) {
-    Q.unemployed -= 0.5;
+    Q.unemployed -= 0.4;
     Q.budget -= 1;
-    Q.inflation += 1;
-    Q.economic_growth += 0.5;
+    Q.inflation += 0.8;
+    Q.economic_growth += 0.4;
     Q.new_middle_ddp += 2;
     Q.old_middle_ddp += 1;
     Q.new_middle_dvp += 3;

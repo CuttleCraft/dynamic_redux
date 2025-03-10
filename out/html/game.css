@@ -586,6 +586,12 @@ td, th {
 .seat.lvp {
   fill: #FFCC00;
 }
+.seat.farm {
+  fill: #38C538;
+}
+.seat.farm2 {
+  fill: #006400;
+}
 .tooltip-text {
   text-decoration: underline;
   text-decoration-style: dotted;

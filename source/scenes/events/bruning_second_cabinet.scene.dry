@@ -14,6 +14,7 @@ Q.bruning_coalition = Q.neo_weimar_coalition;
 Q.bruning_coalition_loss += (Q.dvp_r*0.7);
 Q.bruning_coalition = Math.round((Q.bruning_coalition - Q.bruning_coalition_loss) * 10) / 10;
 Q.new_middle_dvp -= 2;
+Q.new_middle_ddp -= 2;
 !}
 tags: event
 face-image: img/bruningetcurtius.jpg
@@ -24,6 +25,8 @@ max-visits: 1
 The <span style="color: #C0A054;">**DVP**</span>'s Julius Curtius has resigned from the Foreign Ministry following the disastrous failure of the Austro-German customs union, which he was the architect of. With no more <span style="color: #C0A054;">**DVP**</span> ministers in cabinet, the last obstacle preventing them from breaking with Brüning's government has been removed. In an attempt to maintain their support, Brüning has formed a more conservative second cabinet, but this effort has proven insufficient—the <span style="color: #C0A054;">**DVP**</span> has now joined the <span style="color: #7A3C00;">national</span> <span style="color: #3E88B3;">opposition</span>, which also remains opposed to cooperating with his government.
 
 With the <span style="color: #C0A054;">**DVP**</span> now likely to vote alongside the extremist parties, the government's majority is at risk. If the remaining bourgeois parties follow suit, Brüning’s cabinet may no longer hold control. We must now decide whether to continue tolerating this more right-leaning Brüning government—now absent of leftist figures such as the <span style="color: #000000;">Center</span>’s Joseph Wirth—in the hopes the bourgeois parties reconsidering their opposition, or to finally break away from it.
+
+Additionally, Brüning has introduced his third emergency decree, which further reduces salaries, and cuts pensions and welfare benefits to address the deficit caused by the banking crisis.
 
 - @vote_yes
 - @vote_no
@@ -50,6 +53,7 @@ Q.workers_kpd += Q.workers_spd*0.05;
 Q.workers_spd *= 0.95;
 Q.unemployed_spd *= 0.95;
 Q.kpd_relation -= 5;
+if (Q.bruning_joever) Q.wp_reversal = 0;
 Q.bruning_coalition = Q.neo_weimar_coalition;
 Q.bruning_coalition = Math.round((Q.bruning_coalition - Q.bruning_coalition_loss) * 10) / 10;
 if (Q.wp_defect && Q.bruning_coalition < 50) Q.wp_reversal = 1;

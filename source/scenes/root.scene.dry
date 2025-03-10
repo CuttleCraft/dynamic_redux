@@ -409,31 +409,31 @@ Q.lvp_ideology = "Moderate";
 Q.lvp_normalized = 0;
 Q.lvp_votes = 0;
 
-Q.adjustmentFactors_spd = 1.0
-Q.adjustmentFactors_sapd = 1.0
-Q.adjustmentFactors_kpd = 1.0
-Q.adjustmentFactors_z = 1.0
-Q.adjustmentFactors_ddp = 1.0
-Q.adjustmentFactors_dvp = 1.0
-Q.adjustmentFactors_lvp = 1.0
-Q.adjustmentFactors_dnvp = 1.0
-Q.adjustmentFactors_nsdap = 1.0
-Q.adjustmentFactors_dnf = 1.0
-Q.adjustmentFactors_kvp = 1.0
-Q.adjustmentFactors_other = 0.75
+Q.adjustmentFactors_spd = 1.0;
+Q.adjustmentFactors_sapd = 1.0;
+Q.adjustmentFactors_kpd = 1.0;
+Q.adjustmentFactors_z = 1.0;
+Q.adjustmentFactors_ddp = 1.0;
+Q.adjustmentFactors_dvp = 1.0;
+Q.adjustmentFactors_lvp = 1.0;
+Q.adjustmentFactors_dnvp = 1.0;
+Q.adjustmentFactors_nsdap = 1.0;
+Q.adjustmentFactors_dnf = 1.0;
+Q.adjustmentFactors_kvp = 1.0;
+Q.adjustmentFactors_other = 0.75;
 
-Q.adjustmentFactors_spd_prussia = 1.0
-Q.adjustmentFactors_sapd_prussia = 1.0
-Q.adjustmentFactors_kpd_prussia = 1.0
-Q.adjustmentFactors_z_prussia = 1.0
-Q.adjustmentFactors_ddp_prussia = 1.0
-Q.adjustmentFactors_dvp_prussia = 1.0
-Q.adjustmentFactors_lvp_prussia = 1.0
-Q.adjustmentFactors_dnvp_prussia = 1.0
-Q.adjustmentFactors_nsdap_prussia = 1.0
-Q.adjustmentFactors_dnf_prussia = 1.0
-Q.adjustmentFactors_kvp_prussia = 1.0
-Q.adjustmentFactors_other_prussia = 0.7
+Q.adjustmentFactors_spd_prussia = 1.0;
+Q.adjustmentFactors_sapd_prussia = 1.0;
+Q.adjustmentFactors_kpd_prussia = 1.0;
+Q.adjustmentFactors_z_prussia = 1.0;
+Q.adjustmentFactors_ddp_prussia = 1.0;
+Q.adjustmentFactors_dvp_prussia = 1.0;
+Q.adjustmentFactors_lvp_prussia = 1.0;
+Q.adjustmentFactors_dnvp_prussia = 1.0;
+Q.adjustmentFactors_nsdap_prussia = 1.0;
+Q.adjustmentFactors_dnf_prussia = 1.0;
+Q.adjustmentFactors_kvp_prussia = 1.0;
+Q.adjustmentFactors_other_prussia = 0.7;
 
 // array of objects of the form {date: Date(), spd: 10, kpd: 12, ...} for each election
 Q.election_records = [];
@@ -475,6 +475,8 @@ Q.grand_coalition_failed = 0;
 Q.in_minority_government = 0;
 // national unity governmet
 Q.in_center_right_coalition = 0;
+Q.in_social_catholic_coalition = 0;
+Q.in_social_liberal_coalition = 0;
 
 Q.in_right_coalition_prussia = 0;
 Q.in_weimar_coalition_prussia = 1;
@@ -783,9 +785,11 @@ Q.nazi_peak = 20;
 Q.dnvp_westarp = 1;
 Q.ddp_factionless_time = 0;
 Q.wp_conflict_time = 0;
+Q.dvp_conflict_time = 0;
 Q.bruning_austerity_limited = 0;
 Q.political_decree = 0;
 Q.bruning_coalition_dissent = 0;
+Q.dnvp_angry = 0;
 
 // flavour text stuff
 for (let i = 0; i <= 100; i++) {

@@ -45,6 +45,14 @@ if (Q.lvp_formed) {
 }
 
 if (Q.lvp_formed) {
+    Q.social_liberal_coalition = parseFloat((Q.spd_r + Q.lvp_r).toFixed(1));
+} else {
+    Q.social_liberal_coalition = parseFloat((Q.spd_r + Q.ddp_r).toFixed(1));
+}
+
+Q.social_catholic_coalition = parseFloat((Q.spd_r + Q.z_r - 3).toFixed(1));
+
+if (Q.lvp_formed) {
     Q.grand_coalition = parseFloat((Q.spd_r + Q.lvp_r + Q.z_r).toFixed(1));
 } else {
     Q.grand_coalition = parseFloat((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r).toFixed(1));
